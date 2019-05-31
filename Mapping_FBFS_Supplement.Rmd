@@ -1,5 +1,6 @@
 ---
-title: "Application of Bayesian networks to mapping Flood-based Farming Systems."
+title: "Supplementary Material"
+subtitle: "Application of Bayesian networks to mapping Flood-based Farming Systems."
 note: "Replication files are available on the author's Github account (http://github.com/Issoufou-Liman)."
 author:
   - Issoufou Liman:

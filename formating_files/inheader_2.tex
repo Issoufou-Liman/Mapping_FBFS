@@ -1,4 +1,7 @@
 % \documentclass{article} https://tex.stackexchange.com/questions/60209/how-to-add-an-extra-level-of-sections-with-headings-below-subsubsection
+\usepackage{hyperref}
+\usepackage{caption}
+\captionsetup{skip=0pt}
 \makeatletter
 % Editing the default numbering style
 \renewcommand{\thesection}{\Roman{section}.}
@@ -27,4 +30,3 @@
 \makeatother
 \setcounter{secnumdepth}{3} % how many sectioning levels to assign numbers to
 \setcounter{tocdepth}{5}    % how many sectioning levels to show in ToC
-

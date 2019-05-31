@@ -78,9 +78,12 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{May 28, 2019}
+    \date{May 31, 2019}
 
 % \documentclass{article} https://tex.stackexchange.com/questions/60209/how-to-add-an-extra-level-of-sections-with-headings-below-subsubsection
+\usepackage{hyperref}
+\usepackage{caption}
+\captionsetup{skip=0pt}
 \makeatletter
 % Editing the default numbering style
 \renewcommand{\thesection}{\Roman{section}.}
@@ -252,7 +255,7 @@ The output maps from the \href{https://en.wikipedia.org/wiki/Bayesian_network}{B
 \includegraphics[width=1\linewidth]{figures/Mapping_FBFS_posterior_maps} \caption{Posterior FBFS maps and other important FBFS metrics in Kisumu county, Kenya.}\label{fig:fig12}
 \end{figure}
 
-Important changes were introduced from the prior to the posterior maps of water present node. One important change is related to the appearance of a sort-of islands or at least a tendency to drying in certain parts of the Lake shores leading to the conclusion that water may be not be present all the yearlong in that area. Another important change is the increase in the areas where water can be expected on the ground. Probably due to vegetation liquid water, most forests have shown important water presence. The variable temporal variation in vegetation index ranked higher on forests and open waters with most central areas resulting in the lowest. This high vegetation variability over the Lake support the idea of the sequential increase / decrease of aquatic vegetation at certain period of the year (see section @ref(\#II4)), particularly looking at the map of the node vegetation variation caused by flood. The highest chance of flood is recorded near the lake shore and river Nyando, but most floodplains scored high values. As expected, vegetation variation attributed to flood (vegetation variation caused by flood node) seems to be positively correlated with flow accumulation and suitable topography for FBFS. In general, most of the posterior maps are not conclusive enough to be considered as standalone decision support with regards the potential area for FBFS. The target map (pixel is FBFS) seems to also be strongly correlated with flow accumulation and suitable topography and support the idea of vegetation presence inside the Lake which certain parts appears among the very likely areas for FBFS. As expected, most riverbanks are detected as having high potential for FBFS; which potential declines with distance.
+Important changes were introduced from the prior to the posterior maps of water present node. One important change is related to the appearance of a sort-of islands or at least a tendency to drying in certain parts of the Lake shores leading to the conclusion that water may be not be present all the yearlong in that area. Another important change is the increase in the areas where water can be expected on the ground. Probably due to vegetation liquid water, most forests have shown important water presence. The variable temporal variation in vegetation index ranked higher on forests and open waters with most central areas resulting in the lowest. This high vegetation variability over the Lake support the idea of the sequential increase / decrease of aquatic vegetation at certain period of the year (see section \ref{II4}), particularly looking at the map of the node vegetation variation caused by flood. The highest chance of flood is recorded near the lake shore and river Nyando, but most floodplains scored high values. As expected, vegetation variation attributed to flood (vegetation variation caused by flood node) seems to be positively correlated with flow accumulation and suitable topography for FBFS. In general, most of the posterior maps are not conclusive enough to be considered as standalone decision support with regards the potential area for FBFS. The target map (pixel is FBFS) seems to also be strongly correlated with flow accumulation and suitable topography and support the idea of vegetation presence inside the Lake which certain parts appears among the very likely areas for FBFS. As expected, most riverbanks are detected as having high potential for FBFS; which potential declines with distance.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{figures/Mapping_FBFS_uncertainity_maps} \caption{Spatially explicit uncertainity maps derived as part of FBFS mapping in Kisumu county, Kenya.}\label{fig:fig13}
@@ -430,7 +433,7 @@ The spatial explicit uncertainty (Figure \ref{fig:fig13}), expressed as shannon 
 54. Gikuma-Njuru, P. \emph{et al.} Eutrophication of the Lake Victoria Ecosystem. in \emph{Lake victoria regional water quality synthesis report} (eds. Mwanuzi, F. L., Abuodha, J. O., Muyodi, F. J. \& Hecky, R. E.) 81 (LVEMP, 2005).
 
 \leavevmode\hypertarget{ref-World_Bank_1996}{}%
-55. World Bank. \emph{Kenya, Tanzania, UgandaLake Victoria Environmental Management Project}. 158 (World Bank, 1996).
+55. World Bank. \emph{Kenya, Tanzania, Uganda: Lake Victoria Environmental Management Project}. 158 (World Bank, 1996).
 
 
 \end{document}

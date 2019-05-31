@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.Mapping_FBFS_cache/**
+.Mapping_FBFS_files/**
+.Mapping_FBFS_Supplement_cache/**
+.Mapping_FBFS_Supplement_files/**
