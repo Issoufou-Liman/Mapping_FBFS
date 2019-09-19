@@ -68,10 +68,13 @@ output:
       - '--lua-filter=./formating_files/author-info-blocks.lua'
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, tidy = 'formatR', cache = TRUE, dpi = 300)
+```{r, include=FALSE}
+options(tinytex.engine = 'xelatex')
 ```
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,out.extra = '',fig.align='center',fig.pos='!htbp',cache=TRUE)
+```
 
 # Introduction {#intro}
 
@@ -87,12 +90,268 @@ The objective of this paper is to provide an affordable mapping routine that cou
 
 # Material and methods {#I}
 
+## Conceptual framework
+
+
+
 ## Study area {#I1}
 
 The study took place in two regions of Kenya and Ethiopia, the Kisumu county and the Tigray region respectively. Both areas have long history in terms of the practice of flood-based agriculture and have different ways of managing agronomic flooding. However, this paper specifically focuses on the case of Kisumu to provide the backbones of the methodology. Kisumu is one of the largest of Kenya’s counties, located in the western Kenya [@KisumuCountyGovernment_2013]. It is bordered by the Homa Bay County to the South, Nandi County to the North East, Kericho County to the East, Vihiga County to the North West and Siaya County to the West. Kisumu County extends between 33° 20’E and 35° 20’E and 0° 20’S and 0° 50’S covering an area of 2576.5 km2 of which 567 km2 (4.5%) is covered by water [@KisumuCountyGovernment_2013]. Common topographic features are the Winam Gulf of Lake Victoria and the Rift valley. The central part of the county is relatively flat lands surrounded by higher altitudinal ridges reaching up to 1835 m. The relief of the county can be described by 3 main topographical features, the Kano lowlands plains, the Maseno midlands, and the highlands of Nyabondo Plateau making most of the central part prone to flooding, particularly during periods of heavy rains [@KisumuCountyGovernment_2013]. Kisumu county is endowed in surface water with three main rivers flowing into Lake Victoria [@KisumuCountyGovernment_2013]. The floodplains are good for agriculture due to their relatively rich soils resulting from recurrent alluvial deposits and potential for irrigation. 
 
 ## Sensor Characteristics {#I2}
 
+```{tikz fig1, echo=FALSE, fig.cap = "Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya.", fig.ext = 'png', cache=FALSE, eval=TRUE, engine.opts = list(engine='xetex', template = "latex/tikz2pdf.tex")}
+%% Beginning of Overview Detailed Model %%%%
+
+\begin{tikzpicture}[node distance = 0.5cm]
+
+\node[BnsMultipartStyle, text width = 10cm, align=left, draw=gray, inner sep = 5pt] (GDAM){
+\nodepart{one}
+{\centering\Huge
+   Geo-localisation of the area of interest \par
+}
+\nodepart{two}
+\begin{itemize}\huge
+    \item GDAM shapefile acquisition
+\end{itemize}
+ 
+};
+
+\node[BnsMultipartStyle, text width = 10cm, align=left, draw=gray, inner sep = 5pt] [below right=of GDAM](modistsp){
+\nodepart{one}
+{\centering\Huge
+   Automatic pre-processing of MODIS data \par
+}
+\nodepart{two}
+\begin{itemize}
+    \item \huge acquisition of MODIS hdf files
+    \item \huge GDAL translation of the hdf files
+\end{itemize}
+ 
+};
+
+
+
+\node[BnsMultipartStyle, text width = 10cm, align=left, draw=gray, inner sep = 5pt] [above right=of modistsp](modis){
+\nodepart{one}
+{\centering\Huge
+  Identification of MODIS tiles \par
+}
+\nodepart{two}
+\begin{itemize}\huge
+    \item identification of MODIS tiles
+\end{itemize}
+ 
+};
+
+\node[text = blue][below left=of modistsp.south west](derivationofspatialdatanodestitle){\Huge Derivation of spatial data nodes};
+
+\node[BnsMultipartStyle, text width = 8cm, align=left, draw=gray, inner sep = 5pt] [below=of derivationofspatialdatanodestitle](datadiscretisation){
+\nodepart{one}
+{\centering\Huge
+   Data discretisation \par
+}
+\nodepart{two}
+\begin{itemize}\huge
+    \item derivation of ranges and discrete states
+    \item generation of reclassification matrix
+\end{itemize}
+ 
+};
+
+%\node[fill=white, draw=white, text=red][below left=of datadiscretisation](multilayertitle) {\Huge Multi layer procedure};
+\node[text=darkgray][below left=of datadiscretisation.south](multilayertitle) {\Huge Multi layer procedure};
+
+%\node[fill=white, draw=white, text=red][below right=of datadiscretisation](singlelayertitle) {\Huge Single layer procedure};
+\node[text=darkgray][below right=of datadiscretisation.south](singlelayertitle) {\Huge Single layer procedure};
+
+%\node[BnsMultipartStyle, text width = 8cm, align=left] [below=of multilayertitle](presenceabsence){
+%\nodepart{one}
+%{\centering
+ %  Generation of presence absence data \par
+%}
+%\nodepart{two}
+%};
+
+\node[fill=white, text width = 7cm, align=center, draw=gray, inner sep = 5pt][below=of multilayertitle](presenceabsence){\huge Pixel separation using presence/absence rules};
+
+%\node[BnsMultipartStyle, text width = 8cm, align=left] [below=of presenceabsence](probabilityofdiscreteranges){
+%\nodepart{one}
+%{\centering
+%   Probability of discrete ranges \par
+%}
+%\nodepart{two}
+%};
+\node[fill=white, text width = 7cm, align=center, draw=gray, inner sep = 5pt][below=of presenceabsence](probabilityofdiscreteranges){\huge Computation of states probability};
+
+
+%\node[BnsMultipartStyle, text width = 8cm, align=left] [below=of probabilityofdiscreteranges](confusionpixel){
+%\nodepart{one}
+%{\centering
+%   Confusing pixel heuristics \par
+%}
+%\nodepart{two}
+%};
+\node[fill=white, text width = 7cm, align=center, draw=gray, inner sep = 5pt][below=of probabilityofdiscreteranges](confusionpixel){\huge Separation of confusing pixel using heuristic rules};
+
+%\node(fake0) [draw=none, fill=none] [below = 0mm of confusionpixel.south]{};
+\node(fake0) [draw=none, fill=none] [below=0cm of confusionpixel.south] {};
+
+
+
+
+%\tcbsetmacrotoheightofnode{\myheight}{multilayerprocedure}
+
+%\node[BnsMultipartStyle, text width = 8cm, align=left] at (probabilityofdiscreteranges-|singlelayertitle) %(reclassification){
+%\nodepart{one}
+%{\centering
+%   Reclassification \par
+%}
+%\nodepart{two}
+%};
+\node[fill=white, text width = 5cm, align=center, draw=gray, inner sep = 30pt] at (probabilityofdiscreteranges-|singlelayertitle) (reclassification){\huge Reclassification};
+
+%\node(fake1) [draw=none, fill=none] at (confusionpixel.south-|singlelayertitle){};
+\node(fake1) [draw=none, fill=none] at (fake0-|singlelayertitle){};
+
+
+
+%\node [BnsStyle, text width=5.28cm] (soilandwater) at (datadiscretisation-|modis) {
+%\node [BnsStyle, text width=5.28cm] (soilandwater) [below right=of modistsp.south west] {
+%\node [BnsStyle, text width=5.28cm] (soilandwater) at (datadiscretisation-|modis.south west) {
+\node [BnsStyle, draw=gray, text width=6cm] (soilandwater) at (datadiscretisation-|modistsp.south east) {
+  \begin{varwidth}{\textwidth}
+  \begin{center}\Huge
+  Soil and water 
+  \end{center}
+  \begin {BlackBnsBullets}\huge
+  \item sensitivity to flood
+  \item soil water
+  \item etc.
+  \end {BlackBnsBullets}
+  \end{varwidth}
+};
+
+\node [BnsStyle, draw=gray, text width=6cm] (topographiccharacteristics)[right=of soilandwater] {
+  \begin{varwidth}{\textwidth}
+  \begin{center}\Huge
+  Topography
+  \end{center}
+  \begin {BlackBnsBullets}\huge
+  \item slope
+  \item flow accumulation 
+  \item etc.
+  \end {BlackBnsBullets}
+  \end{varwidth}
+};
+
+\node [BnsStyle, text width=2.1cm, align=center, draw=red, text=red] (pixelisfbfs)[below left=of topographiccharacteristics] {
+  \begin{varwidth}{\textwidth}
+  \begin{center}
+   \Huge Pixel is FBFS
+  \end{center}
+  \end{varwidth}
+};
+
+\node [BnsStyle, text width=7.70cm, draw=gray] (vegetation)[below=of pixelisfbfs] {
+  \begin{varwidth}{\textwidth}
+  \begin{center}
+   \Huge Vegetation
+  \end{center}
+  \begin {BlackBnsBullets}\huge
+  \item characteristic vegetation
+  \item variation in vegetation 
+  \item etc.
+  \end {BlackBnsBullets}
+  \end{varwidth}
+};
+
+\node[text = blue] at (derivationofspatialdatanodestitle-|pixelisfbfs) (bnstitle) {\Huge Expert system based on Bayesian networks};
+
+
+
+\node (fake3) at ($(derivationofspatialdatanodestitle.south east)!0.5!(bnstitle.south west)$) {};
+\node (spatiallyexplicitdecisionsupporttool)[draw=black, fill=white, inner sep=10pt][below= 15.50cm of fake3-|modistsp]{\Huge Spatially explicit decision support tool};
+
+\node (maps) [draw=none, fill=none, text =blue][below=0.75cm of spatiallyexplicitdecisionsupporttool] {\Huge Spatially explicit causal predictions and maps};
+
+\node (spatiallyexplicituncertainity) [draw=white, fill=white, text width = 4cm, align=center, draw=gray, inner sep = 5pt][below right=of maps] {\huge Uncertainity maps};
+
+\node (probabilisticmaps)[draw=white, fill=white, text width = 4cm, align=center, draw=gray, inner sep = 5pt][below left=of maps]{\huge Probabilistic maps};
+
+\node[draw=none, fill=none][left=of multilayertitle.west](fake5){};
+\node[draw=none, fill=none][above=of GDAM.north](fake6){};
+\node[draw=none, fill=none][below=of probabilisticmaps.south](fake7){};
+\node[draw=none, fill=none][right=of topographiccharacteristics.east](fake8){};
+
+
+\begin{scope}[on background layer]
+\node (backgrounding)[BnsBox, fit=(fake5)(fake6)(fake7)(fake8)] {};
+\end{scope}
+\node(fake9) [draw=none, fill=none] at (fake0-|singlelayertitle.east){};
+
+\begin{scope}[on background layer]
+\node (singlelayerprocedure)[BnsBox, draw=blue, fill=white, opacity=0.5, fit=(reclassification)(singlelayertitle)(fake1)] {};
+\end{scope}
+
+\begin{scope}[on background layer]
+\node (multilayerprocedure)[BnsBox,  draw=blue, fill=white, opacity=0.5, fit=(multilayertitle)(confusionpixel)(probabilityofdiscreteranges)(presenceabsence)(fake0)] {};
+\end{scope}
+
+\begin{scope}[on background layer]
+\node (derivationofspatialdatanodes)[BnsBox, draw=black, fill=blue, fill opacity=0.1, fit=(multilayerprocedure)(singlelayertitle)(datadiscretisation)(derivationofspatialdatanodestitle)(fake9)] {};
+\end{scope}
+
+\node[draw=none, fill=none] at (fake1.south-|pixelisfbfs)(fake4){};
+
+%\tcbsetmacrotowidthofnode{\mywidth}{derivationofspatialdatanodes}
+
+\begin{scope}[on background layer]
+\node (bayesiannetworks)[BnsBox,  draw=black, fill=blue, fill opacity=0.1, fit=(pixelisfbfs)(topographiccharacteristics)(soilandwater)(vegetation)(bnstitle)(fake4)] {};
+\end{scope}
+
+\begin{scope}[on background layer]
+\node (output)[BnsBox, draw=black, fill=blue, fill opacity=0.1, fit=(probabilisticmaps)(spatiallyexplicituncertainity)(maps)] {};
+\end{scope}
+
+\draw[thickarrow] (GDAM) -- (modistsp);
+\draw[dashedarrow] (GDAM) -- (modis);
+\draw[dashedarrow] (modis) -- (modistsp);
+
+\draw[thickes] (modistsp.west) -- (modistsp.west-|derivationofspatialdatanodes);
+\draw[thickarrow] (modistsp.west-|derivationofspatialdatanodes) -- (derivationofspatialdatanodes);
+
+\draw[thickes] (modistsp.east) -- (modistsp.east-|bayesiannetworks);
+\draw[thickarrow] (modistsp.east-|bayesiannetworks) -- (bayesiannetworks);
+
+\draw[thickes] (datadiscretisation.west) -- ([xshift = -1cm]datadiscretisation.west-|multilayerprocedure);
+\draw[thickarrow] ([xshift = -1cm]datadiscretisation.west-|multilayerprocedure) -- ([xshift = -1cm]multilayerprocedure.north);
+
+\draw[thickes] (datadiscretisation.east) -- ([xshift = 1cm]datadiscretisation.east-|singlelayerprocedure);
+\draw[thickarrow] ([xshift = 1cm]datadiscretisation.east-|singlelayerprocedure) -- ([xshift = 1cm]singlelayerprocedure.north);
+
+\draw[thickarrow](presenceabsence)--(probabilityofdiscreteranges);
+\draw[thickarrow](probabilityofdiscreteranges)--(confusionpixel);
+
+\draw[thickarrow](soilandwater)--(pixelisfbfs);
+\draw[thickarrow](vegetation)--(pixelisfbfs);
+\draw[thickarrow](topographiccharacteristics)--(pixelisfbfs);
+
+\draw[thickes] (bayesiannetworks.south) -- (bayesiannetworks.south|-spatiallyexplicitdecisionsupporttool);
+\draw[thickarrow] (bayesiannetworks.south|-spatiallyexplicitdecisionsupporttool) -- (spatiallyexplicitdecisionsupporttool.east);
+
+\draw[thickes] (derivationofspatialdatanodes.south) -- (derivationofspatialdatanodes.south|-spatiallyexplicitdecisionsupporttool);
+\draw[thickarrow] (derivationofspatialdatanodes.south|-spatiallyexplicitdecisionsupporttool) -- (spatiallyexplicitdecisionsupporttool.west);
+
+\draw[thickarrow](spatiallyexplicitdecisionsupporttool) -- (output);
+
+\draw[dashedarrow] ([yshift=2mm]probabilisticmaps.east) -- ([yshift=2mm]spatiallyexplicituncertainity.west); 
+\draw[dashedarrow] ([yshift=-2mm]spatiallyexplicituncertainity.west) -- ([yshift=-2mm]probabilisticmaps.east); 
+
+\draw [ultra thick, lightgray](current bounding box.north west) rectangle (current bounding box.south east);
+\end{tikzpicture}
+%% End of Overview Detailed Model %%%%
+```
 ### SRTM {#I21}
 
 [SRTM](https://www2.jpl.nasa.gov/srtm/) is an collaborative project between the US National Aeronautics and Space Administration (NASA) and the National Imagery and Mapping Agency (NIMA), the National Geospatial-Intelligence Agency, and the German and Italian Space Agencies providing the most complete highest resolution and public domain DEM between 56° S and  60° N [@Farr_et_al_2000; @Farr_et_al_2007; @Nikolakopoulos_et_al_2006]. It uses a dual radar antennas interferometry to produce high resolution topographic data and carries over 300 high-density tapes storing these data. several spatial resolutions (e.g. 30m, 90m, 1000m) are available [@Farr_et_al_2007; @Jarvis_et_al_2008]. A list of available [SRTM](https://www2.jpl.nasa.gov/srtm/) data and their sources along with various other information can be found in Farr et al. [-@Farr_et_al_2007] and the accuracy of the [SRTM](https://www2.jpl.nasa.gov/srtm/) data is extensively discussed in Falorni et al. [-@Falorni_et_al_2005]. In this study, we used the 30 m spatial resolution DEM on which further processing were applied to ultimately compute the spatial data nodes used in the [BNs](https://en.wikipedia.org/wiki/Bayesian_network).
@@ -110,8 +369,426 @@ The study took place in two regions of Kenya and Ethiopia, the Kisumu county and
 In this study, the ultimate outcome variable (`PixelIsFBFS`) determining whether a given pixel qualify for FBFS is described using causal relationships among several other variables specified in a [BNs](https://en.wikipedia.org/wiki/Bayesian_network) model (Figure \@ref(fig:fig1)). The conceptual model described pixels’ potential for FBFS (`PixelIsFBFS`) to be jointly defined by the amount of flood water received (`FloodSomePts`), the topographic suitability, and the extent of vegetation variation due to flood (`VegVarFlood`) at that pixel. A pixel may record important run-on without experiencing flood because the water may run-off without a suitable topography (`suiteTopo`). This is, vegetation variation in space and time can be due to either flood or non-flood water but each pixel can be profiled in terms of its amount of flood water.
 
 
-```{r fig1, echo=FALSE, out.width = '100%', fig.cap="Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya."}
-knitr::include_graphics("figures/Mapping_FBFS_bayesian_network.png")
+```{tikz fig2, echo=FALSE, fig.cap = "Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya.", fig.ext = 'png', cache=FALSE, eval=TRUE, engine.opts = list(engine='xetex', template = "latex/tikz2pdf.tex")}
+%% Beginning of Mapping BNs %%%%
+
+\begin{tikzpicture}[node distance = 2.5cm and 2cm]
+
+\node[BnsBarplotStyle] (VegVar2Water1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Very low,Low,Medium,High,Very high}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates {(0.200,Very low)(0.200,Low)(0.200,Medium)(0.200,High)(0.200,Very high)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{VegVar2Water1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth, text width=7cm, align=center, inner sep = 2mm](VegVar2Water2)[above=0pt of VegVar2Water1]{Vegetation sensitivity to water variation};
+
+%%%%
+\node[BnsBarplotStyle, right= of VegVar2Water1] (Slope1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Very steep,Steep,Gentile,Relatively flat,Flat}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates {(0.200,Very steep)(0.200,Steep)(0.200,Gentile)(0.200,Relatively flat)(0.200,Flat)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{Slope1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](Slope2)[above=0pt of Slope1]{Slope};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle, right= of Slope1] (FlowAcc1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Very low,Low,Medium,High,Very high}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates {(0.200,Very low)(0.200,Low)(0.200,Medium)(0.200,High)(0.200,Very high)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{FlowAcc1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth, align=center, inner sep = 2mm](FlowAcc2)[above=0pt of FlowAcc1]{Flow\\accumulation};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle, below=of FlowAcc1] (FloodBgs1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Unexpected,Unusual,Common,Frequent,Permanent}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.200,Unexpected)(0.200,Unusual)(0.200,Common)(0.200,Frequent)(0.200,Permanent)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{FloodBgs1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth, text width = 7cm, align=center, inner sep = 2mm](FloodBgs2)[above=0pt of FloodBgs1]{Flood at the beginning\\ of the growing season};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle] at (FloodBgs1-|Slope1) (SuiteTopo1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Unsuitable,Suitable}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.709,Unsuitable)(0.291,Suitable)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{SuiteTopo1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](SuiteTopo2)[above=0pt of SuiteTopo1]{Suitable topography};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle] at (SuiteTopo1-|VegVar2Water1) (CharctVeg1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Dry,Dehydrated, Moderately hydrated,Hydrated,Waterlogged}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.293,Dry)(0.155,Dehydrated)(0.105,Moderately hydrated)(0.154,Hydrated)(0.293,Waterlogged)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{CharctVeg1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth, text width =5cm, align=center, inner sep = 2mm](CharctVeg2)[above=0pt of CharctVeg1]{Characteristic vegetation};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle, below= of CharctVeg1] (FloodSomePts1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Very low,Low,Medium,High,Very high}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.185,Very low)(0.179,Low)(0.175,Medium)(0.224,High)(0.237,Very high)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{FloodSomePts1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](FloodSomePts2)[above=0pt of FloodSomePts1]{Flooded at some point};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle] at (FloodSomePts1-|SuiteTopo1) (PixelIsFBFS1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Highly unlikely,Unlikely,Possible,Likely,Highly likely}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.449,Highly unlikely)(0.208,Unlikely)(0.107,Possible)(0.113,Likely)(0.123,Highly likely)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{PixelIsFBFS1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth, text=red](PixelIsFBFS2)[above=0pt of PixelIsFBFS1]{Pixel is FBFS};
+
+%%%%
+%%%%
+
+\node[BnsBarplotStyle] at (PixelIsFBFS1-|FloodBgs1) (VegVarFlood1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Very low,Low,Medium,High,Very high}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.304,Very low)(0.226,Low)(0.169,Medium)(0.154,High)(0.147,Very high)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{VegVarFlood1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](VegVarFlood2)[above=0pt of VegVarFlood1]{Vegetation variation due to flood};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle, below= of VegVarFlood1] (TempoVarVI1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Extremely low,Very low,Low,High,Very high, Extremely high}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.285,Extremely low)(0.118,Very low)(0.183,Low)(0.156,High)(0.036,Very high)(0.222,Extremely high)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{TempoVarVI1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](TempoVarVI2)[above=0pt of TempoVarVI1]{Vegetation variation due to flood};
+
+%%%%
+%%%%
+
+\node[BnsBarplotStyle] at (TempoVarVI1-|PixelIsFBFS1) (PowerTools1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Low,High}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.200,Low)(0.800,High)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{PowerTools1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](PowerTools2)[above=0pt of PowerTools1]{Power of Tools};
+
+%%%%
+%%%%
+
+\node[BnsBarplotStyle] at (PowerTools1-|FloodSomePts1) (WaterPresent1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Unexpected,Unusual,Common,Permanent}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.200,Unexpected)(0.200,Unusual)(0.200,Common)(0.200,Permanent)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{WaterPresent1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](WaterPresent2)[above=0pt of WaterPresent1]{Water present};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle, below= of WaterPresent1] (Exposure2wet1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Very low,Low,Medium,High,Very high}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates {(0.200,Very low)(0.200,Low)(0.200,Medium)(0.200,High)(0.200,Very high)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{Exposure2wet1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](Exposure2wet2)[above=0pt of Exposure2wet1]{Exposure to wetness};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle, below= of Exposure2wet1] (Sens2Flood1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Very low,Low,Medium,High,Very high}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.200,Very low)(0.200,Low)(0.200,Medium)(0.200,High)(0.200,Very high)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{Sens2Flood1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](Sens2Flood2)[above=0pt of Sens2Flood1]{Sensitivity to flood};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle] at (Exposure2wet1-|PowerTools1) (SoilWaterContent1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Very low,Low,Medium,High,Very high}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates {(0.200,Very low)(0.200,Low)(0.200,Medium)(0.200,High)(0.200,Very high)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{SoilWaterContent1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](SoilWaterContent2)[above=0pt of SoilWaterContent1]{Soil water content};
+
+%%%%
+
+%%%%
+
+\node[BnsBarplotStyle, below= of SoilWaterContent1] (SuitSoil1)  {
+\nodepart{two}
+\begin{tikzpicture}[use background]
+\begin{axis}[AxisStyle,
+                    symbolic y coords = {Unusable,Unsuitable,Moderately suitable,Suitable,Highly suitable}
+                  ]
+
+\addplot [AddPlotStyle]  coordinates{(0.293,Unusable)(0.155,Unsuitable)(0.105,Moderately suitable)(0.154,Suitable)(0.293,Highly suitable)};
+
+\end{axis}
+\end{tikzpicture}
+};
+
+\tcbsetmacrotowidthofnode{\mywidth}{SuitSoil1}
+
+\node[BnsBarplotTitleStyle, minimum width=\mywidth](SuitSoil2)[above=0pt of SuitSoil1]{Suitable soil};
+
+%%%%
+%%%%%
+\draw[thickarrow] (VegVar2Water1) -- (CharctVeg2);
+\draw[thickarrow] (Slope1) -- (SuiteTopo2);
+
+\draw[thickes] (FlowAcc1.west) -- ([xshift=-1cm]FlowAcc1.west);
+\draw[thickes] ([xshift=-1cm]FlowAcc1.west)--([xshift=-1cm]FlowAcc1.west|-SuiteTopo1.east);
+\draw[thickarrow] ([xshift=-1cm]FlowAcc1.west|-SuiteTopo1.east)-- (SuiteTopo1.east);
+
+\node[draw=none, fill=none] at ([xshift=1.1cm]FlowAcc1.east){};
+\draw[thickes] (FlowAcc1.east) -- ([xshift=1cm]FlowAcc1.east);
+\draw[thickes] ([xshift=1cm]FlowAcc1.east) -- ([xshift=1cm]VegVarFlood1.east);
+\draw[thickarrow] ([xshift=1cm]VegVarFlood1.east) -- (VegVarFlood1.east);
+
+\draw[thickarrow] (FloodBgs1) -- (VegVarFlood2);
+\draw[thickarrow] (VegVarFlood1) -- (PixelIsFBFS1);
+\draw[thickarrow] (SuiteTopo1) -- (PixelIsFBFS2);
+\draw[thickarrow] (FloodSomePts1) -- (PixelIsFBFS1);
+\draw[thickarrow] (CharctVeg1) -- (FloodSomePts2);
+
+\draw[thickes] ([yshift=-0.5cm]Sens2Flood1.west) -- ([xshift=-0.5cm, yshift=-0.5cm]CharctVeg1.west|-Sens2Flood1.west);
+\draw[thickes] ([xshift=-0.5cm, yshift=-0.5cm]CharctVeg1.west|-Sens2Flood1.west) -- ([xshift=-0.5cm]CharctVeg1.west);
+\draw[thickarrow] ([xshift=-0.5cm]CharctVeg1.west) -- (CharctVeg1.west);
+\node[draw=none, fill=none] at ([xshift=-0.65cm]CharctVeg1.west|-Sens2Flood1.west){};
+
+
+\draw[thickes] (Sens2Flood1.west) -- ([xshift=-0.5cm]Sens2Flood1.west-|WaterPresent1.west);
+\draw[thickes] ([xshift=-0.5cm]Sens2Flood1.west-|WaterPresent1.west) -- ([xshift=-0.5cm]WaterPresent1.west);
+\draw[thickes] ([xshift=-0.5cm]Sens2Flood1.west-|WaterPresent1.west) -- ([xshift=-0.5cm]WaterPresent1.west);
+\draw[thickarrow] ([xshift=-0.5cm]WaterPresent1.west) -- (WaterPresent1.west);
+
+\draw[thickes] (SuitSoil1.south) -- ([yshift=-0.5cm]SuitSoil1.south);
+\draw[thickes] ([yshift=-0.5cm]SuitSoil1.south) -- ([yshift=-0.5cm, xshift=-1.2cm]SuitSoil1.south-|FloodSomePts1.west);
+\draw[thickes] ([yshift=-0.5cm, xshift=-1.2cm]SuitSoil1.south-|FloodSomePts1.west) -- ([xshift=-1.2cm]FloodSomePts1.west);
+\draw[thickarrow] ([xshift=-1.2cm]FloodSomePts1.west) -- (FloodSomePts1.west);
+\node[draw=none, fill=none] at ([yshift = -0.65cm]SuitSoil1.south){};
+
+%(FloodSomePts1.west);
+
+\draw[thickarrow] (WaterPresent2) -- (FloodSomePts1);
+% \draw[thickarrow] (PowerTools1) -- (WaterPresent1);
+% \draw[thickarrow] (PowerTools1) -- (TempoVarVI1);
+\draw[thickarrow] (PowerTools2) -- (PixelIsFBFS1);
+\draw[thickarrow] (TempoVarVI2) -- (VegVarFlood1);
+
+\draw[thickes] ([xshift=1cm]WaterPresent2.north) -- ([xshift=1cm, yshift=1cm]WaterPresent2.north);
+\draw[thickes] ([xshift=1cm, yshift=1cm]WaterPresent2.north)--([xshift=-1cm, yshift=1cm]WaterPresent2.north-|VegVarFlood1);
+\draw[thickarrow] ([xshift=-1cm, yshift=1cm]WaterPresent2.north-|VegVarFlood1)--([xshift=-1cm]VegVarFlood1.south);
+
+%\draw[thickarrow] (WaterPresent2) -- (VegVarFlood1);
+
+\draw[thickarrow] (Exposure2wet2) -- (WaterPresent1);
+
+\draw[thickes] ([xshift=-0.25cm]Exposure2wet1.south)--([xshift=-0.25cm, yshift=-0.75cm]Exposure2wet1.south);
+\draw[thickes] ([xshift=-0.25cm, yshift=-0.75cm]Exposure2wet1.south) -- ([xshift=-0.5cm, yshift=-0.75cm]SuitSoil2|-Exposure2wet1.south);
+\draw[thickarrow] ([xshift=-0.5cm, yshift=-0.75cm]SuitSoil2|-Exposure2wet1.south) -- ([xshift=-0.5cm]SuitSoil2.north);
+
+
+\draw[thickes] (Exposure2wet1.south)--([yshift=-0.5cm]Exposure2wet1.south);
+\draw[thickes] ([yshift=-0.5cm]Exposure2wet1.south)--([yshift=-0.5cm]Exposure2wet1.south-|VegVarFlood1);
+\draw[thickarrow] ([yshift=-0.5cm]Exposure2wet1.south-|VegVarFlood1)--(TempoVarVI1.south);
+
+%\draw[thickarrow] (Exposure2wet2) -- (TempoVarVI1);
+
+\draw[thickes] ([xshift=-1cm]SoilWaterContent2.north) -- ([xshift=-1cm, yshift=0.25cm]SoilWaterContent2.north);
+\draw[thickes] ([xshift=-1cm, yshift=0.25cm]SoilWaterContent2.north) -- ([xshift=1cm, yshift=0.25cm]SoilWaterContent2.north-|WaterPresent1.south);
+\draw[thickarrow] ([xshift=1cm, yshift=0.25cm]SoilWaterContent2.north-|WaterPresent1.south) -- ([xshift=1cm]WaterPresent1.south);
+
+%(WaterPresent1);
+\node[draw=none, fill=none] at ([yshift=-1.1cm]SoilWaterContent1.south){};
+\draw[thickes] (SoilWaterContent1.south) -- ([yshift=-1cm]SoilWaterContent1.south);
+
+%\draw[thickes] ([yshift=-1cm]SoilWaterContent1.south)--([yshift=-1cm]SuitSoil1|-SoilWaterContent1.south);
+%\draw[thickarrow] ([yshift=-1cm]SuitSoil1|-SoilWaterContent1.south)--(SuitSoil1.south);
+\draw[thickarrow] (SoilWaterContent1.south)--(SuitSoil2.north);
+
+
+\draw[thickes] ([xshift=1cm]SoilWaterContent2.north) -- ([xshift=1cm, yshift=0.25cm]SoilWaterContent2.north);
+\draw[thickes] ([xshift=1cm, yshift=0.25cm]SoilWaterContent2.north) -- ([xshift=-0.5cm, yshift=0.25cm]SoilWaterContent2.north-|TempoVarVI1.south);
+\draw[thickarrow] ([xshift=-0.5cm, yshift=0.25cm]SoilWaterContent2.north-|TempoVarVI1.south) -- ([xshift=-0.5cm]TempoVarVI1.south);
+
+
+\node[draw=none, fill=none] at ([xshift=-0.5cm]SuitSoil1.west){};
+\node[draw=none, fill=none] at ([yshift=0.25cm]VegVar2Water2.north){};
+
+%%%%%
+\draw [ultra thick, lightgray](current bounding box.north west) rectangle (current bounding box.south east);
+\end{tikzpicture}
+%% End of Mapping BNs %%%%
 ```
 
 The topographic suitability of a pixel (`suiteTopo`) depends largely on its slope (`Slope`) and the number of pixels draining into it (`FlowAcc`). While the accumulation of flow (`FlowAcc`) is important to the amount of flood reaching the pixels, it is rather the slope (`Slope`) and the gravity that determine whether the water will be kept or transmitted by that pixel.

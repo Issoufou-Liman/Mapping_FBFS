@@ -78,7 +78,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{May 31, 2019}
+    \date{September 19, 2019}
 
 % \documentclass{article} https://tex.stackexchange.com/questions/60209/how-to-add-an-extra-level-of-sections-with-headings-below-subsubsection
 \usepackage{hyperref}
@@ -147,6 +147,9 @@ The objective of this paper is to provide an affordable mapping routine that cou
 \hypertarget{I}{%
 \section{Material and methods}\label{I}}
 
+\hypertarget{conceptual-framework}{%
+\subsection{Conceptual framework}\label{conceptual-framework}}
+
 \hypertarget{I1}{%
 \subsection{Study area}\label{I1}}
 
@@ -154,6 +157,15 @@ The study took place in two regions of Kenya and Ethiopia, the Kisumu county and
 
 \hypertarget{I2}{%
 \subsection{Sensor Characteristics}\label{I2}}
+
+\begin{figure}[!htbp]
+
+{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig1-1} 
+
+}
+
+\caption{Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya.}\label{fig:fig1}
+\end{figure}
 
 \hypertarget{I21}{%
 \subsubsection{SRTM}\label{I21}}
@@ -175,8 +187,13 @@ The study took place in two regions of Kenya and Ethiopia, the Kisumu county and
 
 In this study, the ultimate outcome variable (\texttt{PixelIsFBFS}) determining whether a given pixel qualify for FBFS is described using causal relationships among several other variables specified in a \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} model (Figure \ref{fig:fig1}). The conceptual model described pixels' potential for FBFS (\texttt{PixelIsFBFS}) to be jointly defined by the amount of flood water received (\texttt{FloodSomePts}), the topographic suitability, and the extent of vegetation variation due to flood (\texttt{VegVarFlood}) at that pixel. A pixel may record important run-on without experiencing flood because the water may run-off without a suitable topography (\texttt{suiteTopo}). This is, vegetation variation in space and time can be due to either flood or non-flood water but each pixel can be profiled in terms of its amount of flood water.
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{figures/Mapping_FBFS_bayesian_network} \caption{Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya.}\label{fig:fig1}
+\begin{figure}[!htbp]
+
+{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig2-1} 
+
+}
+
+\caption{Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya.}\label{fig:fig2}
 \end{figure}
 
 The topographic suitability of a pixel (\texttt{suiteTopo}) depends largely on its slope (\texttt{Slope}) and the number of pixels draining into it (\texttt{FlowAcc}). While the accumulation of flow (\texttt{FlowAcc}) is important to the amount of flood reaching the pixels, it is rather the slope (\texttt{Slope}) and the gravity that determine whether the water will be kept or transmitted by that pixel.
@@ -240,8 +257,13 @@ Specific processing procedures were applied to derive each spatial data node con
 
 The results of the processed spatial data nodes used to feed the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} model are presented in Figure \ref{fig:fig11}. As it can be seen, the topographic characteristics of the area are captured in both slope and flow accumulation nodes. In Kisumu county, run-off flows from East to West with most of the flow converging to Lake Victoria which is the flattest land located in vast low laying lands. In the East of the Lake basin are the steepest lands of Kisumu causing the essential of surface water to flow Westwards. Most poor-quality data are located around the water bodies where the node power of tools scored the lowest values to an extent that most water bodies are clearly visible. The chance of encountering water on the ground (water present node), either in forms of floods water or water body, is high in most area of Kisumu. This seems to be frequent towards the beginning of the growing season since there is no big difference between the map of the node water present and that of the node flood at the beginning of the rainy season. In general, vegetation in Kisumu experiences high intra-annual variation with, unexpectedly, the highest variability associated with Lake Victoria. While vegetation is high in the littoral zone, there seems to be a permanent mixture of vegetation and water in the deep water suggesting possible Eutrophication of Lake Victoria. As expected, the spatial pattern of soil water content mimic that of the exposure to wetness (also water present and flood at the beginning of the rainy season) with the Lake Victoria scoring the highest values. In general, there a drastic moisture within the flat area beyond the lake water; which moisture increases towards the eastern and the northern parts of the county. The highest sensitivity to flood is encountered in the Lake shore. Some forested areas are wrongly detected as high flood sensitivity spots in the north and west eastern of the county towards the neighboring Nandi and Kericho counties. Vegetation sensitivity to water variation, which seems to be negatively correlated with forest and open water, decrease from the literal Lake Victoria outwards.
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{figures/Mapping_FBFS_prior_maps} \caption{Prior spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya.}\label{fig:fig11}
+\begin{figure}[!htbp]
+
+{\centering \includegraphics[width=1\linewidth,]{figures/Mapping_FBFS_prior_maps} 
+
+}
+
+\caption{Prior spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya.}\label{fig:fig11}
 \end{figure}
 
 The importance of vegetation infestation in the Kenyan part of Lake Victoria has been reported in previous studies.\textsuperscript{\protect\hyperlink{ref-Cavalli_et_al_2009}{53}} The high vegetation along with its low sensitivity to water variation in littoral zone can be explained by the permanence of water. Gikuma-Njuru et al.~\textsuperscript{\protect\hyperlink{ref-Gikuma-Njuru_et_al_2005}{54}} reported higher Chlorophyll concentrations in the littoral compared to the pelagic zones due to nutrients additions from tributaries.\textsuperscript{\protect\hyperlink{ref-World_Bank_1996}{55}} The highest vegetation variability associated with the lake water may be explained by a sequence of proliferation and decline of aquatic plants (e.g.~algae) at certain periods of the year. Another explanation could be the periods of active mixing resulting in water-vegetation mixtures.\textsuperscript{\protect\hyperlink{ref-Cavalli_et_al_2009}{53},\protect\hyperlink{ref-Gikuma-Njuru_et_al_2005}{54}} The confusion with regards to the spectral response of open water and forest is a testimonies of uncertainty sources. Care must be taken when dealing with remote sensing data to avoid such errors, particularly in studies dealing with water and vegetation.\textsuperscript{\protect\hyperlink{ref-Cavalli_et_al_2009}{53}} In general, water indices are sensitive to vegetation liquid water.\textsuperscript{\protect\hyperlink{ref-Boschetti_et_al_2014}{10}}
@@ -251,14 +273,24 @@ The importance of vegetation infestation in the Kenyan part of Lake Victoria has
 
 The output maps from the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} model are shown in Figure \ref{fig:fig12} and their respective uncertainties in Figure \ref{fig:fig13}. The suitable topography for FBFS, resulting from the interaction between the slope and flow accumulation nodes, is generally high in area having high flow accumulation which are not necessarily water body. The soil suitability (suitable soils node) is even more misleading showing forests and open waters as having highest suitable in soil for FBFS. Intuitively, permanently waterlogged areas may not be suitable for agriculture. Characteristic vegetation, in contrast, is rather accurate excluding most open waters and forests from typical vegetation for FBFS. Interestingly, the pattern of the characteristic vegetation is depicted with most vegetation exposed to waterlogging close to open water. Clearly, there is a change in the characteristic vegetation at a certain distance from Lake Victoria with the closed area to the Lake showing vegetation exposed to waterlogging and most of the areas near rivers Mogus, Awach, Sondu Miriu, Nyando and Kibos exhibiting hydrated vegetation.
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{figures/Mapping_FBFS_posterior_maps} \caption{Posterior FBFS maps and other important FBFS metrics in Kisumu county, Kenya.}\label{fig:fig12}
+\begin{figure}[!htbp]
+
+{\centering \includegraphics[width=1\linewidth,]{figures/Mapping_FBFS_posterior_maps} 
+
+}
+
+\caption{Posterior FBFS maps and other important FBFS metrics in Kisumu county, Kenya.}\label{fig:fig12}
 \end{figure}
 
 Important changes were introduced from the prior to the posterior maps of water present node. One important change is related to the appearance of a sort-of islands or at least a tendency to drying in certain parts of the Lake shores leading to the conclusion that water may be not be present all the yearlong in that area. Another important change is the increase in the areas where water can be expected on the ground. Probably due to vegetation liquid water, most forests have shown important water presence. The variable temporal variation in vegetation index ranked higher on forests and open waters with most central areas resulting in the lowest. This high vegetation variability over the Lake support the idea of the sequential increase / decrease of aquatic vegetation at certain period of the year (see section \ref{II4}), particularly looking at the map of the node vegetation variation caused by flood. The highest chance of flood is recorded near the lake shore and river Nyando, but most floodplains scored high values. As expected, vegetation variation attributed to flood (vegetation variation caused by flood node) seems to be positively correlated with flow accumulation and suitable topography for FBFS. In general, most of the posterior maps are not conclusive enough to be considered as standalone decision support with regards the potential area for FBFS. The target map (pixel is FBFS) seems to also be strongly correlated with flow accumulation and suitable topography and support the idea of vegetation presence inside the Lake which certain parts appears among the very likely areas for FBFS. As expected, most riverbanks are detected as having high potential for FBFS; which potential declines with distance.
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{figures/Mapping_FBFS_uncertainity_maps} \caption{Spatially explicit uncertainity maps derived as part of FBFS mapping in Kisumu county, Kenya.}\label{fig:fig13}
+\begin{figure}[!htbp]
+
+{\centering \includegraphics[width=1\linewidth,]{figures/Mapping_FBFS_uncertainity_maps} 
+
+}
+
+\caption{Spatially explicit uncertainity maps derived as part of FBFS mapping in Kisumu county, Kenya.}\label{fig:fig13}
 \end{figure}
 
 The spatial explicit uncertainty (Figure \ref{fig:fig13}), expressed as shannon entropy, revealed that the lowest level of uncertainty seems to be achieved with the suitable topography. This may be explained by the simplicity of the causality specified in this node but also the relative accuracy of the data (radar versus optical sensor) used to feed the parents nodes (slope and flow accumulation). Regarding this node, the highest uncertainty spot seems to be located around high flow accumulation areas where water is potentially present, but the topography is not necessarily flat. As stated earlier, the node suitable soils might be misleading, and this can be seen in the uncertainty map where most areas having either relatively low vegetation or water ranked amongst the highest uncertainty spots. Most open water seems to have the lowest uncertainty with regards to characteristic vegetation node contrary to water presence. The uncertainty map related to temporal variation in vegetation index has captured the drying spot inside the Lake as discussed earlier. High uncertainty regarding flood seems be ubiquitous and this seems to be propagated into the node vegetation variation caused by flood. Coming to the target node, there is high uncertainty on most pixels associated with open water. As it can be seen, the water in the Lake is associated with the highest level of uncertainty supporting the ideas that these areas are not suitable. In a nutshell, the posterior maps are to be used with consideration to the associated uncertainty maps.
@@ -430,7 +462,7 @@ The spatial explicit uncertainty (Figure \ref{fig:fig13}), expressed as shannon 
 53. Cavalli, R. M., Laneve, G., Fusilli, L., Pignatti, S. \& Santini, F. Remote sensing water observation for supporting Lake Victoria weed management. \emph{Journal of Environmental Management} \textbf{90}, 2199--2211 (2009).
 
 \leavevmode\hypertarget{ref-Gikuma-Njuru_et_al_2005}{}%
-54. Gikuma-Njuru, P. \emph{et al.} Eutrophication of the Lake Victoria Ecosystem. in \emph{Lake victoria regional water quality synthesis report} (eds. Mwanuzi, F. L., Abuodha, J. O., Muyodi, F. J. \& Hecky, R. E.) 81 (LVEMP, 2005).
+54. Gikuma-Njuru, P. \emph{et al.} Eutrophication of the Lake Victoria Ecosystem. in \emph{Lake victoria regional water quality synthesis report} (eds. Mwanuzi, F. L., Abuodha, J. O. Z., Muyodi, F. J. \& Hecky, R. E.) 81 (LVEMP, 2005).
 
 \leavevmode\hypertarget{ref-World_Bank_1996}{}%
 55. World Bank. \emph{Kenya, Tanzania, Uganda: Lake Victoria Environmental Management Project}. 158 (World Bank, 1996).
