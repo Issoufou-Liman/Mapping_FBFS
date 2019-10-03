@@ -5,4 +5,9 @@
 .Mapping_FBFS_cache/**
 .Mapping_FBFS_files/**
 .Mapping_FBFS_Supplement_cache/**
-.Mapping_FBFS_Supplement_files
+.Mapping_FBFS_Supplement_files/**
+.data_files/dem/**
+.data_files/hdf/**
+.data_files/ndsi/**
+.data_files/shapefiles/**
+
