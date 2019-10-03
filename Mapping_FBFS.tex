@@ -78,7 +78,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{September 19, 2019}
+    \date{October 03, 2019}
 
 % \documentclass{article} https://tex.stackexchange.com/questions/60209/how-to-add-an-extra-level-of-sections-with-headings-below-subsubsection
 \usepackage{hyperref}
@@ -112,6 +112,22 @@
 \makeatother
 \setcounter{secnumdepth}{3} % how many sectioning levels to assign numbers to
 \setcounter{tocdepth}{5}    % how many sectioning levels to show in ToC
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 
 \begin{document}
 \maketitle
@@ -150,6 +166,15 @@ The objective of this paper is to provide an affordable mapping routine that cou
 \hypertarget{conceptual-framework}{%
 \subsection{Conceptual framework}\label{conceptual-framework}}
 
+\begin{figure}[!htbp]
+
+{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig1-1} 
+
+}
+
+\caption{Concetual framework for mapping FBFS.}\label{fig:fig1}
+\end{figure}
+
 \hypertarget{I1}{%
 \subsection{Study area}\label{I1}}
 
@@ -157,15 +182,6 @@ The study took place in two regions of Kenya and Ethiopia, the Kisumu county and
 
 \hypertarget{I2}{%
 \subsection{Sensor Characteristics}\label{I2}}
-
-\begin{figure}[!htbp]
-
-{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig1-1} 
-
-}
-
-\caption{Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya.}\label{fig:fig1}
-\end{figure}
 
 \hypertarget{I21}{%
 \subsubsection{SRTM}\label{I21}}
@@ -195,6 +211,26 @@ In this study, the ultimate outcome variable (\texttt{PixelIsFBFS}) determining 
 
 \caption{Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya.}\label{fig:fig2}
 \end{figure}
+
+\begin{table}[t]
+
+\caption{\label{tab:table1}List of normalized difference spectral indices (NDSI) used for mapping FBFS in Kisumu County, Kenya.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{>{\bfseries}llll}
+\toprule
+\textbf{ } & \textbf{Bands} & \textbf{Spectral range} & \textbf{Full name}\\
+\midrule
+NDVI & B2, B1 & (NIR – VISRed)/(NIR + RED) & Normalized Difference Vegetation Index (Rouse, 1973)\\
+NDFI & B1, B6 & (NIR - SWIR1) / (NIR + SWIR1) & Normalized Difference Flood Index (Boschetti, 2014)\\
+NDII6 & B2, B6 & (NIR2 - SWIR1) / (NIR2 + SWIR1) & Normalized Difference Infrared Index - Band 6 (Hunt, 1989)\\
+NDII7 & B2, B7 & (NIR2 - SWIR2) / (NIR2 + SWIR2) & Normalized Difference Infrared Index - Band 7 (Hunt, 1989)\\
+GAO MDWI & B2, B5 & (NIR2 - NIR5) / (NIR2 + NIR5) & Normalized Difference Water Index (NDWI) (GAO, 1996)\\
+\addlinespace
+McFeeters MDWI & B4, B2 & (VIS4 – NIR2) / (VIS4 + NIR2) & Normalized Difference Water Index (NDWI) (McFeeters, 1996)\\
+\bottomrule
+\end{tabular}}
+\end{table}
 
 The topographic suitability of a pixel (\texttt{suiteTopo}) depends largely on its slope (\texttt{Slope}) and the number of pixels draining into it (\texttt{FlowAcc}). While the accumulation of flow (\texttt{FlowAcc}) is important to the amount of flood reaching the pixels, it is rather the slope (\texttt{Slope}) and the gravity that determine whether the water will be kept or transmitted by that pixel.
 
@@ -226,7 +262,32 @@ Prior to processing the data acquired, preliminary analyses were conducted to un
 \hypertarget{I511}{%
 \paragraph{Time series data}\label{I511}}
 
-The boxplots and the comparative analysis of the NDSIs shows different patterns but these can only be hardly separated making it difficult to threshold the different NDSIs across land use / land cover. An approach based on rigid thresholding was clearly not the best option to demarcate the nature of the spectral response, at least not without making complicated statistical assumptions. A simpler way would be to approach the problem using imprecise quantifiers where fuzzy logic can be used in forms of Likert-type scales\textsuperscript{\protect\hyperlink{ref-Likert_1932}{50}} describing the scores of the spectral responses along a range; supporting the use of \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}. We therefore make use of the different ranges of the boxplot (i.e.~lowest outliers -- lower Whisker, lower Whisker - 1st quartile, 1st quartile -- 3rd quartile, 3rd quartile - upper Whisker , upper Whisker -- highest outliers) to separate the data and estimate the probability of each pixel falling within each of these ranges at each time step in the time series. Although rarely use for deriving variable states, boxplot has been used in all kind of statistics for the last 40 years. Beyond their incredible simplicity, boxplots use robust statistics to summarise data in terms of five-numbers while being particularly handy when comparing the distributions of these data across groups.\textsuperscript{\protect\hyperlink{ref-Wickham_and_Stryjewski_2012}{51}} To estimate the probability for a given range, we first recoded all values outside of that range to 0 whereas the values falling within the range were recorded to 1. This way, all the real-valued time series was reclassified into presence - absence time series data. Thereafter, the final probability of a pixel belonging to a range can be easily estimated using the ratio between the presence and absence of that pixel in the range throughout the time series (Equation \eqref{eq:eq1}).
+The boxplots and the comparative analysis of the NDSIs shows different patterns but these can only be hardly separated making it difficult to threshold the different NDSIs across land use / land cover. An approach based on rigid thresholding was clearly not the best option to demarcate the nature of the spectral response, at least not without making complicated statistical assumptions. A simpler way would be to approach the problem using imprecise quantifiers where fuzzy logic can be used in forms of Likert-type scales\textsuperscript{\protect\hyperlink{ref-Likert_1932}{50}} describing the scores of the spectral responses along a range; supporting the use of \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}. We therefore make use of the different ranges of the boxplot (i.e.~lowest outliers -- lower Whisker, lower Whisker - 1st quartile, 1st quartile -- 3rd quartile, 3rd quartile - upper Whisker , upper Whisker -- highest outliers) to separate the data and estimate the probability of each pixel falling within each of these ranges at each time step in the time series.
+
+\begin{algorithm}[H]
+\SetKw{KwBy}{by}
+\DontPrintSemicolon
+\SetAlgoLined
+\KwResult{a spatially explicit quantitative representation of variable states using probability}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{NDSI time series stack}
+\Output{a raster stack where each layer represents one of the variable states}
+\BlankLine
+\For{$each\;layer\;in\;the\;time\;series$}{
+    compute Whisker ranges\;
+    \For{$each\;Whisker\;range$}{
+        \eIf{cell value belongs to the Whisker range}{
+        recode the cell value to 1\;
+    }{
+        recode the cell value to 0\;
+    }
+    compute the probability of getting 1
+}
+}
+\caption{make pixel states}
+\end{algorithm}
+
+Although rarely use for deriving variable states, boxplot has been used in all kind of statistics for the last 40 years. Beyond their incredible simplicity, boxplots use robust statistics to summarise data in terms of five-numbers while being particularly handy when comparing the distributions of these data across groups.\textsuperscript{\protect\hyperlink{ref-Wickham_and_Stryjewski_2012}{51}} To estimate the probability for a given range, we first recoded all values outside of that range to 0 whereas the values falling within the range were recorded to 1. This way, all the real-valued time series was reclassified into presence - absence time series data. Thereafter, the final probability of a pixel belonging to a range can be easily estimated using the ratio between the presence and absence of that pixel in the range throughout the time series (Equation \eqref{eq:eq1}).
 
 \begin{equation} 
 P(p_i \in range_j) = \frac{n_{p_i \in range_j}}{N}
@@ -236,6 +297,37 @@ P(p_i \in range_j) = \frac{n_{p_i \in range_j}}{N}
 Where \(P(p_i \in range_j)\) is the probability of the pixel \(p_i\) belonging to the range \(range_j\), \(n_{p_i \in range_j}\) is the number of time the pixel \(p_i\) belonged to the range \(range_j\), and \(N\) is the sample space (total size of the time series).
 
 After estimating the probabilities for each boxplot range, these ranges were mapped into fuzzy linguistic quantifiers in forms of low, medium, high etc. (depending on the number of states identify by the boxplot algorithm) to provide vegetation states in a spatially explicit manner. For example, in situation where all the five boxplot ranges are present, lower outlier values were mapped to very low, the lower Whisker to low, the interquartile range to medium, the upper Whisker to high and the upper outliers to very high. These states, computed in separated raster layers, were then merged into one single layer to provide discrete states on which the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} can be easily operationalized.
+
+\begin{algorithm}[H]
+\SetKw{KwBy}{by}
+\DontPrintSemicolon
+\SetAlgoLined
+\KwResult{a spatially explicit qualitative representation of variable states using common language}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{NDSI time series stack}
+\Output{a raster layer where pixels are represented using relative fuzzy linguistic quantifiers}
+\BlankLine
+\textbf{do} algorithm 1: make pixel states\ \label{lst:line:s1}\;
+\For{$each\;pixel$}{
+        \eIf{the pixel has one single maximum for all layers}{
+        assign to the pixel the position of the layer (corresponding to a Whisker range as in the stack generated at step~\ref{lst:line:s1} and mapping to a linguistic quantifier) holding that maximal (probability) value \;
+    }{
+        assign NA to the pixel\ \label{lst:line:s2};
+    }
+    \For{$each\;pixel\;holding\;NA\;in\;the\;layer\;(generated\;after\;step~\ref{lst:line:s2})$}{
+        \eIf{the pixel has one single maximum for all neighbours in the 8 ways connectedness}{
+        fill it with that maximal value \;
+        }{
+        leave the pixel value as NA\ \label{lst:line:s13};
+        }
+            get the position of the remaining pixel holding after step~\ref{lst:line:s13} \;
+            extract all pixel values at the positions in step~\ref{lst:line:s13} from the stack generated at step~\ref{lst:line:s1} \label{lst:line:s14}\;
+            fit a classification regression tree model to the extracted data in step~\ref{lst:line:s14} \label{lst:line:s15}\;
+            predict the remaining pixels holding NA after step~\ref{lst:line:s13} using the model developed at step~\ref{lst:line:s15}
+    }
+}
+\caption{compile pixel states}
+\end{algorithm}
 
 The decision to assign a state value to a given pixel was made transparently using fully probabilistic heuristics in 3 sequential steps. The first step consisted in assigning a particular state to a given pixels if that state scored the highest probability and only if that highest probability is exclusive. Thus, all cases where 2 or more highest probability co-exist are considered as unknown and ignore until the second step. Such cases having equal probability states were commonly encountered at the edges where two consecutive states spatially meet. In the second step, these confusing pixels having 2 or more maximal probability of state occurrence are filled in using majority rule. Herein, since spatial feature are geographically auto-correlated in general, we applied a 3 by 3 moving window (eight-way connectedness) centred on each of these uncertain state value pixels and estimate their state value based on the values of the 8 neighbourhood pixels. Similarly, to the first step, a particular value among the values of the 8 neighbours is chosen when and only when it is the only value that occurs the most. Whenever 2 or more states happen to be the most probable at the same time, the pixel is left out and handled at the third step. In the third step, the rest of these confusing pixels, where the first and second steps heuristics failed, were modelled using decision tree recursive partitioning classification algorithm. We first extracted the maximal values which correspond to the highest probability across all these remaining confusing pixels to fit a classification regression tree (CART) model and used that model to conditionally infer their state values. Therefore, after this third step all pixel state value were estimated, and the resulting raster can be used as spatial data node in the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} model. The boxplot statistics were computed using our own defined function (see \texttt{get\_boxplot\_1d} in the technical material) based on \href{https://www.rdocumentation.org/packages/grDevices/versions/3.5.3/topics/boxplot.stats}{\texttt{boxplot.stats}} function from the \texttt{grDevices} package.\textsuperscript{\protect\hyperlink{ref-RCoreTeam_2018}{35}} We used the \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/reclassify}{\texttt{reclassify}} and the \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/calc}{\texttt{calc}} functions both from the \texttt{raster} package\textsuperscript{\protect\hyperlink{ref-Hijmans_2019}{46}} to recode the pixel values and to estimate the probability respectively. The second step confusing pixels were handled using \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/modal}{\texttt{modal}} function from within the \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/focal}{\texttt{focal}} function also from the \texttt{raster} package.\textsuperscript{\protect\hyperlink{ref-Hijmans_2019}{46}} The CART model was fitted using the \href{https://www.rdocumentation.org/packages/party/versions/1.3-3/topics/Conditional\%20Inference\%20Trees}{\texttt{ctree}} function from the \texttt{party} package\textsuperscript{\protect\hyperlink{ref-Hothorn_et_al_2006}{52}} whereas the third step confusing pixels' inference was achieved by supplying an anonymous function wrapping the \href{https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/predict}{\texttt{predict}} function from the \texttt{stats} package\textsuperscript{\protect\hyperlink{ref-RCoreTeam_2018}{35}} as argument to \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/calc}{\texttt{calc}} function.\textsuperscript{\protect\hyperlink{ref-Hijmans_2019}{46}}
 
@@ -252,6 +344,49 @@ Specific processing procedures were applied to derive each spatial data node con
 \hypertarget{II}{%
 \section{Results and discussion}\label{II}}
 
+\begin{figure}[!htbp]
+
+{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig3-1} 
+
+}
+
+\caption{Temporal variability in water and vegetation in Kisumu county, Kenya.}\label{fig:fig3}
+\end{figure}
+
+\begin{figure}[!htbp]
+
+{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig4-1} 
+
+}
+
+\caption{Discrete states of vegetation and water in Kisumu county, Kenya.}\label{fig:fig4}
+\end{figure}
+
+\begin{table}[t]
+
+\caption{\label{tab:table2}Spatial coverage of different states of vegetation and flood in Kisumu County, Kenya.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{>{\bfseries}lllllll}
+\toprule
+\textbf{ } & \textbf{Very low} & \textbf{Low} & \textbf{Moderately Low} & \textbf{Moderately High} & \textbf{High} & \textbf{Very high}\\
+\midrule
+Vegetation & 544.22
+(20.42\%) & 114.51
+(4.3\%) & 997.99
+(37.45\%) & 766.64
+(28.77\%) & 241.57
+(9.07\%) & \\
+Flood &  & 950.52
+(35.67\%) & 463.98
+(17.41\%) & 618.29
+(23.2\%) & 37.25
+(1.4\%) & 594.87
+(22.32\%)\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
 \hypertarget{II4}{%
 \subsection{Prior spatial distribution of the spatial data node states}\label{II4}}
 
@@ -259,11 +394,11 @@ The results of the processed spatial data nodes used to feed the \href{https://e
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=1\linewidth,]{figures/Mapping_FBFS_prior_maps} 
+{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig5 Kisumu-1} 
 
 }
 
-\caption{Prior spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya.}\label{fig:fig11}
+\caption{Prior, posterior, and uncertainity maps of differents spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya.}(\#fig:fig5 Kisumu)
 \end{figure}
 
 The importance of vegetation infestation in the Kenyan part of Lake Victoria has been reported in previous studies.\textsuperscript{\protect\hyperlink{ref-Cavalli_et_al_2009}{53}} The high vegetation along with its low sensitivity to water variation in littoral zone can be explained by the permanence of water. Gikuma-Njuru et al.~\textsuperscript{\protect\hyperlink{ref-Gikuma-Njuru_et_al_2005}{54}} reported higher Chlorophyll concentrations in the littoral compared to the pelagic zones due to nutrients additions from tributaries.\textsuperscript{\protect\hyperlink{ref-World_Bank_1996}{55}} The highest vegetation variability associated with the lake water may be explained by a sequence of proliferation and decline of aquatic plants (e.g.~algae) at certain periods of the year. Another explanation could be the periods of active mixing resulting in water-vegetation mixtures.\textsuperscript{\protect\hyperlink{ref-Cavalli_et_al_2009}{53},\protect\hyperlink{ref-Gikuma-Njuru_et_al_2005}{54}} The confusion with regards to the spectral response of open water and forest is a testimonies of uncertainty sources. Care must be taken when dealing with remote sensing data to avoid such errors, particularly in studies dealing with water and vegetation.\textsuperscript{\protect\hyperlink{ref-Cavalli_et_al_2009}{53}} In general, water indices are sensitive to vegetation liquid water.\textsuperscript{\protect\hyperlink{ref-Boschetti_et_al_2014}{10}}
@@ -273,27 +408,70 @@ The importance of vegetation infestation in the Kenyan part of Lake Victoria has
 
 The output maps from the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} model are shown in Figure \ref{fig:fig12} and their respective uncertainties in Figure \ref{fig:fig13}. The suitable topography for FBFS, resulting from the interaction between the slope and flow accumulation nodes, is generally high in area having high flow accumulation which are not necessarily water body. The soil suitability (suitable soils node) is even more misleading showing forests and open waters as having highest suitable in soil for FBFS. Intuitively, permanently waterlogged areas may not be suitable for agriculture. Characteristic vegetation, in contrast, is rather accurate excluding most open waters and forests from typical vegetation for FBFS. Interestingly, the pattern of the characteristic vegetation is depicted with most vegetation exposed to waterlogging close to open water. Clearly, there is a change in the characteristic vegetation at a certain distance from Lake Victoria with the closed area to the Lake showing vegetation exposed to waterlogging and most of the areas near rivers Mogus, Awach, Sondu Miriu, Nyando and Kibos exhibiting hydrated vegetation.
 
-\begin{figure}[!htbp]
-
-{\centering \includegraphics[width=1\linewidth,]{figures/Mapping_FBFS_posterior_maps} 
-
-}
-
-\caption{Posterior FBFS maps and other important FBFS metrics in Kisumu county, Kenya.}\label{fig:fig12}
-\end{figure}
-
 Important changes were introduced from the prior to the posterior maps of water present node. One important change is related to the appearance of a sort-of islands or at least a tendency to drying in certain parts of the Lake shores leading to the conclusion that water may be not be present all the yearlong in that area. Another important change is the increase in the areas where water can be expected on the ground. Probably due to vegetation liquid water, most forests have shown important water presence. The variable temporal variation in vegetation index ranked higher on forests and open waters with most central areas resulting in the lowest. This high vegetation variability over the Lake support the idea of the sequential increase / decrease of aquatic vegetation at certain period of the year (see section \ref{II4}), particularly looking at the map of the node vegetation variation caused by flood. The highest chance of flood is recorded near the lake shore and river Nyando, but most floodplains scored high values. As expected, vegetation variation attributed to flood (vegetation variation caused by flood node) seems to be positively correlated with flow accumulation and suitable topography for FBFS. In general, most of the posterior maps are not conclusive enough to be considered as standalone decision support with regards the potential area for FBFS. The target map (pixel is FBFS) seems to also be strongly correlated with flow accumulation and suitable topography and support the idea of vegetation presence inside the Lake which certain parts appears among the very likely areas for FBFS. As expected, most riverbanks are detected as having high potential for FBFS; which potential declines with distance.
 
+The spatial explicit uncertainty (Figure \ref{fig:fig13}), expressed as shannon entropy, revealed that the lowest level of uncertainty seems to be achieved with the suitable topography. This may be explained by the simplicity of the causality specified in this node but also the relative accuracy of the data (radar versus optical sensor) used to feed the parents nodes (slope and flow accumulation). Regarding this node, the highest uncertainty spot seems to be located around high flow accumulation areas where water is potentially present, but the topography is not necessarily flat. As stated earlier, the node suitable soils might be misleading, and this can be seen in the uncertainty map where most areas having either relatively low vegetation or water ranked amongst the highest uncertainty spots. Most open water seems to have the lowest uncertainty with regards to characteristic vegetation node contrary to water presence. The uncertainty map related to temporal variation in vegetation index has captured the drying spot inside the Lake as discussed earlier. High uncertainty regarding flood seems be ubiquitous and this seems to be propagated into the node vegetation variation caused by flood. Coming to the target node, there is high uncertainty on most pixels associated with open water. As it can be seen, the water in the Lake is associated with the highest level of uncertainty supporting the ideas that these areas are not suitable. In a nutshell, the posterior maps are to be used with consideration to the associated uncertainty maps.
+
+\hypertarget{case-study-application-to-tigray-region-of-ethiopia}{%
+\subsection{Case study: Application to Tigray region of Ethiopia}\label{case-study-application-to-tigray-region-of-ethiopia}}
+
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=1\linewidth,]{figures/Mapping_FBFS_uncertainity_maps} 
+{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig5 Tigray-1} 
 
 }
 
-\caption{Spatially explicit uncertainity maps derived as part of FBFS mapping in Kisumu county, Kenya.}\label{fig:fig13}
+\caption{Prior, posterior, and uncertainity maps of differents spatial data used to feed the BNs for mapping FBFS in Tigray region, Ethiopia}(\#fig:fig5 Tigray)
 \end{figure}
 
-The spatial explicit uncertainty (Figure \ref{fig:fig13}), expressed as shannon entropy, revealed that the lowest level of uncertainty seems to be achieved with the suitable topography. This may be explained by the simplicity of the causality specified in this node but also the relative accuracy of the data (radar versus optical sensor) used to feed the parents nodes (slope and flow accumulation). Regarding this node, the highest uncertainty spot seems to be located around high flow accumulation areas where water is potentially present, but the topography is not necessarily flat. As stated earlier, the node suitable soils might be misleading, and this can be seen in the uncertainty map where most areas having either relatively low vegetation or water ranked amongst the highest uncertainty spots. Most open water seems to have the lowest uncertainty with regards to characteristic vegetation node contrary to water presence. The uncertainty map related to temporal variation in vegetation index has captured the drying spot inside the Lake as discussed earlier. High uncertainty regarding flood seems be ubiquitous and this seems to be propagated into the node vegetation variation caused by flood. Coming to the target node, there is high uncertainty on most pixels associated with open water. As it can be seen, the water in the Lake is associated with the highest level of uncertainty supporting the ideas that these areas are not suitable. In a nutshell, the posterior maps are to be used with consideration to the associated uncertainty maps.
+\hypertarget{potential-of-fbfs-in-kisumu-and-tigray}{%
+\subsection{Potential of FBFS in Kisumu and Tigray}\label{potential-of-fbfs-in-kisumu-and-tigray}}
+
+\begin{figure}[!htbp]
+
+{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig6-1} 
+
+}
+
+\caption{Potential areas for FBFS and associated uncertainity in Kisumu County, Kenya and Tigray region, Ethiopia.}\label{fig:fig6}
+\end{figure}
+
+\begin{table}[t]
+
+\caption{\label{tab:table3}Spatial coverage of FBFS in Kisumu County, Kenya and Tigray region, Ethiopia.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{>{\bfseries}llllll}
+\toprule
+\textbf{ } & \textbf{Highly unlikely} & \textbf{Unlikely} & \textbf{Possible} & \textbf{Likely} & \textbf{Highly likely}\\
+\midrule
+Kisumu 1 & 548.69
+(20.59\%) & 1085.89
+(40.75\%) & 27.03
+(1.01\%) & 217.09
+(8.15\%) & 786.21
+(29.5\%)\\
+Tigray 1 & 26.81
+(0.05\%) & 23568.4
+(44.85\%) & 1028.91
+(1.96\%) & 9009.07
+(17.14\%) & 18885.03
+(35.94\%)\\
+Kisumu 2 & 580.62
+(21.79\%) & 769.4
+(28.87\%) & 789.19
+(29.62\%) & 277.32
+(10.41\%) & 248.38
+(9.32\%)\\
+Tigray 2 & 12943.07
+(24.63\%) & 13759.91
+(26.18\%) & 13381.08
+(25.46\%) & 3421.86
+(6.51\%) & 9012.3
+(17.15\%)\\
+\bottomrule
+\end{tabular}}
+\end{table}
 
 \clearpage
 
