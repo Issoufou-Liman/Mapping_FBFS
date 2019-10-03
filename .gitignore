@@ -10,5 +10,7 @@ data_files/dem/**
 data_files/hdf/**
 data_files/ndsi/**
 data_files/shapefiles/**
+output_files/**
+*.log
 
 
