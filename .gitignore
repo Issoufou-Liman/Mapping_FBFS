@@ -11,6 +11,8 @@ data_files/hdf/**
 data_files/ndsi/**
 data_files/shapefiles/**
 output_files/**
+figures/**
 *.log
+*.toc
 
 
