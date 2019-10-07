@@ -1,73 +1,106 @@
 ---
 title: "Application of Bayesian networks to mapping Flood-based Farming Systems."
-note: "Replication files are available on the author's Github account (http://github.com/Issoufou-Liman)."
 author:
-  - Issoufou Liman:
-      email: issoufoul@gmail.com
-      institute: [ICRAF, KU]
-      correspondence: true
-  - name: Cory Whitney
-    institute: [ICRAF, ZEF]
-  - name: James Kungu
-    institute: [KU]
-  - name: Eike Luedeling
-    institute: [ICRAF, ZEF, INRES]
-institute:
-  - ICRAF: World Agroforestry Centre (ICRAF), United Nations Avenue, Gigiri, P. O. Box 30677-00100, Nairobi, Kenya
-  - KU: Kenyatta University, Department of Environmental Sciences
-  - ZEF: Center for Development research (ZEF), University of Bonn, Genscherallee 3, D-53113, Bonn, Germany
-  - INRES: University of Bonn, Department of Horticultural Sciences, Auf dem Hügel 6, D-53121, Bonn, Germany
-abstract: "Accurate information on actual areas under given cropping/farming systems is an important input for applied agricultural research and policies. Therein, remote sensing provides a useful tool for analysing spatial metrics in an explicit manner. In this paper, we captured various characteristics of flood-based farming systems (FBFS) with remote sensing and applied a probabilistic framework for system analysis. FBFS were mapped across the Kisumu County in Kenya by incorporating uncertainties into mapping overlays. A Bayesian network ([BNs](https://en.wikipedia.org/wiki/Bayesian_network)) was used to describe and interlink various features of FBFS using expert knowledge. 3 years (2014-2016) of high-level [MODIS](https://terra.nasa.gov/about/terra-instruments/modis) VI products data were acquired in the forms of normalized difference spectral indices (NDSI). These were used as proxies for estimating various metrics of FBFS which were later used to feed the spatial data nodes of the [BNs](https://en.wikipedia.org/wiki/Bayesian_network) and were propagated along with the rest of other non-spatial nodes derived from expert judgement. We demonstrate that spatial explicit information can be derived from remote sensing data as fuzzy linguistic quantifiers which are suitable for representing node states in [BNs](https://en.wikipedia.org/wiki/Bayesian_network). When such metrics are available, [BNs](https://en.wikipedia.org/wiki/Bayesian_network) are useful tools for incorporating uncertainties when mapping complex systems in a context of limited and uncertain information. The causal probabilistic reasoning embedded in the approach was tested on the Tigray region in Ethiopia; an area with totally different settings; and seems to perform incredibly well. Results were transparently generated in forms of intermediary prior spatial maps for specific metrics to ultimately be aggregated into final posterior maps of plausible areas for flood-based farming along with their spatial explicit uncertainties."
-fontfamily: mathpazo
-fontsize: 12pt
-spacing: double
+- Issoufou Liman:
+    correspondence: yes
+    email: issoufoul@gmail.com
+    institute:
+    - ICRAF
+    - KU
+- institute:
+  - ICRAF
+  - ZEF
+  name: Cory Whitney
+- institute: KU
+  name: James Kungu
+- institute:
+  - ICRAF
+  - ZEF
+  - INRES
+  name: Eike Luedeling
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-documentclass: article
-classoption: oneside # preprint
-geometry: margin=1in
-linkcolor: blue
-urlcolor: blue
-citecolor: red
-bibliography: ./referencing_files/bibliographie.bib
-csl: ./referencing_files/scientific-reports.csl # nature.csl #   elsevier-harvard.csl #  
-subparagraph: yes
-link-citations: true
-header-includes:
-   - \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-output: 
-  bookdown::pdf_document2: 
-    toc: true
-    toc_depth: 5
-    number_sections: true
-    keep_tex: true
-    fig_caption: true
-    latex_engine: xelatex # pdflatex #  lualatex #
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
     includes:
       in_header: ./formating_files/inheader_2.tex
+    keep_tex: yes
+    latex_engine: xelatex
+    number_sections: yes
     pandoc_args:
-      - '--lua-filter=./formating_files/scholarly-metadata.lua'
-      - '--lua-filter=./formating_files/author-info-blocks.lua'
-  bookdown::html_document2:
-    toc: true
-    toc_float:
-      collapsed: true
-      smooth_scroll: true
+    - --lua-filter=./formating_files/scholarly-metadata.lua
+    - --lua-filter=./formating_files/author-info-blocks.lua
+    toc: yes
     toc_depth: 5
-    number_sections: true
+  bookdown::html_document2:
     df_print: paged
-    keep_tex: true
-    fig_caption: true
-    latex_engine: xelatex # pdflatex # lualatex #  
+    fig_caption: yes
+    keep_tex: yes
+    latex_engine: xelatex
+    number_sections: yes
     pandoc_args:
-      - '--lua-filter=./formating_files/scholarly-metadata.lua'
-      - '--lua-filter=./formating_files/author-info-blocks.lua'
+    - --lua-filter=./formating_files/scholarly-metadata.lua
+    - --lua-filter=./formating_files/author-info-blocks.lua
+    toc: yes
+    toc_depth: 5
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+  bookdown::pdf_book: default
   bookdown::word_document2:
+    fig_caption: yes
+    pandoc_args:
+    - --lua-filter=./formating_files/scholarly-metadata.lua
+    - --lua-filter=./formating_files/author-info-blocks.lua
     toc: no
     toc_depth: 5
-    fig_caption: true
-    pandoc_args:
-      - '--lua-filter=./formating_files/scholarly-metadata.lua'
-      - '--lua-filter=./formating_files/author-info-blocks.lua'
+classoption: oneside
+csl: ./referencing_files/scientific-reports.csl
+bibliography: ./referencing_files/bibliographie.bib
+documentclass: article
+fontfamily: mathpazo
+fontsize: 12pt
+geometry: margin=1in
+header-includes: \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+institute:
+- ICRAF: World Agroforestry Centre (ICRAF), United Nations Avenue, Gigiri, P. O. Box
+    30677-00100, Nairobi, Kenya
+- KU: Kenyatta University, Department of Environmental Sciences
+- ZEF: Center for Development research (ZEF), University of Bonn, Genscherallee 3,
+    D-53113, Bonn, Germany
+- INRES: University of Bonn, Department of Horticultural Sciences, Auf dem Hügel 6,
+    D-53121, Bonn, Germany
+link-citations: yes
+linkcolor: blue
+note: Replication files are available on the author's Github account (http://github.com/Issoufou-Liman).
+citecolor: red
+spacing: double
+subparagraph: yes
+abstract: Accurate information on actual areas under given cropping/farming systems
+  is an important input for applied agricultural research and policies. Therein, remote
+  sensing provides a useful tool for analysing spatial metrics in an explicit manner.
+  In this paper, we captured various characteristics of flood-based farming systems
+  (FBFS) with remote sensing and applied a probabilistic framework for system analysis.
+  FBFS were mapped across the Kisumu County in Kenya by incorporating uncertainties
+  was used to describe and interlink various features of FBFS using expert knowledge.
+  VI products data were acquired in the forms of normalized difference spectral indices
+  (NDSI). These were used as proxies for estimating various metrics of FBFS which
+  and were propagated along with the rest of other non-spatial nodes derived from
+  expert judgement. We demonstrate that spatial explicit information can be derived
+  from remote sensing data as fuzzy linguistic quantifiers which are suitable for
+  are useful tools for incorporating uncertainties when mapping complex systems in
+  a context of limited and uncertain information. The causal probabilistic reasoning
+  embedded in the approach was tested on the Tigray region in Ethiopia; an area with
+  totally different settings; and seems to perform incredibly well. Results were transparently
+  generated in forms of intermediary prior spatial maps for specific metrics to ultimately
+  be aggregated into final posterior maps of plausible areas for flood-based farming
+  along with their spatial explicit uncertainties.
+  into mapping overlays. A Bayesian network ([BNs](https://en.wikipedia.org/wiki/Bayesian_network))
+  3 years (2014-2016) of high-level [MODIS](https://terra.nasa.gov/about/terra-instruments/modis)
+  were later used to feed the spatial data nodes of the [BNs](https://en.wikipedia.org/wiki/Bayesian_network)
+  representing node states in [BNs](https://en.wikipedia.org/wiki/Bayesian_network).
+  When such metrics are available, [BNs](https://en.wikipedia.org/wiki/Bayesian_network)
+urlcolor: blue
 ---
 
 ```{r, include=FALSE}
@@ -126,7 +159,8 @@ pacman::p_load(rgdal,
                bnlearn,
                bnspatial,
                knitr,
-               kableExtra
+               kableExtra,
+               ggsn
 )
 ## Loading decisionSupportExtra package ####
 library(decisionSupportExtra)
@@ -144,7 +178,8 @@ my_theme <- theme_minimal() +
         panel.spacing=unit(0.075, "lines"),
         panel.border = element_rect(color = "lightgrey", fill = NA, size = 0.5),
         #axis.text = element_text(size=7),
-        axis.ticks = element_line(colour = 'black', size = 0.05),
+        axis.ticks = element_line(colour = 'black', size = 0.25),
+        axis.ticks.length = unit(0.1, "mm"),
         legend.title = element_blank(),
         legend.text = element_text(size=12, face="bold", color="black"),
         legend.position="top",
@@ -153,6 +188,7 @@ my_theme <- theme_minimal() +
         legend.box.margin=margin(-22, 0, -10, 0),
         strip.background = element_rect(color = "gray", size = 0.075),
         strip.text = element_text(size=12, face="bold", color="black"),
+        strip.text.x = element_text(margin = margin(b = 1)),
         axis.text = element_text(size=12, color="black"),
         plot.title=element_text(size=14, face="bold", color="black"),
         plot.subtitle=element_text(size=12, face="italic", color="blue")
@@ -1144,7 +1180,7 @@ p <- gTree(children = gList(p, gb))
 
 ```
 
-```{r fig3,echo=FALSE,fig.width=7.54,fig.height= 5.79,dpi=300,dev.args=list(png = list(type = "cairo")),fig.cap="Temporal variability in water and vegetation in Kisumu county, Kenya."}
+```{r fig3,echo=FALSE,fig.width=7.54,fig.height= 5.79,dpi=300, dev='png', fig.ext = 'png',fig.cap="Temporal variability in water and vegetation in Kisumu county, Kenya."}
 grid.draw(p)
 ```
 
@@ -1157,6 +1193,149 @@ ggsave(plot=p, device = 'png', filename = "figures/seasonal_ranges_plot.png", wi
 ## Spatially explicit representation of some of the patterns in the Boxplot ####
 # The ggplot has shown various pattern. it would be nice to see them in space.
 # In the following we will extract some of these patterns and present them spatially. 
+
+afr <- readOGR("data_files/shapefiles/Africa.shp.shp")
+# Kenya_L0 <- getData("GADM", country="ken", level=0, path = 'data_files/shapefiles')
+Kenya_L0 <- aggregate(Kenya_L1)
+Kisumu <- readOGR('data_files/shapefiles/Kisumu.shp')
+Kisumu_localities <- list(Kisumu=Kisumu, Kenya=Kenya_L0)
+Kisumu_localities <- sapply(Kisumu_localities, function (i) {
+  out=as.data.frame(coordinates(rgeos::gCentroid(i)))
+  names(out)<- c('Long', 'Lat')
+  out
+}, simplify = FALSE
+)
+Kisumu_localities <- do.call(rbind, Kisumu_localities)
+Kisumu_localities$Place <- rownames(Kisumu_localities)
+ext <- expand.grid(as.list(as.data.frame(matrix(extent(Kisumu), nrow = 2, byrow = F))))
+
+ext <- as(extent(Kisumu), 'SpatialPolygons')  
+# ext <- ext[order(ext$V1), ]
+
+inst00 <- ggplot()+
+  geom_path(data=fortify(afr), aes(x=long, y= lat, group=group), size = 0.1, colour='black')+
+  
+  geom_polygon(data=fortify(Kenya_L0), aes(x=long, y= lat, group=group), fill='red', size = 0.05, colour='red')+
+  
+  # geom_point(data = Kisumu_localities[2, ], aes(x = Long, y = Lat), alpha=0.5)+
+  # geom_text(data = Kisumu_localities[2, ], aes(x = Long, y = Lat, label = Place), 
+  #           position = position_nudge(y = -0.5),
+  #           hjust=0.5, vjust=1, size=4, alpha=0.8)+
+  theme_minimal()+
+  #my_line_theme+ 
+  my_theme +
+  theme(
+    # axis.text = element_text(size = 8),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    # axis.title = element_text(size = 12, face = 'bold'),
+    axis.title = element_blank(),
+    strip.text = element_text(size = 8, face = "bold"),
+    legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+    plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+    plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  coord_equal()+
+  # labs(x='Long', y='Lat')+
+  # labs(subtitle='Prior spatial data nodes')+
+  theme(axis.title = element_blank())+
+  theme(plot.margin = margin(t=0, r=0,b=0, l=0))
+###########################
+
+inst0 <- ggplot()+
+  geom_path(data=fortify(Kenya_L0), aes(x=long, y= lat, group=group), size = 0.1, colour='black')+
+  
+  geom_polygon(data=fortify(Kisumu), aes(x=long, y= lat, group=group), size = 0.05, fill='red', colour='red')+
+  geom_path(data=fortify(ext), aes(x=long, y= lat, group=group), size = 0.05, colour='red')+
+  
+  geom_point(data = Kisumu_localities[2, ], aes(x = Long, y = Lat))+
+  geom_text(data = Kisumu_localities[2, ], aes(x = Long, y = Lat, label = Place), 
+            position = position_nudge(y = 0.7),
+            hjust=0.5, vjust=0, size=3)+
+  theme_minimal()+
+  #my_line_theme+ 
+  my_theme +
+  theme(
+    axis.text = element_blank(),
+    # axis.text = element_text(size = 8),
+    axis.ticks = element_blank(),
+    
+    # axis.title = element_text(size = 12, face = 'bold'),
+    axis.title = element_blank(),
+    strip.text = element_text(size = 8, face = "bold"),
+    legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+    plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+    plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  coord_equal()+
+  # labs(x='Long', y='Lat')+
+  # labs(subtitle='Prior spatial data nodes')+
+  theme(axis.title = element_blank())+
+  theme(plot.margin = margin(t=0, r=0,b=0, l=0))
+###########################
+
+inst <- ggplot()+
+  geom_polygon(data=fortify(Kisumu), aes(x=long, y= lat, group=group), size = 0.25, fill='white', colour='black')+
+  # ggsn::scalebar(location="bottomright", y.min=-0.2, y.max=0, 
+  #                 x.min=34, x.max=35, dist=.1, dd2km = TRUE, model='WGS84',
+  #                 st.dist=.04, transform=TRUE)+
+  ggsn::scalebar(data=fortify(Kisumu), dist = 20, dist_unit = "km",
+                 transform = TRUE, model = "WGS84", anchor=c(x=35.075, y=-0.55), 
+                 height=0.03, st.dist=0.05, st.size=2.5, border.size =0.25)+
+  ggsn::north(data=fortify(Kisumu), scale = 0.32, anchor=c(x=35.44, y=0.03))+
+  
+  geom_point(data = Kisumu_localities[1, ], aes(x = Long, y = Lat))+
+  geom_text(data = Kisumu_localities[1, ], aes(x = Long, y = Lat, label = ""), 
+            position = position_nudge(y = -0.425),
+            hjust=0.5, vjust=1, size=4, alpha=1)+ # used only to make rooms for inset maps
+  geom_text(data = Kisumu_localities[1, ], aes(x = Long, y = Lat, label = "Kisumu County, Kenya"), 
+            position = position_nudge(y = 0.025),
+            hjust=0.5, vjust=0, size=3)+
+  theme_minimal()+
+  #my_line_theme+ 
+  my_theme +
+  theme(axis.text = element_text(size = 12),
+        # axis.title = element_text(size = 12, face = 'bold'),
+        strip.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  coord_equal()+
+  # labs(x='Long', y='Lat')+
+  labs(subtitle='')+
+  theme(axis.title = element_blank())+
+  theme(plot.margin = margin(t=0, r=0,b=0, l=0))
+
+inst <- inst +
+  annotation_custom(
+    grob = ggplotGrob(inst0+
+                        theme(panel.grid = element_blank(),
+                              plot.background = element_rect(fill = 'white', colour = 'white'),
+                              panel.border = element_blank()
+                        )),
+    
+    xmin = 35.09,
+    xmax = 35.35-0.01,
+    ymin = -0.72,
+    ymax = -0.15
+  )+
+  annotation_custom(
+    grob = ggplotGrob(inst00+
+                        theme(panel.grid = element_blank(),
+                              plot.background = element_rect(fill = 'white', colour = 'white'),
+                              panel.border = element_blank()
+                        )),
+    
+    xmin = 34.42,
+    xmax = 34.7,
+    ymin = -0.73,
+    ymax = -0.15
+  )
+inst <- gTree(children = gList(ggplotGrob(inst), gb))
 
 ## Probaility of vegetation ####
 
@@ -1171,8 +1350,11 @@ if(!file.exists(ficher)){
 
 veg_coverage <- p
 # plot(p)
-labeller = c('Very low (lower outliers)', 'Low (lower Whisker)', 'Moderately low (lower IQR)', 
-             'Moderately high (upper IQR)','High (upper Whisker)', 'Very high (upper outliers)')
+# labeller = c('Very low\n(lower outliers)', 'Low\n(lower Whisker)', 'Moderately low\n(lower IQR)', 
+#              'Moderately high\n(upper IQR)','High\n(upper Whisker)', 'Very high\n(upper outliers)')
+
+labeller = c('Very low', 'Low', 'Moderately low', 
+             'Moderately high','High', 'Very high')
 
 
 names(labeller) <- names(p)
@@ -1181,7 +1363,7 @@ labeller = as_labeller(labeller)
 # # ggploting the rasters
 # my_subtitle <- expression(paste('MODIS NDVI','   '^ 
 #                                   italic("  cell values are probabilities of the corresponding\nstate based the time series")), col = "red")
-my_subtitle <- expression(paste('MODIS NDVI'))
+my_subtitle <- expression(paste('NDVI'))
 
 f <- function(decimals=0){
   # return a function responpsible for formatting the 
@@ -1200,7 +1382,7 @@ p1 <- rasterVis::gplot(p)+
         legend.box.margin=margin(-22, 1, -10, 0),
         strip.text = element_text(size = 12),
         axis.text.y = element_text(size = 11),
-        axis.text.x = element_blank(),
+        # axis.text.x = element_blank(),
         axis.title = element_blank(),
         plot.title = element_blank(),
         # plot.margin = margin(b=-0.5, unit = 'cm'),
@@ -1210,36 +1392,40 @@ p1 <- rasterVis::gplot(p)+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=4), expand = c(0, 0.015)) +
   scale_y_continuous(expand = c(0, 0.015))+
   labs(subtitle=my_subtitle)+
-  guides(fill=guide_colourbar(barwidth=20, barheight = 0.5, label.position="bottom"))
+  guides(fill=guide_colourbar(barwidth=15, barheight = 0.5, label.position="bottom"))+
+  geom_path(data=fortify(Kisumu), aes(x=long, y= lat, group=group), size = 0.1, alpha=0.9, colour='black')
 
 p1 <- gTree(children = gList(ggplotGrob(p1), gb))
 
-# grid.newpage()
-# p1 <- grid.arrange(p, ncol=1)
-# p <- gTree(children = gList(p, gb))
-# ggsave(plot=p, device = 'png', filename = "figures/veg_states_plot.png", dpi = 300,
-#        height = 8.75-1.558, units = 'in')
-
+p1 <- grid.arrange(inst, p1, layout_matrix =rbind(c(1, 2, 2)))
 ## Probaility of water ####
 
 # Dicretizing the NDFI raster stack to make water probability
 ficher <- 'output_files/Kisumu_flood_coverage.grd'
 if(!file.exists(ficher)){
- p <- make_pixel_states(Boschetti_NDFI_ts, split_IQR = TRUE, op = 'proba', filename = ficher)
+  p <- make_pixel_states(Boschetti_NDFI_ts, split_IQR = TRUE, op = 'proba', filename = ficher)
 } else {
- p <- brick(ficher)
+  p <- brick(ficher)
 }
 flood_coverage <- p
 # # ggploting the rasters
-my_subtitle <- expression(paste('MODIS NDFI'))
+my_subtitle <- expression(paste('NDFI'))
 col0 = RColorBrewer::brewer.pal(n = 6, name = "Blues")
 col1 = rev(terrain.colors(5))
 col1= c(col0[c(1)],
-       col1[c(-1,-4, -5)],
-       col0[c(3,4,5)])
+        col1[c(-1,-4, -5)],
+        col0[c(3,4,5)])
 col1=colorRampPalette(col1)(255)
 
 midpoint <- median(p[], na.rm = TRUE)
+
+labeller = c('Very low (lower outliers)', 'Low (lower Whisker)', 'Moderately low (lower IQR)', 
+             'Moderately high (upper IQR)','High (upper Whisker)', 'Very high (upper outliers)')
+
+
+names(labeller) <- names(p)
+labeller = as_labeller(labeller)
+
 p <- rasterVis::gplot(p)+
   geom_raster(aes(fill = value)) +
   facet_wrap(~ variable, labeller = labeller, ncol = 3) +
@@ -1260,12 +1446,32 @@ p <- rasterVis::gplot(p)+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=4), expand = c(0, 0.015)) +
   scale_y_continuous(expand = c(0, 0.015))+
   labs(subtitle=my_subtitle)+
-  guides(fill=guide_colourbar(barwidth=20, barheight = 0.5, label.position="bottom"))
+  guides(fill=guide_colourbar(barwidth=20, barheight = 0.5, label.position="bottom"))+
+  geom_path(data=fortify(Kisumu), aes(x=long, y= lat, group=group), size = 0.1, alpha=0.9, colour='black')
+
 
 p <- gTree(children = gList(ggplotGrob(p), gb))
 
-grid.newpage()
-p <- list(p1, p)
+# # # grid.newpage()
+# p <- list(p1, p)
+# # p$ncol = 1
+# # p$top = grid::textGrob("Kisumu County, Kenya: MODIS 2014-01-01 / 2016-12-26.",
+# #                        x=0, hjust=0, vjust = 0.5,
+# #                        gp = gpar(fontfamily='serif',fontsize=16,fontface="bold", col="black"))
+# # p$bottom = grid::textGrob("Long",
+# #                           x=0.5, hjust=0, vjust = 0.5,rot = 0,
+# #                           gp = gpar(fontfamily='serif',fontsize=16,fontface="bold", col="black"))
+# # p$left = grid::textGrob("Lat",
+# #                         rot = 90,
+# #                         gp = gpar(fontfamily='serif',fontsize=16,fontface="bold", col="black"))
+# # 
+# p$heights = c(7.192/2.0, 7.192/1.95)
+# 
+# p <- do.call(grid.arrange, p)
+# p <- gTree(children = gList(p, gb))
+
+# grid.newpage()
+p <- list(p, p1)
 p$ncol = 1
 p$top = grid::textGrob("Kisumu County, Kenya: MODIS 2014-01-01 / 2016-12-26.",
                        x=0, hjust=0, vjust = 0.5,
@@ -1277,19 +1483,20 @@ p$left = grid::textGrob("Lat",
                         rot = 90,
                         gp = gpar(fontfamily='serif',fontsize=16,fontface="bold", col="black"))
 
-p$heights = c(7.192/2.05, 7.192/1.95)
-
+p$layout_matrix =rbind(c(1, 1, 1, 1, 1),
+                       c(2, 2, 2, 2, 2))
+p$heights=unit(c(1, 0.75), c("null", "null"))
 p <- do.call(grid.arrange, p)
 p <- gTree(children = gList(p, gb))
 ```
 
-```{r fig4,echo=FALSE,fig.width=7.54,fig.height= 7.192,dpi=300,fig.cap="Discrete states of vegetation and water in Kisumu county, Kenya."}
+```{r fig4,echo=FALSE,fig.width=7.54,fig.height= 6,dpi=300,fig.cap="Discrete states of vegetation and water in Kisumu county, Kenya."}
 grid.draw(p)
 ```
 
 ```{r fig4 export,echo=FALSE,include=FALSE}
 ggsave(plot=p, device = 'png', filename = "figures/veg_water_states_plot.png", dpi = 300, width = 7.54,
-       height = 7.192, units = 'in')
+       height = 6, units = 'in')
 ```
 
 ```{r table2, echo=FALSE}
@@ -1486,7 +1693,7 @@ f_acc <- focal (f_acc, w=matrix(1,9,9), fun=modal,
 
 slope <- raster('data_files/dem/Kisumu/Kisumu_dem_mosaic_cropped_slope.tif')
 slope <- calc(x = slope, fun = function(x) atan(x)*180/pi)
-slope <- resample(slope, ndvi_ts)
+# slope <- resample(slope, ndvi_ts)
 slope <- discretize_raster(slope, split_IQR = TRUE)
 slope <- focal (slope, w=matrix(1,9,9), fun=modal, 
                    na.rm=TRUE, NAonly=TRUE, pad=TRUE)
@@ -1710,7 +1917,13 @@ names(spatialData)<- names_spatialData
 ```
 
 ```{r Bnspatial plot Kisumu,echo=FALSE,include=FALSE}
+# col = rev(terrain.colors(255)) 
+col = c('#FF4500', '#FFA07A','#FFE4E1', '#FFDEAD', '#808000', '#6B8E23')
+col = c('#FF4500', '#FFA07A','#FFE4E1', '#FFDEAD', '#808000', '#008000')
 
+# col = c('#ADD8E6', '#F8F8FF', '#EEE8AA', '#F4A460', '#90EE90', '#228B22')
+# col = c('#ADD8E6', '#E0FFFF', '#EEE8AA', '#F4A460', '#90EE90', '#228B22')
+# col = c('#ADD8E6', '#E0FFFF',  '#F8F8FF', '#EEE8AA','#90EE90', '#228B22')
 # making more intuitive  labels for ggplot facets
 labeller0 <- c("Flow accumulation", "Slope", "Power of tools", "Water present", "Flood at the beginning\nof the rainy season", 
                "Temporal variation\nin vegetation index", "Soil water content", "Exposure to wetness", "Sensitivity to flood",
@@ -1750,9 +1963,9 @@ p0 <- rasterVis::gplot(spatialData, maxpixels=ncell(spatialData))+
   theme_minimal()+
   #my_line_theme+ 
   my_theme +
-  theme(axis.text = element_text(size = 10),
+  theme(axis.text = element_text(size = 8),
         axis.title = element_text(size = 12, face = 'bold'),
-        strip.text = element_text(size = 10, face = "bold"),
+        strip.text = element_text(size = 7.5, face = "bold"),
         legend.text = element_text(family = 'serif', face = 'bold', size = 8),
         plot.title = element_text(size = 14, face = 'bold', color = 'black'),
         plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
@@ -1761,26 +1974,157 @@ p0 <- rasterVis::gplot(spatialData, maxpixels=ncell(spatialData))+
   scale_y_continuous(expand = c(0, 0))+
   labs(subtitle='Prior spatial data nodes')+
   theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=0, b=0))+
+  theme(plot.margin = margin(t=0, b=-5))+
   guides(fill=guide_colourbar(barwidth=10, barheight = 0.35, label.position="bottom"))+
   theme(strip.text.x = element_text(margin = margin(b = 0)))  
 
 p0 <- gTree(children = gList(grid.arrange(p0), gb))
 
+#################################################
+Kenya_L0 <- getData("GADM", country="ken", level=0, path = 'data_files/shapefiles')
+Kisumu <- readOGR('data_files/shapefiles/Kisumu.shp')
+Kisumu_localities <- list(Kisumu=Kisumu, Kenya=Kenya_L0)
+Kisumu_localities <- sapply(Kisumu_localities, function (i) {
+  out=as.data.frame(coordinates(rgeos::gCentroid(i)))
+  names(out)<- c('Long', 'Lat')
+  out
+}, simplify = FALSE
+)
+Kisumu_localities <- do.call(rbind, Kisumu_localities)
+Kisumu_localities$Place <- rownames(Kisumu_localities)
+ext <- expand.grid(as.list(as.data.frame(matrix(extent(Kisumu), nrow = 2, byrow = F))))
 
-# gplot_data <- function(x, maxpixels=ncell(x), ...){
-#   nl <- nlayers(x)
-#   x <- sampleRegular(x, maxpixels, asRaster=TRUE)
-#   coords <- xyFromCell(x, seq_len(ncell(x)))
-#   ## Extract values
-#   dat <- stack(as.data.frame(getValues(x)))
-#   names(dat) <- c('value', 'variable')
-#   
-#   dat <- cbind(coords, dat)
-# }
+ext <- as(extent(Kisumu), 'SpatialPolygons')
+# ext <- ext[order(ext$V1), ]
 
-# FBFS_pixel <-brick(query_set_stack_class[["pixel_is_FBFS"]],
-#                    query_set_stack_entropy[["pixel_is_FBFS"]])
+inst00 <- ggplot()+
+  geom_path(data=fortify(afr), aes(x=long, y= lat, group=group), size = 0.1, colour='black')+
+
+  geom_polygon(data=fortify(Kenya_L0), aes(x=long, y= lat, group=group), fill='red', size = 0.05, colour='red')+
+
+  # geom_point(data = Kisumu_localities[2, ], aes(x = Long, y = Lat), alpha=0.5)+
+  # geom_text(data = Kisumu_localities[2, ], aes(x = Long, y = Lat, label = Place),
+  #           position = position_nudge(y = -0.5),
+  #           hjust=0.5, vjust=1, size=4, alpha=0.8)+
+  theme_minimal()+
+  #my_line_theme+
+  my_theme +
+  theme(
+    # axis.text = element_text(size = 8),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+        # axis.title = element_text(size = 12, face = 'bold'),
+        axis.title = element_blank(),
+        strip.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  coord_equal()+
+  # labs(x='Long', y='Lat')+
+  # labs(subtitle='')+
+  theme(axis.title = element_blank())+
+  theme(plot.margin = margin(t=1, r=1, b=-1, l=-1))
+###########################
+
+inst0 <- ggplot()+
+  geom_path(data=fortify(Kenya_L0), aes(x=long, y= lat, group=group), size = 0.1, colour='black')+
+
+  geom_polygon(data=fortify(Kisumu), aes(x=long, y= lat, group=group), size = 0.05, fill='red', colour='red')+
+  geom_path(data=fortify(ext), aes(x=long, y= lat, group=group), size = 0.05, colour='red')+
+
+  geom_point(data = Kisumu_localities[2, ], aes(x = Long, y = Lat))+
+  geom_text(data = Kisumu_localities[2, ], aes(x = Long, y = Lat, label = Place),
+            position = position_nudge(y = 0.7),
+            hjust=0.5, vjust=0, size=3)+
+  theme_minimal()+
+  #my_line_theme+
+  my_theme +
+  theme(
+    axis.text = element_blank(),
+    # axis.text = element_text(size = 8),
+    axis.ticks = element_blank(),
+
+        # axis.title = element_text(size = 12, face = 'bold'),
+        axis.title = element_blank(),
+        strip.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  coord_equal()+
+  # labs(x='Long', y='Lat')+
+  # labs(subtitle='Prior spatial data nodes')+
+  theme(axis.title = element_blank())+
+  theme(plot.margin = margin(t=1, r=1,b=-1, l=-1))
+###########################
+
+inst_kisumu <- ggplot()+
+  geom_polygon(data=fortify(Kisumu), aes(x=long, y= lat, group=group), size = 0.25, fill='white', colour='black')+
+  ggsn::scalebar(data=fortify(Kisumu), dist = 20, dist_unit = "km",
+                 transform = TRUE, model = "WGS84", anchor=c(x=35.075, y=-0.55), 
+                 height=0.03, st.dist=0.05, st.size=2.5, border.size =0.25)+
+  ggsn::north(data=fortify(Kisumu), scale = 0.32, anchor=c(x=35.44, y=0.03))+
+  
+  geom_point(data = Kisumu_localities[1, ], aes(x = Long, y = Lat))+
+  geom_text(data = Kisumu_localities[1, ], aes(x = Long, y = Lat, label = ""),
+            position = position_nudge(y = -0.425),
+            hjust=0.5, vjust=1, size=4, alpha=1)+ # used only to make rooms for inset maps
+  geom_text(data = Kisumu_localities[1, ], aes(x = Long, y = Lat, label = "Kisumu County, Kenya"),
+            position = position_nudge(y = 0.025),
+            hjust=0.5, vjust=0, size=3)+
+  theme_minimal()+
+  #my_line_theme+
+  my_theme +
+  theme(axis.text = element_text(size = 8),
+        axis.title = element_text(size = 12, face = 'bold'),
+        strip.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  coord_equal()+
+  # labs(x='Long', y='Lat')+
+  labs(subtitle='Prior spatial data nodes')+
+  theme(axis.title = element_blank())+
+  theme(plot.margin = margin(t=0, b=0))
+
+inst_kisumu <- inst_kisumu +
+  annotation_custom(
+    grob = ggplotGrob(inst0+
+                        theme(panel.grid = element_blank(),
+                              plot.background = element_rect(fill = 'white'),
+                              panel.border = element_blank()
+                        )),
+
+    xmin = 35.09,
+    xmax = 35.35-0.01,
+    ymin = -0.72,
+    ymax = -0.15
+  )+
+  annotation_custom(
+    grob = ggplotGrob(inst00+
+                        theme(panel.grid = element_blank(),
+                              plot.background = element_rect(fill = 'white'),
+                              panel.border = element_blank()
+                              )),
+
+    xmin = 34.42,
+    xmax = 34.7,
+    ymin = -0.73,
+    ymax = -0.15
+  )
+
+
+inst_kisumu <- gTree(children = gList(ggplotGrob(inst_kisumu), gb))
+
+p0 <-grid.arrange(inst_kisumu, p0, layout_matrix =rbind(c(1,1, 2, 2, 2, 2, 2),
+                                     c(1,1, 2, 2, 2, 2, 2)))
+
+#################################################
 
 FBFS_pixel_class <-query_set_stack_class[["pixel_is_FBFS"]]
 FBFS_pixel_entrophy <-query_set_stack_entropy[["pixel_is_FBFS"]]
@@ -1823,7 +2167,7 @@ p1 <- rasterVis::gplot(p1, maxpixels=ncell(p1))+
   theme(axis.text = element_text(size = 8),
         axis.title = element_text(size = 12, face = 'bold'),
         strip.text = element_text(size = 8, face = "bold"),
-        legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 6),
         plot.title = element_text(size = 14, face = 'bold', color = 'black'),
         plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
   coord_equal()+
@@ -1831,7 +2175,7 @@ p1 <- rasterVis::gplot(p1, maxpixels=ncell(p1))+
   scale_y_continuous(expand = c(0, 0), breaks = scales::pretty_breaks(n=4))+
   labs(subtitle='Posterior maps')+
   theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=0, b=0))+
+  theme(plot.margin = margin(t=0, b=-5))+
   guides(fill=guide_colourbar(barwidth=10, barheight = 0.35, label.position="bottom"))+
   theme(strip.text.x = element_text(margin = margin(b = 0)))  
 
@@ -1861,38 +2205,108 @@ p2 <- rasterVis::gplot(p2, maxpixels=ncell(p2))+
   scale_y_continuous(expand = c(0, 0), breaks = scales::pretty_breaks(n=4))+
   labs(subtitle='Uncertainity maps')+
   theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=0, b=0))+
+  theme(plot.margin = margin(t=0, b=-5))+
   guides(fill=guide_colourbar(barwidth=10, barheight = 0.35, label.position="bottom"))+
   theme(strip.text.x = element_text(margin = margin(b = 0)))  
 
 p2 <- gTree(children = gList(grid.arrange(p2), gb))
+
+########################
+f <- function(lst, id=TRUE){
+  lengths <- lapply(lst, length)
+  longest <- which.max(lengths)
+  # lst[which(lengths==longest)]
+  tmp0 <- 1:length(lst)
+  names(tmp0) <- names(lst)
+  tmp <- 1:length(lst[[longest]])
+  sapply(tmp0, function(i){
+    out <- 1:length(lst[[i]])
+    sapply(tmp, function(j) {
+      if (j %in% out){
+        if(id){
+          out <- j
+        } else {
+          out <- lst[[i]][j]
+        }
+      } else {
+        ''
+      }
+    }, simplify = T)
+  }, simplify = T)
+}
+
+
+states <- nodeStates(network)
+states <- states[-length(states)]
+
+states <- f(states, id=F)
+states <- cbind(States=1:nrow(states), states)
+colnames(states) <- c('State\nvalues', "Flow\naccumulation", "Slope", "Suitable\ntopography",
+                      "Soil water\ncontent","Exposure to\nwetness","Suitable soils",
+                      "Sensitivity\nto flood", "Vegetation\nsensitivity\nto water\nvariation",
+                      "Characteristic \nvegetation", "Power\nof tools", "Water\npresent", 
+                      "Temporal\nvariation in\nvegetation\nindex", "Flood at the\nbeginning of\nthe rainy\nseason",  
+                      "Flooded \nat some\npoints", "Vegetation\nvariation \ncaused by\nflood")
+
+
+inst0 <- tableGrob(states[-nrow(states), ],
+           theme=ttheme_default(base_size =5.65,
+                                core=list(bg_params = list(fill = 'white', col=c('lightgrey')),
+                                                    fg_params=list(fontface=3, fontsize=5.40)),
+                                colhead=list(bg_params = list(fill = 'white', col=c('lightgrey'))),
+                                rowhead=list(bg_params = list(fill = 'white', col=c('lightgrey'))),
+                                padding = unit(c(1, 1), "mm")))
+
+top = grid::textGrob("Mapping of discrete variable states",
+                       x=0.04, hjust=0, vjust = 0.50,
+                       gp = gpar(fontfamily='serif',fontsize=12,fontface="italic", col="blue"))
+inst0 <- grid.arrange(top=top, inst0)
+########################
 
 p1 <- arrangeGrob(p0, 
                   p1,
                   p2,
                   nrow=3,
                   # widths = unit(c(7.54, 7.54, 7.54), c("in", "in", "in")),
-                  heights = unit(c(2.5, 1.25, 1.25), c("in", "in", "in"))
+                  heights = unit(c(1.81, 1.1, 1.1), c("in", "in", "in"))
                   
 )
 
 
 p1 <- list(p1)
 p1$top = grid::textGrob("Kisumu County, Kenya: MODIS 2014-01-01 / 2016-12-26.",
-                             x=0, hjust=0, vjust = 0.5,
-                             gp = gpar(fontfamily='serif',fontsize=14,fontface="bold", col="black"))
+                       x=0, hjust=0, vjust = 0.5,
+                       gp = gpar(fontfamily='serif',fontsize=14,fontface="bold", col="black"))
+p1$bottom = grid::textGrob("Long",
+                          x=0.5, hjust=0, vjust = 0.5,rot = 0,
+                          gp = gpar(fontfamily='serif',fontsize=14,fontface="bold", col="black"))
+p1$left = grid::textGrob("Lat",
+                        rot = 90,
+                        gp = gpar(fontfamily='serif',fontsize=14,fontface="bold", col="black"))
 p1$ncol <- 1
 
 p1 <- do.call(grid.arrange, p1)
 p1 <- gTree(children = gList(grid.arrange(p1), gb))
+
+p1 <- arrangeGrob(p1,
+                  inst0,
+                  nrow=2,
+                  # widths = unit(c(7.54, 7.54, 7.54), c("in", "in", "in")),
+                  heights = unit(c(1.81+1.1+1.1+0.4, 1.1), c("in", "in"))
+
+)
+
+p1 <- do.call(grid.arrange, p1)
+p1 <- gTree(children = gList(grid.arrange(p1), gb))
+
 ```
 
-```{r fig5 Kisumu,echo=FALSE,fig.width=7.54,fig.height=5.25,dpi=300,fig.cap="Prior, posterior, and uncertainity maps of differents spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya."}
+```{r fig5,echo=FALSE,fig.width=7.54,fig.height=1.81+1.1+1.1+0.4+1.1,dpi=300,fig.cap="Prior, posterior, and uncertainity maps of differents spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya."}
 grid.draw(p1)
 ```
 
 ```{r fig5 Kisumu export,echo=FALSE,include=FALSE}
-ggsave(plot=p1, device = 'png', filename = "figures/Kisumu_prior_posterior_uncertainity_plot.png", dpi = 300, width=7.54, height = 5.25)
+ggsave(plot=p1, device = 'png', filename = "figures/Kisumu_prior_posterior_uncertainity_plot.png", dpi = 300, width=7.54, height = 1.81+1.1+1.1+0.4+1.1)
 ```
 
 The importance of vegetation infestation in the Kenyan part of Lake Victoria has been reported in previous studies [@Cavalli_et_al_2009]. The high vegetation along with its low sensitivity to water variation in littoral zone can be explained by the permanence of water. Gikuma-Njuru et al. [-@Gikuma-Njuru_et_al_2005] reported higher Chlorophyll concentrations in the  littoral compared to the pelagic zones due to nutrients additions from tributaries [@World_Bank_1996].  The highest vegetation variability associated with the lake water may be explained by a sequence of proliferation and decline of aquatic plants (e.g. algae) at certain periods of the year. Another explanation could be the periods of active mixing resulting in water-vegetation mixtures [@Cavalli_et_al_2009; @Gikuma-Njuru_et_al_2005]. The confusion with regards to the spectral response of open water and forest is a testimonies of uncertainty sources. Care must be taken when dealing with remote sensing data to avoid such errors, particularly in studies dealing with water and vegetation [see @Cavalli_et_al_2009]. In general, water indices are sensitive to vegetation liquid water [see @Boschetti_et_al_2014].
@@ -1918,7 +2332,8 @@ The spatial explicit uncertainty (Figure \@ref(fig:fig13)), expressed as shannon
 
 ```{r Tigray data fetching and gap filling, include = FALSE, echo = FALSE, cache = FALSE}
 
-rm(list=setdiff(ls(), c('my_theme', "gb", 'Kisumu', 'Tigray', 'get_coverages', 'col')))
+rm(list=setdiff(ls(), c('my_theme', "gb", 'Kisumu', 'Tigray', 'get_coverages', 'col',
+                        'Ethiopia_L1', 'Kenya_L1', 'afr', 'inst_kisumu')))
 gc()
 
 # beginCluster(n=10)
@@ -2317,7 +2732,8 @@ spatialDataList <- linkMultiple(spatialData, network, intervals)
 
 # # ## removing objects that are no longer needed ####
 rm(list=setdiff(ls(), c("spatialData", 'spatialDataList', "network", "network_bn_fit", 'my_theme', "gb",
-                        'intervals','Kisumu', 'get_coverages', 'Tigray', 'col')))
+                        'intervals','Kisumu', 'get_coverages', 'Tigray', 'col', 'Ethiopia_L1', 'Kenya_L1', 
+                        'afr', 'inst_kisumu')))
 gc()
 
 ## Query the bn and making some maps ####
@@ -2357,6 +2773,13 @@ names(spatialData)<- names_spatialData
 ```
 
 ```{r Bnspatial plot Tigray,echo=FALSE,include=FALSE}
+# col = rev(terrain.colors(255)) 
+col = c('#FF4500', '#FFA07A','#FFE4E1', '#FFDEAD', '#808000', '#6B8E23')
+col = c('#FF4500', '#FFA07A','#FFE4E1', '#FFDEAD', '#808000', '#008000')
+
+# col = c('#ADD8E6', '#F8F8FF', '#EEE8AA', '#F4A460', '#90EE90', '#228B22')
+# col = c('#ADD8E6', '#E0FFFF', '#EEE8AA', '#F4A460', '#90EE90', '#228B22')
+# col = c('#ADD8E6', '#E0FFFF',  '#F8F8FF', '#EEE8AA','#90EE90', '#228B22')
 # making more intuitive  labels for ggplot facets
 labeller0 <- c("Flow accumulation", "Slope", "Power of tools", "Water present", "Flood at the beginning\nof the rainy season", 
                "Temporal variation\nin vegetation index", "Soil water content", "Exposure to wetness", "Sensitivity to flood",
@@ -2396,10 +2819,10 @@ p0 <- rasterVis::gplot(spatialData, maxpixels=ncell(spatialData))+
   theme_minimal()+
   #my_line_theme+ 
   my_theme +
-  theme(axis.text = element_text(size = 12),
+  theme(axis.text = element_text(size = 8),
         axis.title = element_text(size = 12, face = 'bold'),
-        strip.text = element_text(size = 10, face = "bold"),
-        legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+        strip.text = element_text(size = 7.5, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 6),
         plot.title = element_text(size = 14, face = 'bold', color = 'black'),
         plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
   coord_equal()+
@@ -2407,36 +2830,168 @@ p0 <- rasterVis::gplot(spatialData, maxpixels=ncell(spatialData))+
   scale_y_continuous(expand = c(0, 0))+
   labs(subtitle='Prior spatial data nodes')+
   theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=0, b=0))+
-  guides(fill=guide_colourbar(barwidth=10, barheight = 0.5, label.position="bottom"))+
+  theme(plot.margin = margin(t=0, b=-5))+
+  guides(fill=guide_colourbar(barwidth=10, barheight = 0.35, label.position="bottom"))+
   theme(strip.text.x = element_text(margin = margin(b = 0)))  
 
 p0 <- gTree(children = gList(grid.arrange(p0), gb))
 
+#################################################
+# Ethiopia_L0 <- getData("GADM", country="ETH", level=0, path = 'data_files/shapefiles')
+Ethiopia_L0 <- aggregate(Ethiopia_L1)
+Tigray <- readOGR('data_files/shapefiles/Tigray.shp')
+Tigray_localities <- list(Tigray=Tigray, Ethiopia=Ethiopia_L0)
+Tigray_localities <- sapply(Tigray_localities, function (i) {
+  out=as.data.frame(coordinates(rgeos::gCentroid(i)))
+  names(out)<- c('Long', 'Lat')
+  out
+}, simplify = FALSE
+)
+Tigray_localities <- do.call(rbind, Tigray_localities)
+Tigray_localities$Place <- rownames(Tigray_localities)
+ext <- expand.grid(as.list(as.data.frame(matrix(extent(Tigray), nrow = 2, byrow = F))))
 
-# gplot_data <- function(x, maxpixels=ncell(x), ...){
-#   nl <- nlayers(x)
-#   x <- sampleRegular(x, maxpixels, asRaster=TRUE)
-#   coords <- xyFromCell(x, seq_len(ncell(x)))
-#   ## Extract values
-#   dat <- stack(as.data.frame(getValues(x)))
-#   names(dat) <- c('value', 'variable')
-#   
-#   dat <- cbind(coords, dat)
-# }
+ext <- as(extent(Tigray), 'SpatialPolygons')
+# ext <- ext[order(ext$V1), ]
 
-# FBFS_pixel <-brick(query_set_stack_class[["pixel_is_FBFS"]],
-#                    query_set_stack_entropy[["pixel_is_FBFS"]])
+inst00 <- ggplot()+
+  geom_path(data=fortify(afr), aes(x=long, y= lat, group=group), size = 0.1, colour='black')+
+
+  geom_polygon(data=fortify(Ethiopia_L0), aes(x=long, y= lat, group=group), fill='red', size = 0.05, colour='red')+
+
+  # geom_point(data = Tigray_localities[2, ], aes(x = Long, y = Lat), alpha=0.5)+
+  # geom_text(data = Tigray_localities[2, ], aes(x = Long, y = Lat, label = Place),
+  #           position = position_nudge(y = -0.5),
+  #           hjust=0.5, vjust=1, size=4, alpha=0.8)+
+  theme_minimal()+
+  #my_line_theme+
+  my_theme +
+  theme(
+    # axis.text = element_text(size = 8),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+        # axis.title = element_text(size = 12, face = 'bold'),
+        axis.title = element_blank(),
+        strip.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  coord_equal()+
+  # labs(x='Long', y='Lat')+
+  # labs(subtitle='')+
+  theme(axis.title = element_blank())+
+  theme(plot.margin = margin(t=1, r=1, b=-1, l=-1))
+###########################
+
+inst0 <- ggplot()+
+  geom_path(data=fortify(Ethiopia_L0), aes(x=long, y= lat, group=group), size = 0.1, colour='black')+
+
+  geom_polygon(data=fortify(Tigray), aes(x=long, y= lat, group=group), size = 0.05, fill='red', colour='red')+
+  geom_path(data=fortify(ext), aes(x=long, y= lat, group=group), size = 0.05, colour='red')+
+
+  geom_point(data = Tigray_localities[2, ], aes(x = Long, y = Lat))+
+  geom_text(data = Tigray_localities[2, ], aes(x = Long, y = Lat, label = Place),
+            position = position_nudge(y = -0.7),
+            hjust=0.5, vjust=1, size=3)+
+  theme_minimal()+
+  #my_line_theme+
+  my_theme +
+  theme(
+    axis.text = element_blank(),
+    # axis.text = element_text(size = 8),
+    axis.ticks = element_blank(),
+
+        # axis.title = element_text(size = 12, face = 'bold'),
+        axis.title = element_blank(),
+        strip.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  coord_equal()+
+  # labs(x='Long', y='Lat')+
+  # labs(subtitle='Prior spatial data nodes')+
+  theme(axis.title = element_blank())+
+  theme(plot.margin = margin(t=1, r=1,b=-1, l=-1))
+###########################
+
+inst <- ggplot()+
+  geom_polygon(data=fortify(Tigray), aes(x=long, y= lat, group=group), size = 0.25, fill='white', colour='black')+
+  geom_polygon(data=fortify(Tigray), aes(x=long, y= lat, group=group), size = 0.25, fill='white', colour='black')+
+  # ggsn::scalebar(location="bottomright", y.min=-0.2, y.max=0, 
+  #                 x.min=34, x.max=35, dist=.1, dd2km = TRUE, model='WGS84',
+  #                 st.dist=.04, transform=TRUE)+
+  ggsn::scalebar(data=fortify(Tigray), dist = 50, dist_unit = "km",
+                 transform = TRUE, model = "WGS84", anchor=c(x=38.5, y=12.25+0.2), 
+                 height=0.03, st.dist=0.05, st.size=2, border.size =0.25)+
+  ggsn::north(data=fortify(Tigray), scale = 0.2, anchor=c(x=37.25, y=14.85))+
+  
+  geom_point(data = Tigray_localities[1, ], aes(x = Long, y = Lat))+
+  # geom_text(data = Tigray_localities[1, ], aes(x = Long, y = Lat, label = ""),
+  #           position = position_nudge(y = -0.425),
+  #           hjust=0.5, vjust=1, size=10, alpha=1)+ # used only to make rooms for inset maps
+  geom_text(data = Tigray_localities[1, ], aes(x = Long, y = Lat, label = "Tigray region, Ethiopia"),
+            position = position_nudge(y = 0.05),
+            hjust=0.5, vjust=0, size=3)+
+  theme_minimal()+
+  #my_line_theme+
+  my_theme +
+  theme(axis.text = element_text(size = 8),
+        axis.title = element_text(size = 12, face = 'bold'),
+        strip.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 8),
+        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  scale_x_continuous(expand = c(0,0))+
+  scale_y_continuous(expand = c(0,0))+
+  coord_equal()+
+  # labs(x='Long', y='Lat')+
+  labs(subtitle='Prior spatial data nodes')+
+  theme(axis.title = element_blank())+
+  theme(plot.margin = margin(t=0, b=0))
+
+inst <- inst +
+    annotation_custom(
+        grob = ggplotGrob(inst0+
+                              theme(panel.grid = element_blank(),
+                                    plot.background = element_rect(fill = 'white'),
+                                    panel.border = element_blank()
+                              )),
+        xmin = 37.5,
+        xmax = 38.5,
+        ymin = 12.25+0.2,
+        ymax = 13.25+0.2
+    )+
+    annotation_custom(
+        grob = ggplotGrob(inst00+
+                              theme(panel.grid = element_blank(),
+                                    plot.background = element_rect(fill = 'white'),
+                                    panel.border = element_blank()
+                              )),
+        xmin = 36.4,
+        xmax = 37.5,
+        ymin = 12.3,
+        ymax = 13.25
+    )
+
+
+
+inst <- gTree(children = gList(ggplotGrob(inst), gb))
+
+p0 <-grid.arrange(inst, p0, layout_matrix =rbind(c(1, 1, 2, 2, 2, 2, 2),
+                                                 c(1, 1, 2, 2, 2, 2, 2)))
+
+#################################################
 
 FBFS_pixel_class <-query_set_stack_class[["pixel_is_FBFS"]]
-
+FBFS_pixel_entrophy <-query_set_stack_entropy[["pixel_is_FBFS"]]
 ficher <- 'output_files/Tigray_FBFS_pixel_class.grd'
 if(!file.exists(ficher)){
   writeRaster(FBFS_pixel_class, filename = ficher)
 }
-
-FBFS_pixel_entrophy <-query_set_stack_entropy[["pixel_is_FBFS"]]
-
 ficher <- 'output_files/Tigray_FBFS_pixel_entrophy.grd'
 if(!file.exists(ficher)){
   writeRaster(FBFS_pixel_entrophy, filename = ficher)
@@ -2466,19 +3021,24 @@ p1 <- rasterVis::gplot(p1, maxpixels=ncell(p1))+
   # facet_grid(L1~variable, labeller = labeller1)+geom_raster()+
     facet_wrap(~ variable, nrow = 1, labeller = labeller1) +
   scale_fill_gradientn(colours=col)+
-    # scale_fill_gradient2(low = '#F5DEB3', mid = '#FFEFD5', high = "#AFEEEE",
-    #                    midpoint = midpoint)+
+  theme_minimal()+
+  #my_line_theme+ 
+  my_theme +
+  theme(axis.text = element_text(size = 8),
+        axis.title = element_text(size = 12, face = 'bold'),
+        strip.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 6),
+        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
   coord_equal()+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=4), expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0))+
-  my_theme+  labs(subtitle='Posterior maps')+
+  scale_y_continuous(expand = c(0, 0), breaks = scales::pretty_breaks(n=4))+
+  labs(subtitle='Posterior maps')+
   theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=0, b=0, unit = 'cm'))+
-  guides(fill=guide_colourbar(barwidth=10, barheight = 0.5, label.position="bottom"))+
-  # theme(legend.position = 'none')+
-  # theme(axis.text = element_text(size = 12))+
-  theme(strip.text.x = element_text(margin = margin(b = 0)))+
-  theme(strip.text = element_text(size = 8))
+  theme(plot.margin = margin(t=0, b=-5))+
+  guides(fill=guide_colourbar(barwidth=10, barheight = 0.35, label.position="bottom"))+
+  theme(strip.text.x = element_text(margin = margin(b = 0)))  
+
 
 
 p1 <- gTree(children = gList(grid.arrange(p1), gb))
@@ -2491,60 +3051,211 @@ p2 <- rasterVis::gplot(p2, maxpixels=ncell(p2))+
   # scale_fill_gradientn(colours=rev(terrain.colors(255)))+
   scale_fill_gradient2(low = col[6], mid = col[3], high = col[1],
                        midpoint = midpoint)+
+ theme_minimal()+
+  #my_line_theme+ 
+  my_theme +
+  theme(axis.text = element_text(size = 8),
+        axis.title = element_text(size = 12, face = 'bold'),
+        strip.text = element_text(size = 8, face = "bold"),
+        legend.text = element_text(family = 'serif', face = 'bold', size = 6),
+        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
+        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
   coord_equal()+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=4), expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0))+
-  my_theme+ 
-  labs(subtitle='Uncertainty maps')+
+  scale_y_continuous(expand = c(0, 0), breaks = scales::pretty_breaks(n=4))+
+  labs(subtitle='Uncertainity maps')+
   theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=0, b=0, unit = 'cm'))+
-  guides(fill=guide_colourbar(barwidth=10, barheight = 0.5, label.position="bottom"))+
-  # theme(legend.position = 'none')+
-  # theme(axis.text = element_text(size = 12))+
-  theme(strip.text.x = element_text(margin = margin(b = 0)))+
-  theme(strip.text = element_text(size = 8))
+  theme(plot.margin = margin(t=0, b=-5))+
+  guides(fill=guide_colourbar(barwidth=10, barheight = 0.35, label.position="bottom"))+
+  theme(strip.text.x = element_text(margin = margin(b = 0)))  
 
 p2 <- gTree(children = gList(grid.arrange(p2), gb))
+
+########################
+f <- function(lst, id=TRUE){
+  lengths <- lapply(lst, length)
+  longest <- which.max(lengths)
+  # lst[which(lengths==longest)]
+  tmp0 <- 1:length(lst)
+  names(tmp0) <- names(lst)
+  tmp <- 1:length(lst[[longest]])
+  sapply(tmp0, function(i){
+    out <- 1:length(lst[[i]])
+    sapply(tmp, function(j) {
+      if (j %in% out){
+        if(id){
+          out <- j
+        } else {
+          out <- lst[[i]][j]
+        }
+      } else {
+        ''
+      }
+    }, simplify = T)
+  }, simplify = T)
+}
+
+
+states <- nodeStates(network)
+states <- states[-length(states)]
+
+states <- f(states, id=F)
+states <- cbind(States=1:nrow(states), states)
+colnames(states) <- c('State\nvalues', "Flow\naccumulation", "Slope", "Suitable\ntopography",
+                      "Soil water\ncontent","Exposure to\nwetness","Suitable soils",
+                      "Sensitivity\nto flood", "Vegetation\nsensitivity\nto water\nvariation",
+                      "Characteristic \nvegetation", "Power\nof tools", "Water\npresent", 
+                      "Temporal\nvariation in\nvegetation\nindex", "Flood at the\nbeginning of\nthe rainy\nseason",  
+                      "Flooded \nat some\npoints", "Vegetation\nvariation \ncaused by\nflood")
+
+
+inst0 <- tableGrob(states[-nrow(states), ],
+           theme=ttheme_default(base_size =5.65,
+                                core=list(bg_params = list(fill = 'white', col=c('lightgrey')),
+                                                    fg_params=list(fontface=3, fontsize=5.40)),
+                                colhead=list(bg_params = list(fill = 'white', col=c('lightgrey'))),
+                                rowhead=list(bg_params = list(fill = 'white', col=c('lightgrey'))),
+                                padding = unit(c(1, 1), "mm")))
+
+top = grid::textGrob("Mapping of discrete variable states",
+                       x=0.04, hjust=0, vjust = 0.50,
+                       gp = gpar(fontfamily='serif',fontsize=12,fontface="italic", col="blue"))
+inst0 <- grid.arrange(top=top, inst0)
+########################
 
 p1 <- arrangeGrob(p0, 
                   p1,
                   p2,
                   nrow=3,
                   # widths = unit(c(7.54, 7.54, 7.54), c("in", "in", "in")),
-                  heights = unit(c(7/2.15, 7/4.4, 7/4.4), c("in", "in", "in"))
+                  heights = unit(c(2.3, 1.35, 1.35), c("in", "in", "in"))
                   
 )
 
 
 p1 <- list(p1)
 p1$top = grid::textGrob("Tigray region, Ethiopia: MODIS 2014-01-01 / 2016-12-26.",
-                             x=0, hjust=0, vjust = 0.5,
-                             gp = gpar(fontfamily='serif',fontsize=14,fontface="bold", col="black"))
+                       x=0, hjust=0, vjust = 0.5,
+                       gp = gpar(fontfamily='serif',fontsize=14,fontface="bold", col="black"))
+p1$bottom = grid::textGrob("Long",
+                          x=0.5, hjust=0, vjust = 0.5,rot = 0,
+                          gp = gpar(fontfamily='serif',fontsize=14,fontface="bold", col="black"))
+p1$left = grid::textGrob("Lat",
+                        rot = 90,
+                        gp = gpar(fontfamily='serif',fontsize=14,fontface="bold", col="black"))
 p1$ncol <- 1
+
+p1 <- do.call(grid.arrange, p1)
+p1 <- gTree(children = gList(grid.arrange(p1), gb))
+
+p1 <- arrangeGrob(p1,
+                  inst0,
+                  nrow=2,
+                  # widths = unit(c(7.54, 7.54, 7.54), c("in", "in", "in")),
+                  heights = unit(c(5.5, 1.1), c("in", "in"))
+
+)
 
 p1 <- do.call(grid.arrange, p1)
 p1 <- gTree(children = gList(grid.arrange(p1), gb))
 ```
 
-```{r fig5 Tigray,echo=FALSE,fig.width=7.54,fig.height=6.685,dpi=300,fig.cap="Prior, posterior, and uncertainity maps of differents spatial data used to feed the BNs for mapping FBFS in Tigray region, Ethiopia"}
+
+```{r fig6,echo=FALSE,fig.width=7.54,fig.height=5.5+1.1,dpi=300,fig.cap="Prior, posterior, and uncertainity maps of differents spatial data used to feed the BNs for mapping FBFS in Tigray region, Ethiopia"}
 grid.draw(p1)
 ```
 
-```{r fig5 export Tigray,echo=FALSE,include=FALSE}
-ggsave(plot=p1, device = 'png', filename = "figures/Tigray_prior_posterior_uncertainity_plot.png", dpi = 300, width=7.54, height = 6.68)
+```{r fig6 export Tigray,echo=FALSE,include=FALSE}
+ggsave(plot=p1, device = 'png', filename = "figures/Tigray_prior_posterior_uncertainity_plot.png", dpi = 300, width=7.54, height = 5.5+1.1)
 ```
 
 ## Potential of FBFS in Kisumu and Tigray 
 
 ```{r FBFS maps Kisumu and Tigray,echo=FALSE,include=FALSE}
+source("source_files/inset_maps.R")
+text_size <- 2
+inst01 <- inst01 + 
+  geom_text(data = Kisumu_localities[2, ], aes(x = Long, y = Lat, label = Place), size=text_size,
+            position = position_nudge(y = 0.7), hjust=0.5, vjust=0)
 
-rm(list=setdiff(ls(), c('my_theme', "gb",'Kisumu', 'Tigray', 'col', 'f', 'get_coverages')))
+inst_kisumu <- inst_kisumu + labs(subtitle='Kisumu referential')+
+  geom_text(data = Kisumu_localities[1, ], aes(x = Long, y = Lat, label = "Kisumu County, Kenya"), size=text_size,
+            position = position_nudge(y = 0.025), hjust=0.5, vjust=0)
+inst_kisumu <- inst_kisumu +
+  annotation_custom(
+    grob = ggplotGrob(inst01+
+                        theme(panel.grid = element_blank(),
+                              plot.background = element_rect(fill = 'white'),
+                              panel.border = element_blank(),
+                              plot.margin = margin(t = 0, r = 0, b = 0, l = 0)
+                        )),
+    
+    xmin = 35.09,
+    xmax = 35.35-0.01,
+    ymin = -0.72,
+    ymax = -0.15
+  )+
+  annotation_custom(
+    grob = ggplotGrob(inst00+
+                        theme(panel.grid = element_blank(),
+                              plot.background = element_rect(fill = 'white'),
+                              panel.border = element_blank(),
+                              plot.margin = margin(t = 0, r = 0, b = 0, l = 0)
+                        )),
+    
+    xmin = 34.42,
+    xmax = 34.7,
+    ymin = -0.73,
+    ymax = -0.15
+  )
+
+inst02 <- inst02 +
+  geom_text(data = Tigray_localities[2, ], aes(x = Long, y = Lat, label = Place),
+            size=text_size, position = position_nudge(y = -0.7), hjust=0.5, vjust=1)
+
+inst_tigray <- inst_tigray + labs(subtitle='Tigray referential')+
+   geom_text(data = Tigray_localities[1, ], aes(x = Long, y = Lat, label = "Tigray region, Ethiopia"),
+            size = text_size, position = position_nudge(y = 0.05), hjust=0.5, vjust=0)
+inst_tigray <- inst_tigray +
+  annotation_custom(
+    grob = ggplotGrob(inst02+
+                        theme(panel.grid = element_blank(),
+                              plot.background = element_rect(fill = 'white'),
+                              panel.border = element_blank(),
+                              plot.margin = margin(t = 0, r = 0, b = 0, l = 0)
+                        )),
+    xmin = 37.5,
+    xmax = 38.5,
+    ymin = 12.25+0.2,
+    ymax = 13.25+0.2
+  )+
+  annotation_custom(
+    grob = ggplotGrob(inst00+
+                        theme(panel.grid = element_blank(),
+                              plot.background = element_rect(fill = 'white'),
+                              panel.border = element_blank(),
+                              plot.margin = margin(t = 0, r = 0, b = 0, l = 0)
+                        )),
+    xmin = 36.4,
+    xmax = 37.5,
+    ymin = 12.3,
+    ymax = 13.25
+  )
+rm(list=setdiff(ls(), c('my_theme', "gb",'Kisumu', 'Tigray', 'col', 'get_coverages', 'Ethiopia_L1', 'Kenya_L1', 
+                        'afr', 'inst_kisumu', 'inst_tigray', 'text_size')))
 gc()
+
+
+f <- function(decimals=0){
+  # return a function responpsible for formatting the 
+  # axis labels with a given number of decimals 
+  function(x) as.character(round(x,decimals))
+}
 
 Kisumu_localities <- matrix(c(34.918664, -0.173477, "Ahero",  
                        34.767892, -0.092518, "Kisumu",
                        35.073257, -0.161697, "Awasi",
-                       35.200067, -0.150011, 'Muhoroni',
+                       # 35.200067, -0.150011, 'Muhoroni',
                        35.286275, -0.368985, 'Kericho',
                        34.971798, -0.269972, "Katito",
                        35.050748, -0.066539, 'Kibigori',
@@ -2558,13 +3269,13 @@ Kisumu_localities[,2] <- as.numeric(Kisumu_localities[,2])
 
 
 Tigray_localities <- matrix(c(39.478020,  13.493353, "Mekele",  
-                       39.521428,  12.507312, "Korem",
+                       # 39.521428,  12.507312, "Korem",
                        39.550491, 12.415558, "Alamata",
                        # 38.747275,  14.133082, 'Aksum',
                        38.747275,  14.1, 'Aksum',
                        39.460561, 14.278563, 'Adigrat',
                        # 38.893718,  14.163646, 'Adwa',
-                       38.893718,  14.17, 'Adwa',
+                       # 38.893718,  14.17, 'Adwa',
                        39.543339, 12.786711, 'Maychew'),
                      ncol=3, byrow = TRUE)
 colnames(Tigray_localities) <- c("Long", "Lat", "Place")
@@ -2596,169 +3307,107 @@ Tigray_coverge_overlaid <- get_coverages(Tigray_FBFS_pixel_overlaid, Tigray)
 ## FBFS raw maps ####
 p01 <- rasterVis::gplot(Kisumu_FBFS_pixel_class, maxpixels=ncell(Kisumu_FBFS_pixel_class))+
   geom_raster(aes(fill = value)) +
-  # facet_wrap(~ variable, ncol = 1, labeller = labeller0) +
   scale_fill_gradientn(colours=col)+
-  theme_minimal()+
-  #my_line_theme+
   my_theme +
-  theme(axis.text = element_text(size = 12),
-        axis.title = element_text(size = 12, face = 'bold'),
-        strip.text = element_text(size = 12, face = "bold"),
-        legend.text = element_text(family = 'serif', face = 'bold', size = 7),
-        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
-        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_text(size = 6, margin = margin(r=0)),
+    legend.text = element_text(family = 'serif', face = 'bold', size = 4, margin = margin(b=-5)),
+    plot.margin = margin(r=0, b=0, l=0),
+    plot.title = element_blank(),
+    plot.subtitle = element_text(size = 8, face = 'italic', color = 'blue', margin = margin(b=12))
+  )+
   coord_equal()+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=5), expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))+
-  # labs(subtitle='FBFS Potential')+
-  theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=10, r=0, b=-10, l=0))+
-  guides(fill=guide_colourbar(barwidth=10, barheight = 0.5, label.position="bottom"))+
-  theme(strip.text.x = element_text(margin = margin(b = 0)))
-
+  labs(subtitle='FBFS Potential')+
+  guides(fill=guide_colourbar(barwidth=5/2, barheight = 0.25, label.position="top"))
 
 
 p01 <- p01 + 
-  geom_path(data=fortify(Kisumu), aes(x=long, y= lat, group=group), colour='black',alpha=0.5)+
-  geom_point(data = Kisumu_localities, aes(x = Long, y = Lat), alpha=0.5)+
-  geom_text(data = Kisumu_localities, aes(x = Long, y = Lat, label = Place),
-            hjust=1, vjust=0, size=3, alpha=0.8)
+  geom_path(data=fortify(Kisumu), aes(x=long, y= lat, group=group), colour='black', size=0.25, alpha=0.5)+
+  geom_point(data = Kisumu_localities, aes(x = Long, y = Lat), size = 0.5, alpha=0.5)+
+  geom_text(data = Kisumu_localities, aes(x = Long, y = Lat, label = Place), size=text_size,
+            # position = position_nudge(y = 0.02), 
+            hjust=1, vjust=1, alpha=0.8)
 
 # p3 <- gTree(children = gList(grid.arrange(p0, ncol=), gb))
 
 
 p02 <- rasterVis::gplot(Tigray_FBFS_pixel_class, maxpixels=ncell(Tigray_FBFS_pixel_class))+
   geom_raster(aes(fill = value)) +
-  # facet_wrap(~ variable, ncol = 1, labeller = labeller0) +
   scale_fill_gradientn(colours=col)+
-  theme_minimal()+
-  #my_line_theme+
   my_theme +
-  theme(axis.text = element_text(size = 12),
-        axis.title = element_text(size = 12, face = 'bold'),
-        strip.text = element_text(size = 12, face = "bold"),
-        legend.text = element_text(family = 'serif', face = 'bold', size = 7),
-        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
-        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_text(size = 6, margin = margin(r=0)),
+    legend.text = element_text(family = 'serif', face = 'bold', size = 4, margin = margin(b=-5)),
+    plot.margin = margin(r=0, b=-20, l=0),
+    plot.title = element_blank(),
+    plot.subtitle = element_blank())+
   coord_equal()+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=5), expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))+
-  # labs(subtitle='FBFS Potential')+
-  theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=10, r=0, b=-10, l=0))+
-  guides(fill=guide_colourbar(barwidth=10, barheight = 0.5, label.position="bottom"))+
-  theme(strip.text.x = element_text(margin = margin(b = 0)))
-
-
+  guides(fill=guide_colourbar(barwidth=5/2, barheight = 0.25, label.position="top"))
 p02 <- p02 + 
-  geom_path(data=fortify(Tigray), aes(x=long, y= lat, group=group), colour='black',alpha=0.5)+
-  geom_point(data = Tigray_localities, aes(x = Long, y = Lat), alpha=0.5)+
-  geom_text(data = Tigray_localities, aes(x = Long, y = Lat, label = Place),
-            hjust=1, vjust=0, size=3, alpha=0.8)
-
-# p0 <- gTree(children = gList(grid.arrange(p0, ncol=), gb))
-
-
-p0=arrangeGrob(p01,p02,
-               ncol=2,
-               widths = unit(c(7.54/2.1, 7.7/3.25), c("in", "in"))
-               # ,
-               # heights = unit(c(2.1, 2.1), c("in", "in"))
-               
-)
-
-p0 <- list(p0)
-p0$top = grid::textGrob("FBFS Potential.",
-                             hjust=0.5, vjust = 0.5,
-                             gp = gpar(fontfamily='serif',fontsize=14,fontface="italic", col="blue"))
-p0$ncol <- 1
-
-p0 <- do.call(grid.arrange, p0)
-p0 <- gTree(children = gList(grid.arrange(p0), gb))
+  geom_path(data=fortify(Tigray), aes(x=long, y= lat, group=group), colour='black', size=0.25, alpha=0.5)+
+  geom_point(data = Tigray_localities, aes(x = Long, y = Lat), size = 0.5, alpha=0.5)+
+  geom_text(data = Tigray_localities, aes(x = Long, y = Lat, label = Place),size = text_size,
+            # position = position_nudge(y = 0.2/3), 
+            hjust=1, vjust=1, alpha=0.8)
 ######################################
 
 midpoint <- median(Kisumu_FBFS_pixel_entrophy[], na.rm = TRUE)
 p11 <- rasterVis::gplot(Kisumu_FBFS_pixel_entrophy, maxpixels=ncell(Kisumu_FBFS_pixel_entrophy))+
   geom_raster(aes(fill = value)) +
-  # facet_wrap(~ variable, ncol = 1, labeller = labeller0) +
-  # scale_fill_gradientn(colours=rev(terrain.colors(255)))+
-    scale_fill_gradient2(low = col[6], mid = col[3], high = col[1],
+  scale_fill_gradient2(low = col[6], mid = col[3], high = col[1],
                        midpoint = midpoint)+
-  theme_minimal()+
-  #my_line_theme+
-  my_theme +
-  theme(axis.text = element_text(size = 12),
-        axis.title = element_text(size = 12, face = 'bold'),
-        strip.text = element_text(size = 12, face = "bold"),
-        legend.text = element_text(family = 'serif', face = 'bold', size = 7),
-        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
-        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+   my_theme +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_text(size = 6, margin = margin(r=0)),
+    legend.text = element_text(family = 'serif', face = 'bold', size = 4, margin = margin(b=-5)),
+    plot.margin = margin(r=0, b=0, l=0),
+    plot.title = element_blank(),
+    plot.subtitle = element_text(size = 8, face = 'italic', color = 'blue', margin = margin(b=12))
+  )+
   coord_equal()+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=5), expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))+
-  # labs(subtitle='Entrophy')+
-  theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=10, r=0, b=-10, l=0))+
-  guides(fill=guide_colourbar(barwidth=10, barheight = 0.5, label.position="bottom"))+
-  theme(strip.text.x = element_text(margin = margin(b = 0)))
+  labs(subtitle='Entrophy')+
+  guides(fill=guide_colourbar(barwidth=5/2, barheight = 0.25, label.position="top"))
 
 p11 <- p11 + 
-  geom_path(data=fortify(Kisumu), aes(x=long, y= lat, group=group), colour='black',alpha=0.5)+
-  geom_point(data = Kisumu_localities, aes(x = Long, y = Lat), alpha=0.5)+
-  geom_text(data = Kisumu_localities, aes(x = Long, y = Lat, label = Place),
-            hjust=1, vjust=0, size=3, alpha=0.8)
-
-# p1 <- gTree(children = gList(grid.arrange(p1, ncol=), gb))
+  geom_path(data=fortify(Kisumu), aes(x=long, y= lat, group=group), colour='black', size=0.25, alpha=0.5)+
+  geom_point(data = Kisumu_localities, aes(x = Long, y = Lat), size = 0.5,  alpha=0.5)+
+  geom_text(data = Kisumu_localities, aes(x = Long, y = Lat, label = Place), size = text_size,
+            # position = position_nudge(y = 0.02),
+            hjust=1, vjust=1, alpha=0.8)
 
 midpoint <- median(Tigray_FBFS_pixel_entrophy[], na.rm = TRUE)
 p12 <- rasterVis::gplot(Tigray_FBFS_pixel_entrophy, maxpixels=ncell(Tigray_FBFS_pixel_entrophy))+
   geom_raster(aes(fill = value)) +
-  # facet_wrap(~ variable, ncol = 1, labeller = labeller0) +
-  # scale_fill_gradientn(colours=rev(terrain.colors(255)))+
-    scale_fill_gradient2(low = col[6], mid = col[3], high = col[1],
+  scale_fill_gradient2(low = col[6], mid = col[3], high = col[1],
                        midpoint = midpoint)+
-  theme_minimal()+
-  #my_line_theme+
   my_theme +
-  theme(axis.text = element_text(size = 12),
-        axis.title = element_text(size = 12, face = 'bold'),
-        strip.text = element_text(size = 12, face = "bold"),
-        legend.text = element_text(family = 'serif', face = 'bold', size = 7),
-        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
-        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_text(size = 6, margin = margin(r=0)),
+    legend.text = element_text(family = 'serif', face = 'bold', size = 4, margin = margin(b=-5)),
+    plot.margin = margin(r=0, b=-20, l=0),
+    plot.title = element_blank(),
+    plot.subtitle = element_blank())+
   coord_equal()+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=5), expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))+
-  # labs(subtitle='Entrophy')+
-  theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=10, r=0, b=-10, l=0))+
-  guides(fill=guide_colourbar(barwidth=10, barheight = 0.5, label.position="bottom"))+
-  theme(strip.text.x = element_text(margin = margin(b = 0)))
+  guides(fill=guide_colourbar(barwidth=5/2, barheight = 0.25, label.position="top"))
 
 p12 <- p12 + 
-  geom_path(data=fortify(Tigray), aes(x=long, y= lat, group=group), colour='black',alpha=0.5)+
-  geom_point(data = Tigray_localities, aes(x = Long, y = Lat), alpha=0.5)+
-  geom_text(data = Tigray_localities, aes(x = Long, y = Lat, label = Place),
-            hjust=1, vjust=0, size=3, alpha=0.8)
-
-# p1 <- gTree(children = gList(grid.arrange(p1, ncol=), gb))
-
-p1=arrangeGrob(p11,p12,
-               ncol=2,
-               widths = unit(c(7.54/2.1, 7.7/3.25), c("in", "in"))
-               # ,
-               # heights = unit(c(2.1, 2.1), c("in", "in"))
-               
-)
-
-p1 <- list(p1)
-p1$top = grid::textGrob("Uncertainity",
-                             hjust=0.5, vjust = 0.5,
-                             gp = gpar(fontfamily='serif',fontsize=14,fontface="italic", col="blue"))
-p1$ncol <- 1
-
-p1 <- do.call(grid.arrange, p1)
-p1 <- gTree(children = gList(grid.arrange(p1), gb))
+  geom_path(data=fortify(Tigray), aes(x=long, y= lat, group=group), colour='black', size=0.25, alpha=0.5)+
+  geom_point(data = Tigray_localities, aes(x = Long, y = Lat), size = 0.5, alpha=0.5)+
+  geom_text(data = Tigray_localities, aes(x = Long, y = Lat, label = Place), size = text_size,
+            # position = position_nudge(y = 0.2/3),
+            hjust=1, vjust=1, alpha=0.8)
 
 ##################################################
 
@@ -2766,104 +3415,74 @@ p21 <- rasterVis::gplot(Kisumu_FBFS_pixel_overlaid, maxpixels=ncell(Kisumu_FBFS_
   geom_raster(aes(fill = value)) +
   # facet_wrap(~ variable, ncol = 1, labeller = labeller0) +
   scale_fill_gradientn(colours=col)+
-  theme_minimal()+
-  #my_line_theme+
-  my_theme +
-  theme(axis.text = element_text(size = 12),
-        axis.title = element_text(size = 12, face = 'bold'),
-        strip.text = element_text(size = 12, face = "bold"),
-        legend.text = element_text(family = 'serif', face = 'bold', size = 7),
-        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
-        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+   my_theme +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_text(size = 6, margin = margin(r=0)),
+    legend.text = element_text(family = 'serif', face = 'bold', size = 4, margin = margin(b=-5)),
+    plot.margin = margin(r=0, b=0, l=0),
+    plot.title = element_blank(),
+    plot.subtitle = element_text(size = 8, face = 'italic', color = 'blue', margin = margin(b=12))
+  )+
   coord_equal()+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=5), expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))+
-  # labs(subtitle='FBFS Potential accounting for uncertainity')+
-  theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=10, r=0, b=-10, l=0))+
-  guides(fill=guide_colourbar(barwidth=10, barheight = 0.5, label.position="bottom"))+
-  theme(strip.text.x = element_text(margin = margin(b = 0)))
-
+  labs(subtitle='FBFS Potential accounting for uncertainity')+
+  guides(fill=guide_colourbar(barwidth=5/2, barheight = 0.25, label.position="top"))
 
 p21 <- p21 + 
-  geom_path(data=fortify(Kisumu), aes(x=long, y= lat, group=group), colour='black',alpha=0.5)+
-  geom_point(data = Kisumu_localities, aes(x = Long, y = Lat), alpha=0.5)+
-  geom_text(data = Kisumu_localities, aes(x = Long, y = Lat, label = Place),
-            hjust=1, vjust=0, size=3, alpha=0.8)
+  geom_path(data=fortify(Kisumu), aes(x=long, y= lat, group=group), colour='black', size=0.25, alpha=0.5)+
+  geom_point(data = Kisumu_localities, aes(x = Long, y = Lat), size=0.5, alpha=0.5)+
+  geom_text(data = Kisumu_localities, aes(x = Long, y = Lat, label = Place), size = text_size,
+            # position = position_nudge(y = 0.02), 
+            hjust=1, vjust=1, alpha=0.8)
 
 # p2 <- gTree(children = gList(grid.arrange(p2, ncol=), gb))
 
 p22 <- rasterVis::gplot(Tigray_FBFS_pixel_overlaid, maxpixels=ncell(Tigray_FBFS_pixel_overlaid))+
   geom_raster(aes(fill = value)) +
-  # facet_wrap(~ variable, ncol = 1, labeller = labeller0) +
   scale_fill_gradientn(colours=col)+
-  theme_minimal()+
-  #my_line_theme+
   my_theme +
-  theme(axis.text = element_text(size = 12),
-        axis.title = element_text(size = 12, face = 'bold'),
-        strip.text = element_text(size = 12, face = "bold"),
-        legend.text = element_text(family = 'serif', face = 'bold', size = 7),
-        plot.title = element_text(size = 14, face = 'bold', color = 'black'),
-        plot.subtitle = element_text(size = 12, face = 'italic', color = 'blue'))+
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_text(size = 6, margin = margin(r=0)),
+    legend.text = element_text(family = 'serif', face = 'bold', size = 4, margin = margin(b=-5)),
+    plot.margin = margin(r=0, b=-20, l=0),
+    plot.title = element_blank(),
+    plot.subtitle = element_blank())+
   coord_equal()+
   scale_x_continuous(labels = f(1), breaks = scales::pretty_breaks(n=5), expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))+
-  # labs(subtitle='FBFS Potential accounting for uncertainity')+
-  theme(axis.title = element_blank())+
-  theme(plot.margin = margin(t=10, r=0, b=-10, l=0))+
-  guides(fill=guide_colourbar(barwidth=10, barheight = 0.5, label.position="bottom"))+
-  theme(strip.text.x = element_text(margin = margin(b = 0)))
-
+  guides(fill=guide_colourbar(barwidth=5/2, barheight = 0.25, label.position="top"))
 
 p22 <- p22 + 
-  geom_path(data=fortify(Tigray), aes(x=long, y= lat, group=group), colour='black',alpha=0.5)+
-  geom_point(data = Tigray_localities, aes(x = Long, y = Lat), alpha=0.5)+
-  geom_text(data = Tigray_localities, aes(x = Long, y = Lat, label = Place),
-            hjust=1, vjust=0, size=3, alpha=0.8)
+  geom_path(data=fortify(Tigray), aes(x=long, y= lat, group=group), colour='black', size=0.25, alpha=0.5)+
+  geom_point(data = Tigray_localities, aes(x = Long, y = Lat), size=0.5, alpha=0.5)+
+  geom_text(data = Tigray_localities, aes(x = Long, y = Lat, label = Place), size = text_size,
+            # position = position_nudge(y = 0.2/3),
+            hjust=1, vjust=1, alpha=0.8)
 
-# p2 <- gTree(children = gList(grid.arrange(p2, ncol=), gb))
-p2=arrangeGrob(p21,p22,
-               ncol=2,
-               widths = unit(c(7.54/2.1, 7.7/3.25), c("in", "in"))
-               # ,
-               # heights = unit(c(2.1, 2.1), c("in", "in"))
-               
-)
-
-p2 <- list(p2)
-p2$top = grid::textGrob("FBFS Potential accounting for uncertainity.",
-                             hjust=0.5, vjust = 0.5,
-                             gp = gpar(fontfamily='serif',fontsize=14,fontface="italic", col="blue"))
-p2$ncol <- 1
-
-p2 <- do.call(grid.arrange, p2)
-p2 <- gTree(children = gList(grid.arrange(p2), gb))
-
-p0 <- list(p0, p1, p2)
-p0$top = grid::textGrob("Kisumu (left), Tigray (right): MODIS 2014-01-01 / 2016-12-26",
-                        x=0, hjust=0, vjust = 0.5,
-                        gp = gpar(fontfamily='serif',fontsize=14,fontface="bold", col="black"))
-p0$bottom = grid::textGrob("Long",
-                           x=0.5, hjust=0, vjust = 0.5,rot = 0,
-                           gp = gpar(fontfamily='serif',fontsize=16,fontface="bold", col="black"))
-p0$left = grid::textGrob("Lat",
-                         rot = 90,
-                         gp = gpar(fontfamily='serif',fontsize=16,fontface="bold", col="black"))
-
-p0$ncol <- 1
-
+p0 <- list(ggplotGrob(inst_kisumu), ggplotGrob(p01), ggplotGrob(p11), ggplotGrob(p21))
+p0$layout_matrix <- cbind(1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4)
 p0 <- do.call(grid.arrange, p0)
 p0 <- gTree(children = gList(grid.arrange(p0), gb))
+###############################
+p1 <- list(ggplotGrob(inst_tigray), ggplotGrob(p02), ggplotGrob(p12), ggplotGrob(p22))
+p1$layout_matrix <- cbind(1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4)
+p1 <- do.call(grid.arrange, p1)
+p1 <- gTree(children = gList(grid.arrange(p1), gb))
+p1 <- list(p0, p1)
+p1$heights <- c(1.15, 1.67)
+p1 <- do.call(grid.arrange, p1)
+p1 <- gTree(children = gList(grid.arrange(p1), gb))
 ```
 
-```{r fig6,echo=FALSE,fig.width=6+0.25,fig.height= 6.88+0.5,dpi=300,fig.cap="Potential areas for FBFS and associated uncertainity in Kisumu County, Kenya and Tigray region, Ethiopia."}
-grid.draw(p0)
+```{r fig7,echo=FALSE,fig.width=6+0.25,fig.height= 1.15+1.67,dpi=300,fig.cap="Potential areas for FBFS and associated uncertainity in Kisumu County, Kenya and Tigray region, Ethiopia."}
+grid.draw(p1)
 ```
 
-```{r fig6 Kisumu export,echo=FALSE,include=FALSE}
-# ggsave(plot=p0, device = 'png', filename = "figures/Kisumu_Pixel_is_FBFS_plot.png", dpi = 300, width=8.19-0.65, height = 8.16-0.65)
-ggsave(plot=p0, device = 'png', filename = "figures/Kisumu_Tigray_Pixel_is_FBFS_plot.png", dpi = 300, width = 6+0.25, height = 6.88+0.5)
+```{r fig7 export,echo=FALSE,include=FALSE}
+ggsave(plot=p1, device = 'png', filename = "figures/Kisumu_Tigray_Pixel_is_FBFS_plot.png", dpi = 300, width = 7.54, height = 1.15+1.67)
 ```
 
 ```{r table3, echo=FALSE}

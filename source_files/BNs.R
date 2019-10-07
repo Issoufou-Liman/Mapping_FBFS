@@ -4,7 +4,7 @@
 f_acc_node <- cptable(~f_acc, values = c(0.2, 0.2, 0.2), levels = c("Low","Medium", "High"))
 
 ## slope node: this will be a raster ####
-slope_node <- cptable(~slope, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("V. steep", "Step", "Gentile", "R. flat", "Flat"))
+slope_node <- cptable(~slope, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("Very steep", "Step", "Gentile", "Relatively flat", "Flat"))
 
 ## suitable topography: this will be a just probabilities (Not a raster) ####
 suitable_topo_node_tmp <- make_gRain_CPT(parent_effects = list(c(2, 3, 1),
@@ -21,10 +21,10 @@ suitable_topo_node_levels <- suitable_topo_node_tmp$levels
 suitable_topo_node <- cptable (~suitable_topo|f_acc:slope, values = suitable_topo_node_values,levels = suitable_topo_node_levels)
 
 ## soil water node : this will be a raster ####
-soil_water_content_node <- cptable(~soil_water_content, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("V. low", "Low", "Medium", 'High', 'V. high'))
+soil_water_content_node <- cptable(~soil_water_content, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("Very low", "Low", "Medium", 'High', 'Very high'))
 
 ## wetness exposure: this will be a raster  ####
-exposure2wetness_node <- cptable(~exposure2wetness, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("V. low", "Low", "Medium", 'High', 'V. high'))
+exposure2wetness_node <- cptable(~exposure2wetness, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("Very low", "Low", "Medium", 'High', 'Very high'))
 
 ## suitable soils this will be a raster ####
 suitable_soil_node_tmp <- make_gRain_CPT(parent_effects = list(c(0, 1, 2, 3, 0),
@@ -32,7 +32,7 @@ suitable_soil_node_tmp <- make_gRain_CPT(parent_effects = list(c(0, 1, 2, 3, 0),
                                          parent_weights = c(3, 1),
                                          b = 5,
                                          child_prior = c(0.1, 0.3, 0.4, 0.3, 0.1),
-                                         child_states = c("Unusable", "Unsuitable", "M. suitable", "suitable", "H. suitable"),
+                                         child_states = c("Unusable", "Unsuitable", "Moderately suitable", "suitable", "Highly suitable"),
                                          parent_states = list(soil_water_content_node$levels,
                                                               exposure2wetness_node$levels),
                                          parent_names = c('soil_water_content', 'exposure2wetness'))
@@ -41,10 +41,10 @@ suitable_soil_node_levels <- suitable_soil_node_tmp$levels
 suitable_soil_node <- cptable (~suitable_soil|soil_water_content:exposure2wetness, values = suitable_soil_node_values,levels = suitable_soil_node_levels)
 
 ## sensitivity to flood ####
-sensitivity2flood_node <- cptable(~sensitivity2flood, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("V. low", "Low", "Medium", 'High', 'V. high'))
+sensitivity2flood_node <- cptable(~sensitivity2flood, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("Very low", "Low", "Medium", 'High', 'Very high'))
 
 ## vegetation sensitibity to water ####
-veg_sensitivity2water_var_node <- cptable(~veg_sensitivity2water_var, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("V. low", "Low", "Medium", 'High', 'V. high'))
+veg_sensitivity2water_var_node <- cptable(~veg_sensitivity2water_var, values = c(0.2, 0.2, 0.2, 0.2, 0.2), levels = c("Very low", "Low", "Medium", 'High', 'Very high'))
 
 ## characteristic vegetation ####
 charact_veg_node_tmp <- make_gRain_CPT(parent_effects = list(c(1, 1, 2, 4, 5),
@@ -52,7 +52,7 @@ charact_veg_node_tmp <- make_gRain_CPT(parent_effects = list(c(1, 1, 2, 4, 5),
                                        parent_weights = c(1, 2),
                                        b = 5,
                                        child_prior = c(0.1, 0.3, 0.4, 0.3, 0.1),
-                                       child_states = c('Dry', "Dehydrate", "M. hydrated", "hydrated", 'Water logged'),
+                                       child_states = c('Dry', "Dehydrated", "Moderately hydrated", "hydrated", 'Water logged'),
                                        parent_states = list(sensitivity2flood_node$levels,
                                                             veg_sensitivity2water_var_node$levels),
                                        parent_names = c('sensitivity2flood', 'veg_sensitivity2water_var'))
@@ -85,7 +85,7 @@ tempo_var_vi_node_tmp <- make_gRain_CPT(parent_effects = list(c(0, 1, 2, 4, 5),
                                         parent_weights = c(3, 2, 3),
                                         b = 3,
                                         child_prior = c(0.05, 0.1, 0.35, 0.35, 0.05, 0.1),
-                                        child_states = c('Ext. low', "V. low", "Low", 'High', 'V. high', 'E. high'),
+                                        child_states = c('Extremely low', "Very low", "Low", 'High', 'Very high', 'Extremely high'),
                                         parent_states = list(sensitivity2flood_node$levels,
                                                              exposure2wetness_node$levels,
                                                              soil_water_content_node$levels),
@@ -104,7 +104,7 @@ flooded_at_some_pts_node_tmp <- make_gRain_CPT(parent_effects = list(c(0, 0, 1, 
                                                parent_weights = c(1, 2, 1),
                                                b = 3,
                                                child_prior = c(0.1, 0.3, 0.4, 0.3, 0.1),
-                                               child_states = c("V. low", "Low", "Medium", 'High', 'V. high'),
+                                               child_states = c("Very low", "Low", "Medium", 'High', 'Very high'),
                                                parent_states = list(suitable_soil_node$levels,
                                                                     water_prznt_node$levels,
                                                                     charact_veg_node$levels),
@@ -121,7 +121,7 @@ veg_var_caused_by_flood_node_tmp <- make_gRain_CPT(parent_effects = list(c(1, 2,
                                                    parent_weights = c(2, 1, 2, 1),
                                                    b = 3,
                                                    child_prior = c(0.1, 0.3, 0.4, 0.3, 0.1),
-                                                   child_states = c('V. low', 'Low', 'Medium', "High", 'V. high'),
+                                                   child_states = c('Very low', 'Low', 'Medium', "High", 'Very high'),
                                                    parent_states = list(tempo_var_vi_node$levels, 
                                                                         flood_bgs_node$levels,
                                                                         f_acc_node$levels,
@@ -141,7 +141,7 @@ pixel_is_FBFS_node_tmp <- make_gRain_CPT(parent_effects = list(c(0, 1),
                                          parent_weights = c(3, 1, 2, 3),
                                          b = 4,
                                          child_prior = c(0.05, 0.4, 0.6, 0.4, 0.05),
-                                         child_states = c('H. unlikely', 'Unlikely', 'Possible', "Likely", "H. likely"),
+                                         child_states = c('Highly unlikely', 'Unlikely', 'Possible', "Likely", "Highly likely"),
                                          parent_states = list(suitable_topo_node$levels,
                                                               flooded_at_some_pts_node$levels,
                                                               veg_var_caused_by_flood_node$levels,
