@@ -50,10 +50,10 @@ inst01 <- ggplot()+
 
 inst_kisumu <- ggplot()+
   geom_polygon(data=fortify(Kisumu), aes(x=long, y= lat, group=group), size = 0.03, fill='white', colour='black')+
-  ggsn::scalebar(data=fortify(Kisumu), dist = 15, dist_unit = "km",
+  scalebar(data=fortify(Kisumu), dist = 15, dist_unit = "km",
                  transform = TRUE, model = "WGS84", anchor=c(x=35.075, y=-0.55), 
                  height=0.03, st.dist=0.05, st.size=1, border.size =0.25/2)+
-  ggsn::north(data=fortify(Kisumu), scale = 0.32, anchor=c(x=35.44, y=0.03))+
+  north(data=fortify(Kisumu), scale = 0.32, anchor=c(x=35.44, y=0.03))+
   
   geom_point(data = Kisumu_localities[1, ], aes(x = Long, y = Lat), size = 0.25)+
   geom_text(data = Kisumu_localities[1, ], aes(x = Long, y = Lat, label = ""),
@@ -108,10 +108,10 @@ inst02 <- ggplot()+
 ###########################
 inst_tigray <- ggplot()+
   geom_polygon(data=fortify(Tigray), aes(x=long, y= lat, group=group), size = 0.03, fill='white', colour='black')+
-  ggsn::scalebar(data=fortify(Tigray), dist = 50, dist_unit = "km",
+  scalebar(data=fortify(Tigray), dist = 50, dist_unit = "km",
                  transform = TRUE, model = "WGS84", anchor=c(x=38.5, y=12.25+0.2), 
                  height=0.03, st.dist=0.05, st.size=1, border.size =0.25/2)+
-  ggsn::north(data=fortify(Tigray), scale = 0.2, anchor=c(x=37.25, y=14.85))+
+  north(data=fortify(Tigray), scale = 0.2, anchor=c(x=37.25, y=14.85))+
   
   geom_point(data = Tigray_localities[1, ], aes(x = Long, y = Lat), size = 0.25)+
   my_theme +

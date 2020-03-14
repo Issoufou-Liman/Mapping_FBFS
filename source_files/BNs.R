@@ -52,7 +52,7 @@ charact_veg_node_tmp <- make_gRain_CPT(parent_effects = list(c(1, 1, 2, 4, 5),
                                        parent_weights = c(1, 2),
                                        b = 5,
                                        child_prior = c(0.1, 0.3, 0.4, 0.3, 0.1),
-                                       child_states = c('Dry', "Dehydrated", "Moderately hydrated", "hydrated", 'Water logged'),
+                                       child_states = c('very dry', 'Dry', 'Moderately moist', 'Moist', 'Waterlogged'),
                                        parent_states = list(sensitivity2flood_node$levels,
                                                             veg_sensitivity2water_var_node$levels),
                                        parent_names = c('sensitivity2flood', 'veg_sensitivity2water_var'))

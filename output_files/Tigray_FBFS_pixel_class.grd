@@ -1,6 +1,6 @@
 [general]
 creator=R package 'raster'
-created=2019-09-28 22:54:55
+created=2019-12-19 14:07:50
 [georeference]
 nrows=657
 ncols=898
@@ -8,7 +8,7 @@ xmin=36.45117569
 ymin=12.255511284
 xmax=39.990844727
 ymax=14.845477104
-projection=+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
+projection=+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
 [data]
 datatype=FLT4S
 byteorder=little
