@@ -38,16 +38,16 @@ output:
     base_format: rticles::elsevier_article
 ---
 
-```{r, include=FALSE}
-options(tinytex.engine = 'xelatex')
+```{r,include=FALSE}
+options(tinytex.engine='xelatex')
 pdf.options(useDingbats = TRUE)
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo=TRUE,out.extra = '',fig.align='center',fig.pos='!h',cache=TRUE,echo=FALSE,warning=FALSE,message=FALSE)
+```{r setup,include=FALSE}
+knitr::opts_chunk$set(echo=TRUE,out.extra='',fig.align='center',fig.pos='!h',cache=TRUE,echo=FALSE,warning=FALSE,message=FALSE)
 ```
 
-```{r Setting the Scene, include = FALSE, echo = FALSE, cache = FALSE}
+```{r Setting-the-Scene,include=FALSE,echo=FALSE,cache=FALSE}
 
 set.seed(123)
 ### Forcing the use of gRain 1.3-0 because higher versions seems to introduce changes that break certain parts of this works
@@ -110,37 +110,11 @@ if (!require("pdftools")) install.packages("pdftools")
 if (!require("pdftools")) install.packages("psych")
 
 
-## Loading decisionSupportExtra package ####
+## Loading dedicated own packages written for this analysis ####
 library(decisionSupportExtra)
 library(growingSeason)
 library(SpatialProbs)
 library(RTauDEM)
-
-## exporting the plot to file.####
-export_fun <- function(export, output_dir = "figures"){
-  paste0(output_dir, '/', export, ".png")
-}
-
-my_theme <- theme_minimal() +
-  theme(text = element_text(family = 'serif', face = 'plain'),
-        panel.spacing=unit(0.075, "lines"),
-        panel.border = element_rect(color = "lightgrey", fill = NA, size = 0.5),
-        #axis.text = element_text(size=7),
-        axis.ticks = element_line(colour = 'black', size = 0.25),
-        axis.ticks.length = unit(0.1, "mm"),
-        legend.title = element_blank(),
-        legend.text = element_text(size=12, face="bold", color="black"),
-        legend.position="top",
-        legend.justification = 'right',
-        legend.margin=margin(0, 0, 0, 0),
-        legend.box.margin=margin(-22, 0, -10, 0),
-        strip.background = element_rect(color = "gray", size = 0.075),
-        strip.text = element_text(size=12, face="bold", color="black"),
-        strip.text.x = element_text(margin = margin(b = 1)),
-        axis.text = element_text(size=12, color="black"),
-        plot.title=element_text(size=14, face="bold", color="black"),
-        plot.subtitle=element_text(size=12, face="italic", color="blue")
-  )
 
 ifelse(!dir.exists(file.path(getwd(), 'data_files/hdf')), dir.create(file.path(getwd(), 'data_files/hdf')), FALSE)
 ifelse(!dir.exists(file.path(getwd(), 'data_files/ndsi')), dir.create(file.path(getwd(), 'data_files/ndsi')), FALSE)
@@ -153,18 +127,9 @@ ifelse(!dir.exists(file.path(getwd(), 'data_files/dem/Kisumu')), dir.create(file
 ifelse(!dir.exists(file.path(getwd(), 'data_files/dem/Tigray')), dir.create(file.path(getwd(), 'data_files/dem/Tigray')), FALSE)
 ifelse(!dir.exists(file.path(getwd(), 'output_files')), dir.create(file.path(getwd(), 'output_files')), FALSE)
 
-# col = rev(terrain.colors(255)) 
-col = c('#FF4500', '#FFA07A','#FFE4E1', '#FFDEAD', '#808000', '#6B8E23')
-col = c('#FF4500', '#FFA07A','#FFE4E1', '#FFDEAD', '#808000', '#008000')
-col = RColorBrewer::brewer.pal(11, 'RdYlGn')[c(4:9)]
-# col = c('#ADD8E6', '#F8F8FF', '#EEE8AA', '#F4A460', '#90EE90', '#228B22')
-# col = c('#ADD8E6', '#E0FFFF', '#EEE8AA', '#F4A460', '#90EE90', '#228B22')
-# col = c('#ADD8E6', '#E0FFFF',  '#F8F8FF', '#EEE8AA','#90EE90', '#228B22')
 ```
 
-```{r Shp data acquisition and preprocessing,include=FALSE,eval=TRUE,echo=FALSE,cache=FALSE}
-source("source_files/north_arrow_and_scalebar.R")
-
+```{r Shp-data-acquisition,include=FALSE,eval=TRUE,echo=FALSE,cache=FALSE}
 Kenya_L1 <- getData("GADM", country="ken", level=1, path = 'data_files/shapefiles')
 Kisumu <- Kenya_L1 [Kenya_L1$NAME_1 == "Kisumu", ]
 writeOGR(Kisumu, 'data_files/shapefiles', "Kisumu", driver="ESRI Shapefile", overwrite_layer=TRUE)
@@ -174,7 +139,7 @@ Tigray <- Ethiopia_L1 [Ethiopia_L1$NAME_1 == "Tigray", ]
 writeOGR(Tigray, 'data_files/shapefiles', "Tigray", driver="ESRI Shapefile", overwrite_layer=TRUE)
 ```
 
-```{r Modis data acquisition and preprocessing,include=FALSE,eval=FALSE,echo=FALSE,cache=FALSE}
+```{r Modis-data-acquisition-and-preprocessing,include=FALSE,eval=FALSE,echo=FALSE,cache=FALSE}
 opts_file <- 'modis_opts/modistsp_opts.json'
 # opts_file <- "C:/Users/LIssoufou/Documents/Papers/ICRAF/190912_papers/modis_opts/modis_opts.json"
 
@@ -1097,7 +1062,7 @@ writeRaster(water_prznt, filename = ficher)
 
 ```{r Tigray data fetching and gap filling,eval=FALSE,include=FALSE,echo=FALSE,cache=FALSE}
 
-rm(list=setdiff(ls(), c('my_theme', "gb", 'Kisumu', 'Tigray', 'get_coverages', 'col',
+rm(list=setdiff(ls(), c("gb", 'Kisumu', 'Tigray', 'get_coverages', 'col',
                         'Ethiopia_L1', 'Kenya_L1', 'afr', 'inst_kisumu')))
 # beginCluster(n=10)
 source("source_files/north_arrow_and_scalebar.R")
@@ -2258,6 +2223,30 @@ nnnnnnnnnn nnnnnnnnn nn nnnnnnnnnnnnnnn  nnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnn
 
 ```{r making sense of the data,echo=FALSE,eval=FALSE,include=FALSE}
 ## Making sense of the data: examing the NDVI values #####
+
+col <- RColorBrewer::brewer.pal(11, 'RdYlGn')[c(4:9)]
+
+theme_this <- theme_minimal() +
+  theme(text = element_text(family = 'serif', face = 'plain'),
+        panel.spacing=unit(0.075, "lines"),
+        panel.border = element_rect(color = "lightgrey", fill = NA, size = 0.5),
+        #axis.text = element_text(size=7),
+        axis.ticks = element_line(colour = 'black', size = 0.25),
+        axis.ticks.length = unit(0.1, "mm"),
+        legend.title = element_blank(),
+        legend.text = element_text(size=12, face="bold", color="black"),
+        legend.position="top",
+        legend.justification = 'right',
+        legend.margin=margin(0, 0, 0, 0),
+        legend.box.margin=margin(-22, 0, -10, 0),
+        strip.background = element_rect(color = "gray", size = 0.075),
+        strip.text = element_text(size=12, face="bold", color="black"),
+        strip.text.x = element_text(margin = margin(b = 1)),
+        axis.text = element_text(size=12, color="black"),
+        plot.title=element_text(size=14, face="bold", color="black"),
+        plot.subtitle=element_text(size=12, face="italic", color="blue")
+  )
+
 f <- function(x, decimals = 1){
   x <- x/10000
   # as.character(round(x,decimals))
@@ -2269,7 +2258,7 @@ p <- ggplot_seasonal_ranges(list(
   'Normalized difference water index (McFeeters NDWI)' = mcfeeters_NDMI_ts, 
   'Normalized difference flood index (NDFI)'=Boschetti_NDFI_ts,
   'Normalized difference water index (Gao NDWI)' = GAO_NDWI_ts))+
-  my_theme +
+  theme_this +
   # guides(color = FALSE)+
   theme(panel.grid.minor.y = element_line(size = 0.02, linetype = 'solid',color = 'darkgray'),
         axis.title = element_blank(),
@@ -2618,7 +2607,7 @@ spatialDataList <- linkMultiple(spatialData, network, intervals)
 
 ## Query the bn and making some maps ####
 ## please adjust the number of cores par parallel processus
-you_have_only_one_core_left <- parallel::detectCores()-30
+you_have_only_one_core_left <- parallel::detectCores()-1
 
 query_set_names <- nodes(network_bn_fit)[(!(nodes(network_bn_fit) %in% root.nodes(network_bn_fit)))]
 
@@ -2805,15 +2794,18 @@ intervals <- setClasses(c("f_acc",
 spatialDataList <- linkMultiple(spatialData, network, intervals)
 
 # # ## removing objects that are no longer needed ####
-rm(list=setdiff(ls(), c("spatialData", 'spatialDataList', "network", "network_bn_fit", 'my_theme', "gb",
-                        'intervals','Kisumu', 'get_coverages', 'Tigray', 'col', 'Ethiopia_L1', 'Kenya_L1', 
+rm(list=setdiff(ls(), c("spatialData", 'spatialDataList', "network", "network_bn_fit", "gb",
+                        'intervals','Kisumu', 'get_coverages', 'Tigray', 'Ethiopia_L1', 'Kenya_L1', 
                         'afr', 'inst_kisumu')))
 gc()
+
+col <- RColorBrewer::brewer.pal(11, 'RdYlGn')[c(4:9)]
+
 source("source_files/north_arrow_and_scalebar.R")
 
 ## Query the bn and making some maps ####
 ## please adjust the number of cores par parallel processus
-you_have_only_one_core_left <- parallel::detectCores()-30
+you_have_only_one_core_left <- parallel::detectCores()-1
 
 query_set_names <- nodes(network_bn_fit)[(!(nodes(network_bn_fit) %in% root.nodes(network_bn_fit)))]
 
@@ -2938,7 +2930,9 @@ if(!file.exists(ficher)){
 
 ```{r prior plot,echo=FALSE,include=FALSE}
 source("source_files/BNs.R")
-# source("source_files/inset_maps_2.R")
+
+col <- RColorBrewer::brewer.pal(11, 'RdYlGn')[c(4:9)]
+
 spatialData <- brick('output_files/Kisumu_spatial_data.grd')
 
 gplot_data <- function(x, maxpixels=ncell(x),...){
