@@ -1,117 +1,62 @@
-\documentclass[12pt,oneside]{article}
-\usepackage[]{mathpazo}
+\documentclass[]{elsarticle} %review=doublespace preprint=single 5p=2 column
+%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
+\usepackage[hyphens]{url}
+
+
+
+\usepackage{lineno} % add
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{graphicx}
+\usepackage{booktabs} % book-quality tables
+%%%%%%%%%%%%%%%% end my additions to header
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-\fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
 % use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
-\usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
-\hypersetup{unicode=true,
-            pdftitle={Application of Bayesian networks to mapping Flood-based Farming Systems.},
-            pdfauthor={Issoufou Liman1,2,; Cory Whitney1,3; James Kungu2; Eike Luedeling1,3,4},
-            colorlinks=true,
-            linkcolor=blue,
-            citecolor=red,
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\bibliographystyle{elsarticle-harv}
+\usepackage{longtable}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={Mapping Flood-based Farming Systems with Bayesian networks.},
+            colorlinks=false,
             urlcolor=blue,
-            breaklinks=true}
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{longtable,booktabs}
-\usepackage{graphicx,grffile}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 \setcounter{secnumdepth}{5}
-
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Application of Bayesian networks to mapping Flood-based Farming Systems.}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Issoufou Liman\textsuperscript{1,2,*} \\ Cory Whitney\textsuperscript{1,3} \\ James Kungu\textsuperscript{2} \\ Eike Luedeling\textsuperscript{1,3,4}}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{October 07, 2019}
-
-% \documentclass{article} https://tex.stackexchange.com/questions/60209/how-to-add-an-extra-level-of-sections-with-headings-below-subsubsection
-\usepackage{hyperref}
-\usepackage{caption}
-\captionsetup{skip=0pt}
-\makeatletter
-% Editing the default numbering style
-\renewcommand{\thesection}{\Roman{section}.}
-\renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
-\renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
-
-\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
-            {-2.5ex\@plus -1ex \@minus -.25ex}%
-            {1.25ex \@plus .25ex}%
-            {\normalfont\normalsize\bfseries}}   
-
-% \renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
-%             {-1.25ex\@plus -1ex \@minus -.30ex}%
-%             {1.00ex \@plus .30ex}%
-%             {\normalfont\normalsize\bfseries}}
-            
-\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
-            {-1.25ex\@plus -1ex \@minus -.30ex}%
-            {1.00ex \@plus .30ex}%
-            {\normalfont\normalsize\bfseries\itshape}}  
-            
-\renewcommand{\theparagraph}{\thesubsubsection\arabic{paragraph}.}
-\renewcommand{\thesubparagraph}{\theparagraph\arabic{subparagraph}.}
+% Pandoc toggle for numbering sections (defaults to be off)
 
 
-\makeatother
-\setcounter{secnumdepth}{3} % how many sectioning levels to assign numbers to
-\setcounter{tocdepth}{5}    % how many sectioning levels to show in ToC
+% Pandoc header
+\usepackage{setspace}\setstretch{1.5}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -127,97 +72,86 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 
-\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+
 
 \begin{document}
-\maketitle
-\begin{abstract}
-Accurate information on actual areas under given cropping/farming systems is an important input for applied agricultural research and policies. Therein, remote sensing provides a useful tool for analysing spatial metrics in an explicit manner. In this paper, we captured various characteristics of flood-based farming systems (FBFS) with remote sensing and applied a probabilistic framework for system analysis. FBFS were mapped across the Kisumu County in Kenya by incorporating uncertainties was used to describe and interlink various features of FBFS using expert knowledge. VI products data were acquired in the forms of normalized difference spectral indices (NDSI). These were used as proxies for estimating various metrics of FBFS which and were propagated along with the rest of other non-spatial nodes derived from expert judgement. We demonstrate that spatial explicit information can be derived from remote sensing data as fuzzy linguistic quantifiers which are suitable for are useful tools for incorporating uncertainties when mapping complex systems in a context of limited and uncertain information. The causal probabilistic reasoning embedded in the approach was tested on the Tigray region in Ethiopia; an area with totally different settings; and seems to perform incredibly well. Results were transparently generated in forms of intermediary prior spatial maps for specific metrics to ultimately be aggregated into final posterior maps of plausible areas for flood-based farming along with their spatial explicit uncertainties. into mapping overlays. A Bayesian network (\href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}) 3 years (2014-2016) of high-level \href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS} were later used to feed the spatial data nodes of the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} representing node states in \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}. When such metrics are available, \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}
-\end{abstract}
+\begin{frontmatter}
 
-{
-\hypersetup{linkcolor=black}
-\setcounter{tocdepth}{5}
-\tableofcontents
-}
-\textsuperscript{1} World Agroforestry Centre (ICRAF), United Nations Avenue, Gigiri, P. O. Box 30677-00100, Nairobi, Kenya\\
-\textsuperscript{2} Kenyatta University, Department of Environmental Sciences\\
-\textsuperscript{3} Center for Development research (ZEF), University of Bonn, Genscherallee 3, D-53113, Bonn, Germany\\
-\textsuperscript{4} University of Bonn, Department of Horticultural Sciences, Auf dem Hügel 6, D-53121, Bonn, Germany
+  \title{Mapping Flood-based Farming Systems with Bayesian networks.}
+    \author[KU,ICRAF]{Issoufou, Liman Harou\corref{Corresponding Author}}
+   \ead{issoufoul@gmail.com; L.issoufou@cgiar.org} 
+    \author[INRES]{Cory Whitney}
+   \ead{cory.whitney@uni-bonn.de} 
+    \author[KU]{James Kungu}
+   \ead{kungu.james@ku.ac.ke} 
+    \author[INRES]{Eike Luedeling}
+   \ead{luedeling@uni-bonn.de} 
+      \address[KU]{Kenyatta University, Department of Environmental Sciences, P.O. Box 43844 00100 Nairobi, Kenya}
+    \address[ICRAF]{World Agroforestry Centre (ICRAF), United Nations Avenue, Gigiri, P.O. Box 30677-00100, Nairobi, Kenya}
+    \address[INRES]{University of Bonn, Department of Horticultural Sciences, Auf dem Hügel 6, D-53121, Bonn, Germany}
+    \address[ZEF]{Center for Development research (ZEF), University of Bonn, Genscherallee 3, D-53113, Bonn, Germany}
+    
+  \begin{abstract}
+  Many actors in agricultural research, development and policy require accurate information on the spatial extents of cropping and farming practices. While remote sensing provides venues for obtaining such information, it is often difficult to distinguish between agricultural practices which can be quite similar in their spectral signatures. This can easily lead to misclassification by traditional algorithms. We addressed this limitation by combining traditional remote sensing techniques with probabilistic reasoning engines informed by expert knowledge to map flood-based farming systems, an important form of agricultural production employed by farmers in regions with seasonal water surplus. Flood-based farming systems were mapped across Kisumu County in Kenya and the Tigray region in Ethiopia using a model of causality. While the two areas present noticeable differences in terms of their hydrology, vegetation, or the practice of agronomic flooding, these relevant aspects for mapping flood-based farming systems are mostly stochastic in space and time, which makes it difficult to provide a generalizable characterization of the practice using precise quantifiers. Recognizing this aspect, the causal model described in this paper considers uncertainties across expert-based estimates to provide quantitative assessment of the overall uncertainty in the final output. To account for the effect of specific geographic settings, we used Bayesian networks informed by expert knowledge to characterize these settings. Three years (2014-2016) of processed MODIS VI data were acquired in the forms of normalized difference spectral indices which were used as proxies for estimating various spatial metrics relevant for flood-based farming systems detection. The spatial metrics along with other non-spatial data derived from expert judgement were used as nodes to feed the Bayesian networks. Results were transparently generated in the form of intermediary prior spatial maps for specific metrics to ultimately be aggregated into final posterior maps of plausible areas for flood-based farming along with their spatially explicit uncertainties. We demonstrate that spatially explicit information can be derived from remote sensing data as fuzzy linguistic quantifiers which are suitable for representing node states in Bayesian networks. When such metrics are available, Bayesian networks are useful tools for incorporating uncertainties when mapping complex systems in a context of limited and uncertain information. The causal probabilistic reasoning embedded in the approach achieved a remarkably accurate result in both settings where 60 to 100\% of various flood-based farming system fields sampled from different locations were correctly mapped with high chance of being suitable for the practice.
+  \end{abstract}
+  
+ \end{frontmatter}
 
-\textsuperscript{*} Correspondence: \href{mailto:issoufoul@gmail.com}{Issoufou Liman \textless{}\href{mailto:issoufoul@gmail.com}{\nolinkurl{issoufoul@gmail.com}}\textgreater{}}
+\hypertarget{introduction}{%
+\section*{Introduction}\label{introduction}}
+\addcontentsline{toc}{section}{Introduction}
 
-\hypertarget{intro}{%
-\section{Introduction}\label{intro}}
+\hypertarget{section_1}{%
+\section{Study area}\label{section_1}}
 
-Flood-based farming systems (FBFS) are rainfed farming systems occurring in drylands areas and receiving extra irrigation from various type of non-harmful floods that share the properties of being unpredictable, of short duration, of low annual frequency and occurring in relatively lowlands areas with gentile local topography where various social and institutional arrangements govern the water access and sharing.\textsuperscript{\protect\hyperlink{ref-Puertas_et_al_2011}{1}--\protect\hyperlink{ref-Varisco_1983}{3}} By making flood water available for use in agriculture, these farming systems contribute to food security along with many other benefits for drylands' society.\textsuperscript{\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2},\protect\hyperlink{ref-Xing_et_al_2014}{4}} They are mostly extensive subsistence-based but support millions of farmers especially in East Africa where they also provide income and various other intangible services.\textsuperscript{\protect\hyperlink{ref-Puertas_et_al_2011}{1}} Many countries across Africa and Asia endorsed their development through a common framework for research, policy and action (i.e.~Flood-based Livelihood Network (FBLN) foundation) mandated for knowledge sharing, filling critical knowledge gaps and improving their productivity of these farming systems.\textsuperscript{\protect\hyperlink{ref-Puertas_et_al_2011}{1},\protect\hyperlink{ref-FBLN_2018}{5}}
+\begin{figure}[!h]
 
-Despite their promises and importance, FBFS have been the topic of surprisingly few studies\textsuperscript{\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2}} focusing on aspects related to hydrology and sedimentation, design and maintenance, or sociology attuned to specific contexts.\textsuperscript{\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2},\protect\hyperlink{ref-Haile_2010}{6}} Consequently, there is a general lack of information to answer relevant questions for FBLN countries. For example, little effort has been made to provide reliable estimates of their coverage.\textsuperscript{\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2}} Despite the existing country-specific area estimates, it is often unclear how these were derived resulting in large uncertainties across these estimates.\textsuperscript{\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2}} Most FBLN countries' reports expressed the need for mapping FBFS, yet only few attempts\textsuperscript{\protect\hyperlink{ref-Ghebreamlak_et_al_2018}{7}--\protect\hyperlink{ref-Theilen-Willige_et_al_2015}{9}} are available towards this end in our knowledge. While most aspects related to FBFS are unpredictable,\textsuperscript{\protect\hyperlink{ref-Puertas_et_al_2011}{1},\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2}} these approaches seems to rely on the assumption that agronomic flooding can be clearly detected on a satellite image in the near time of flooding event and sometimes imply that the areas to be mapped and the timing of the flooding is already known and matches a remote sensing scene in space and time. Furthermore, some of these approaches rely on the derivation of some kind of thresholds based on which FBFS can be discriminated. Threshold-based methods may be impractical considering the complexity of FBFS, the communalities they share with both forests, open water, rainfed and irrigated systems,\textsuperscript{\protect\hyperlink{ref-Puertas_et_al_2011}{1},\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2}} and particularly when discriminating between different type of FBFS.\textsuperscript{\protect\hyperlink{ref-Boschetti_et_al_2014}{10}} Moreover, some of these methods rely on visual interpretations which are hard to upscale and may require a keen knowledge of the area. While it is challenging to map these FBFS, accurate information is needed to monitor them, assess their contribution to food security, biodiversity conservation and other intangible benefits at various scales, urging the need for standard methodologies for mapping them. We argue such a surveillance can be best achieved using Geoinformation.
-
-\protect\hyperlink{ref-Wegmann_et_al_2016}{11} covered a range of capabilities and applications of remote sensing in development research, including the use of spectral vegetation indices, and digital elevation models in ecological studies which have potentials in mapping FBFS. Even though satellite remote sensing provides a framework for comprehensive mapping of these farming systems,\textsuperscript{\protect\hyperlink{ref-Wegmann_et_al_2016}{11},\protect\hyperlink{ref-Konecny_2014}{12}} traditional methods may fail to discriminate them due to their complexity and diversity across different settings.\textsuperscript{\protect\hyperlink{ref-Boschetti_et_al_2014}{10}} The complexity arises from their similarities with both rainfed and irrigated systems\textsuperscript{\protect\hyperlink{ref-Puertas_et_al_2011}{1},\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2}} along with a number of their biophysical attributes that could exhibit different signatures and can, therefore, only provide partial information for discriminating them. In flood-based agriculture, one may expect, for instance, an open water followed by rapid increase in vegetation or a combination of thereof.\textsuperscript{\protect\hyperlink{ref-Boschetti_et_al_2014}{10}} The sequence open water-vegetation, though, can be misleading because the flood event can take place without leaving detectable trace of inundation not only because the sensor can miss to capture the flood event but also because many FBFS have deep soils capable of storing large amount of water. The flood event may also occur after the planting date in which case it can be confused with other flood hazards. The diversity of flood-based agriculture may pose another challenge for mapping FBFS because locally adopted thresholds may be required\textsuperscript{\protect\hyperlink{ref-Bashari_et_al_2008}{13}} due to the diversity of conditions under which they are practiced.\textsuperscript{\protect\hyperlink{ref-Puertas_et_al_2011}{1},\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2}} In addition, the areas under the practice may be unstable over time because of changes in the water courses, water flow, etc..\textsuperscript{\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2}} There is clearly a need for generic approaches for mapping FBFS which can be applied to several contexts given their diversity and the diversity of crops grown under them.\textsuperscript{\protect\hyperlink{ref-Puertas_et_al_2011}{1}}
-
-Mapping such complex systems, where events can be causally related in a context of data uncertainty may require multivariate approaches that are able to leverage on both available information and expertise.\textsuperscript{\protect\hyperlink{ref-Hubbard_2014}{14}--\protect\hyperlink{ref-Whitney_et_al_2018}{17}} Considering the data uncertainty for remote sensing of FBFS, Such an approach, conversely, needs to be able to combine knowledge from domain experts with learning from all available data, be suitable for incomplete information while accounting for the sources of uncertainties.\textsuperscript{\protect\hyperlink{ref-Kuhnert_2011}{18}--\protect\hyperlink{ref-Whitney_et_al_2018a}{20}} These expectations can be achieved using \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}.\textsuperscript{\protect\hyperlink{ref-Whitney_et_al_2018a}{20},\protect\hyperlink{ref-Yet_et_al_2016}{21}} The technicalities along with the many real-world applications of \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} are beyond the scope of this paper and are extensively documented elsewhere.\textsuperscript{\protect\hyperlink{ref-Pourret_et_al_2008}{22}}
-
-The objective of this paper is to provide an affordable mapping routine that could be used to comprehensively estimate the coverage of FBFS. However, the concept is reproducible in other contexts where spatial data are available. Based on the definition and characteristics of FBFS,\textsuperscript{\protect\hyperlink{ref-Puertas_et_al_2011}{1},\protect\hyperlink{ref-VanSteenbergen_et_al_2010}{2},\protect\hyperlink{ref-VanSteenbergen_et_al_2011}{23}} examining a number of biophysical surface states related to their characteristic hydrology, vegetation, and topography, preferably in forms of time series where possible, are clearly relevant for mapping them. With this assumption, we used open source satellite remote sensing data and software to capture various FBFS attributes following a conceptual model developed by experts using various normalized difference spectral indices (NDSI) and topographic structures\textsuperscript{\protect\hyperlink{ref-Wegmann_et_al_2016}{11},\protect\hyperlink{ref-Arge_et_al_2003}{24}--\protect\hyperlink{ref-Yang_et_al_2006}{34}} specific to FBFS to ultimately derive their probability of occurrence for each pixel across Kisumu County in Kenya. We argue that threshold-based methods may be unsuitable to mapping such complex systems and demonstrate the versatility of probabilistic methods. Despite the ranges of data uncertainty under such complex systems, we elaborate on the existence of some sort of spatio-temporal pattern in the general landscape that can be described using causality and from which fuzzy metrics can be derived to describe distinctives sub-entities. We described how this can be achieved and by deriving the required inputs for \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} from raw spatial data. The approach was tested across the Tigray region in Ethiopia (not presented here); an area with different settings; and seems to perform incredibly well. The core data used in the study include three years (2014-2016) of high-level Moderate Resolution Imaging Spectroradiometer (\href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS}) version VI products acquired in the forms of NDSI, the Shuttle Radar Topographic Mission (STRM) \href{http://srtm.csi.cgiar.org/}{void-filled Digital Elevation Model} (DEM). Data analysis were conducted using the \href{https://cran.r-project.org/}{\texttt{R}} programming language\textsuperscript{\protect\hyperlink{ref-RCoreTeam_2018}{35}} and software packages are referred to as such unless otherwise specified.
-
-\hypertarget{I}{%
-\section{Material and methods}\label{I}}
-
-\hypertarget{conceptual-framework}{%
-\subsection{Conceptual framework}\label{conceptual-framework}}
-
-\begin{figure}[!htbp]
-
-{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig1-1} 
+{\centering \includegraphics[width=1\linewidth,]{figures/study_area_map} 
 
 }
 
-\caption{Concetual framework for mapping FBFS.}\label{fig:fig1}
+\caption{Typical flood-based farming systems landscapes found in Tigray region of Ethiopia and Kisumu County in Kenya.}\label{fig:fig1}
 \end{figure}
 
-\hypertarget{I1}{%
-\subsection{Study area}\label{I1}}
+\hypertarget{section_2}{%
+\section{Material and methods}\label{section_2}}
 
-The study took place in two regions of Kenya and Ethiopia, the Kisumu county and the Tigray region respectively. Both areas have long history in terms of the practice of flood-based agriculture and have different ways of managing agronomic flooding. However, this paper specifically focuses on the case of Kisumu to provide the backbones of the methodology. Kisumu is one of the largest of Kenya's counties, located in the western Kenya.\textsuperscript{\protect\hyperlink{ref-KisumuCountyGovernment_2013}{36}} It is bordered by the Homa Bay County to the South, Nandi County to the North East, Kericho County to the East, Vihiga County to the North West and Siaya County to the West. Kisumu County extends between 33° 20'E and 35° 20'E and 0° 20'S and 0° 50'S covering an area of 2576.5 km2 of which 567 km2 (4.5\%) is covered by water.\textsuperscript{\protect\hyperlink{ref-KisumuCountyGovernment_2013}{36}} Common topographic features are the Winam Gulf of Lake Victoria and the Rift valley. The central part of the county is relatively flat lands surrounded by higher altitudinal ridges reaching up to 1835 m. The relief of the county can be described by 3 main topographical features, the Kano lowlands plains, the Maseno midlands, and the highlands of Nyabondo Plateau making most of the central part prone to flooding, particularly during periods of heavy rains.\textsuperscript{\protect\hyperlink{ref-KisumuCountyGovernment_2013}{36}} Kisumu county is endowed in surface water with three main rivers flowing into Lake Victoria.\textsuperscript{\protect\hyperlink{ref-KisumuCountyGovernment_2013}{36}} The floodplains are good for agriculture due to their relatively rich soils resulting from recurrent alluvial deposits and potential for irrigation.
+\hypertarget{section_2_1}{%
+\subsection{Conceptual framework}\label{section_2_1}}
 
-\hypertarget{I2}{%
-\subsection{Sensor Characteristics}\label{I2}}
+\begin{figure}[!h]
 
-\hypertarget{I21}{%
-\subsubsection{SRTM}\label{I21}}
-
-\href{https://www2.jpl.nasa.gov/srtm/}{SRTM} is an collaborative project between the US National Aeronautics and Space Administration (NASA) and the National Imagery and Mapping Agency (NIMA), the National Geospatial-Intelligence Agency, and the German and Italian Space Agencies providing the most complete highest resolution and public domain DEM between 56° S and 60° N.\textsuperscript{\protect\hyperlink{ref-Farr_et_al_2000}{37}--\protect\hyperlink{ref-Nikolakopoulos_et_al_2006}{39}} It uses a dual radar antennas interferometry to produce high resolution topographic data and carries over 300 high-density tapes storing these data. several spatial resolutions (e.g.~30m, 90m, 1000m) are available.\textsuperscript{\protect\hyperlink{ref-Farr_et_al_2007}{38},\protect\hyperlink{ref-Jarvis_et_al_2008}{40}} A list of available \href{https://www2.jpl.nasa.gov/srtm/}{SRTM} data and their sources along with various other information can be found in Farr et al.~\textsuperscript{\protect\hyperlink{ref-Farr_et_al_2007}{38}} and the accuracy of the \href{https://www2.jpl.nasa.gov/srtm/}{SRTM} data is extensively discussed in Falorni et al.~\textsuperscript{\protect\hyperlink{ref-Falorni_et_al_2005}{41}}. In this study, we used the 30 m spatial resolution DEM on which further processing were applied to ultimately compute the spatial data nodes used in the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}.
-
-\hypertarget{I22}{%
-\subsubsection{MODIS}\label{I22}}
-
-\href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS} is a key remote sensing sensor on both Earth Observing System (EOS)-AM1 and EOS-PM1 operating onboard Terra and Aqua satellites respectively.\textsuperscript{\protect\hyperlink{ref-King_et_al_1995}{42}} \href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS} acquires data in the visible and infrared regions of the electromagnetic spectrum to provide 36 spectral bands with a viewing swath width of 2,330 km for studying various aspects of terrestrial ecosystems. \href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS} scenes are geo-localised using a sinusoidal projection system and therefore identified using their specific horizontal (h) and vertical (v) tiles number. These data are provided in different spatial (250 m, 500 m, and 1 Km) and temporal (e.g.~daily, 8 days, 16 days) resolutions. In this study, we used the \href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS} product \texttt{MOD09A1} (Terra Surface Reflectance 8-Day L3 Global 500m SIN Grid V006\textsuperscript{\protect\hyperlink{ref-Vermote_2015}{43}} which provides an 8-day composite atmospherically corrected land surface reflectance across bands 1 to 7 along with other additional quality indicators layers assessing the quality of the acquisition at pixel level.
-
-\hypertarget{I3}{%
-\subsection{Data acquisition and pre-processing}\label{I3}}
-
-\hypertarget{I31}{%
-\subsubsection{The BNs}\label{I31}}
-
-\href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} are reasoning engine and knowledge engineering tools that can be used to model partially known events in forms of probability, incorporate causal uncertainty in the analysis,\textsuperscript{\protect\hyperlink{ref-Pourret_et_al_2008}{22}} and therefore allow reasoning under uncertainty. On the one hand, they are causal probabilistic models, on the other hand, they are ways of decomposing large joint probability distributions\textsuperscript{\protect\hyperlink{ref-Pourret_et_al_2008}{22},\protect\hyperlink{ref-Pearl_2000}{44}} and specifying complex heuristics that go beyond a simple regression model.\textsuperscript{\protect\hyperlink{ref-Whitney_et_al_2018}{17}} In Bayesian analysis, scientific reasoning starts with the current state of knowledge and subsequently assesses the contribution of further new information to that knowledge.\textsuperscript{\protect\hyperlink{ref-Pearl_2000}{44}} \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} become more exciting and have proven to give incredibly remarkable results when there is a need to incorporate many variables in a model and determine their effects on an outcome.
-
-In this study, the ultimate outcome variable (\texttt{PixelIsFBFS}) determining whether a given pixel qualify for FBFS is described using causal relationships among several other variables specified in a \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} model (Figure \ref{fig:fig1}). The conceptual model described pixels' potential for FBFS (\texttt{PixelIsFBFS}) to be jointly defined by the amount of flood water received (\texttt{FloodSomePts}), the topographic suitability, and the extent of vegetation variation due to flood (\texttt{VegVarFlood}) at that pixel. A pixel may record important run-on without experiencing flood because the water may run-off without a suitable topography (\texttt{suiteTopo}). This is, vegetation variation in space and time can be due to either flood or non-flood water but each pixel can be profiled in terms of its amount of flood water.
-
-\begin{figure}[!htbp]
-
-{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig2-1} 
+{\centering \includegraphics[width=1\linewidth,]{Mapping_FBFS_files/figure-latex/fig1-plot-1} 
 
 }
 
-\caption{Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya.}\label{fig:fig2}
+\caption{Conceptual framework for mapping FBFS in Kisumu County, Kenya and Tigray region, Ethiopia.}\label{fig:fig2}
 \end{figure}
 
-\begin{table}[t]
+\hypertarget{section_2_2}{%
+\subsection{Sensor Characteristics}\label{section_2_2}}
 
-\caption{\label{tab:table1}List of normalized difference spectral indices (NDSI) used for mapping FBFS in Kisumu County, Kenya.}
+\hypertarget{section_2_3}{%
+\subsection{Data acquisition and pre-processing}\label{section_2_3}}
+
+\hypertarget{section_2_3_1}{%
+\subsubsection{The BNs}\label{section_2_3_1}}
+
+\begin{figure}[!h]
+
+{\centering \includegraphics[width=1\linewidth,]{Mapping_FBFS_files/figure-latex/fig2-plot-1} 
+
+}
+
+\caption{Bayesian Network describing the causal reasoning used for mapping FBFS in Kisumu, Kenya.}\label{fig:fig3}
+\end{figure}
+
+\begin{table}
+
+\caption{\label{tab:tab1}List of normalized difference spectral indices (NDSI) used for mapping FBFS in Kisumu County, Kenya.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}{>{\bfseries}llll}
+\begin{tabular}[t]{>{\bfseries}llll}
 \toprule
 \textbf{ } & \textbf{Bands} & \textbf{Spectral range} & \textbf{Full name}\\
 \midrule
@@ -232,37 +166,19 @@ McFeeters MDWI & B4, B2 & (VIS4 – NIR2) / (VIS4 + NIR2) & Normalized Differenc
 \end{tabular}}
 \end{table}
 
-The topographic suitability of a pixel (\texttt{suiteTopo}) depends largely on its slope (\texttt{Slope}) and the number of pixels draining into it (\texttt{FlowAcc}). While the accumulation of flow (\texttt{FlowAcc}) is important to the amount of flood reaching the pixels, it is rather the slope (\texttt{Slope}) and the gravity that determine whether the water will be kept or transmitted by that pixel.
+\hypertarget{section_2_3_2}{%
+\subsubsection{Spatial data}\label{section_2_3_2}}
 
-The extent to which vegetation variation is caused by flood water (\texttt{VegVarFlood}) can be a straightforward indicator for mapping flood-based agriculture but also difficult to measure. Vegetation variation caused by flood (\texttt{VegVarFlood}) was therefore assessed via proxy variables. For the temporal variation in vegetation indices (\texttt{TempoVarInVi}) to be attributed to flood to some extent (\texttt{VegVarFlood}) at a given pixel, one may expect a certain degree of flow accumulation (\texttt{FlowAcc}), and a certain likelihood of flood events near the beginning of the growing season (\texttt{FloodBgs}). Then, the temporal variation in vegetation (\texttt{TempoVarInVi}) of the pixel is assumed to be influenced by a number of factors such as its soil water content (\texttt{SoilwaterCont}), its exposure (\texttt{Expos2wet}) and sensitivity to flood (\texttt{Sens2Flood}), or even the quality of the data in relation with the type of algorithm used in processing these data (\texttt{PowerTools}).
+\hypertarget{section_2_4}{%
+\subsection{Making sense of data in specific contexts}\label{section_2_4}}
 
-For a given pixel to be flooded at some points (\texttt{FloodSomePts}), there must be water presence on the ground (\texttt{WaterPrznt}). This is moderated by the soils suitability (\texttt{SuitSoil}) resulting in specific type of vegetation (\texttt{CharactVeg}). Therefore, the extent to which a pixel is flooded (\texttt{FloodSomePts}) can be deduced from its typical vegetation (\texttt{CharactVeg}), the soil suitability (\texttt{SuitSoil}), and the presence of water (\texttt{WaterPrznt}). Soil suitability to FBFS is defined by its exposure to wetness (\texttt{Expos2wet}) and more importantly its water content (\texttt{SoilWaterCont}). Water presence (\texttt{WaterPrznt}) may depend on soil water content (\texttt{soilWaterCont}), the power of tools (\texttt{PowerTools}), and the sensitivity to flood (\texttt{Sens2Flood}). Characteristic FBFS' vegetations are assumed to be due to vegetation sensitivity to water variation (\texttt{Veg2waterVar}) and the sensitivity of the area to flood (\texttt{Sens2Flood}).
+\hypertarget{section_2_5}{%
+\subsection{Deriving spatial data nodes}\label{section_2_5}}
 
-\hypertarget{I32}{%
-\subsubsection{The shapefiles data}\label{I32}}
+\hypertarget{section_2_5_1}{%
+\subsubsection{General multi-layer procedure applied to time series data}\label{section_2_5_1}}
 
-The shapefiles of the study areas were acquired from the \href{https://gadm.org/}{global administrative boundaries database}\textsuperscript{\protect\hyperlink{ref-GADM_2018}{45}} as level 1 product, using the string country name as argument to \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/getData}{\texttt{getData}} function from the \texttt{raster} package,\textsuperscript{\protect\hyperlink{ref-Hijmans_2019}{46}} from which we extracted the shapefile of the area of interest. These shapefiles were latter used to identify the \href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS} H/V titles corresponding to the area. Other shapefiles used are the spatial polygons representing well known selected surface features (land use/ land cover) used to understand the behaviour of the spectral response in the area. These were either collected during field works using handheld GPS devices or digitized on Google Earth to be used to query the spectral response of pixels they match spatially. The surfaces features considered here include different depth water bodies, settlements, FBFS fields, rainfed agricultural fields, riparian forests, forests with varying degree of density, and sugarcane fields having relatively extended growing season.
-
-\hypertarget{I33}{%
-\subsubsection{MODIS Tera}\label{I33}}
-
-We considered a period of three years (2014 - 2016) and queried all available \href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS} \texttt{Tera} data overlapping the acquired shapefiles of the area of interest (section \ref{I32}). We first determined the Horizontal and Vertical tiles corresponding to the spatial coverage of the shapefiles and used these to define the appropriate geo-locations of the study area relative to the \href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS} Sinusoidal grid systems using the \href{https://www.rdocumentation.org/packages/MODIS/versions/1.1.4/topics/getTile}{\texttt{getTiles}} function from the \texttt{MODIS} package.\textsuperscript{\protect\hyperlink{ref-Mattiuzzi_and_Detsch_2018}{47}} As result, the Kisumu County falls in-between the \texttt{h21v09} and \texttt{h21v08}. Based on these tiles and the temporal window of interest, we mosaiced the images and calculated the NDSIs after filtering and downloading the data from MODIS global online database (i.e.~LP DAAC, LAADS) using the machine-to-machine routines embedded in the \href{https://www.rdocumentation.org/packages/MODIStsp/versions/1.3.2}{\texttt{MODIStsp}} function from the package of the same name.\textsuperscript{\protect\hyperlink{ref-Busetto_and_ranghetti_2016}{48}} Since the \href{https://terra.nasa.gov/about/terra-instruments/modis}{MODIS} data are provided in hierarchical data format (hdf), they were re-projected to World Geodetic System 1984 (\texttt{WGS\ 84}) and subsequently translated into Geotiff format using \href{https://www.gdal.org/}{\texttt{GDAL\ 2.2.3}}.\textsuperscript{\protect\hyperlink{ref-GDAL_OGRcontributors_2018}{49}}
-
-\hypertarget{I4}{%
-\subsection{Making sense of data in the context}\label{I4}}
-
-Prior to processing the data acquired, preliminary analyses were conducted to understand the behavior of the spectral response with regards to water and vegetation in the study area. These analyses include the boxplot of the time series to understand the temporal variability and the principal component analysis to depict the spatio-temporal pattern. The results are presented in the supplementary materials.
-
-\hypertarget{I5}{%
-\subsection{Derivation of spatial data nodes}\label{I5}}
-
-\hypertarget{I51}{%
-\subsubsection{General Procedure}\label{I51}}
-
-\hypertarget{I511}{%
-\paragraph{Time series data}\label{I511}}
-
-The boxplots and the comparative analysis of the NDSIs shows different patterns but these can only be hardly separated making it difficult to threshold the different NDSIs across land use / land cover. An approach based on rigid thresholding was clearly not the best option to demarcate the nature of the spectral response, at least not without making complicated statistical assumptions. A simpler way would be to approach the problem using imprecise quantifiers where fuzzy logic can be used in forms of Likert-type scales\textsuperscript{\protect\hyperlink{ref-Likert_1932}{50}} describing the scores of the spectral responses along a range; supporting the use of \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}. We therefore make use of the different ranges of the boxplot (i.e.~lowest outliers -- lower Whisker, lower Whisker - 1st quartile, 1st quartile -- 3rd quartile, 3rd quartile - upper Whisker , upper Whisker -- highest outliers) to separate the data and estimate the probability of each pixel falling within each of these ranges at each time step in the time series.
+dddddddddddddddddddd hhhhhhhhhhhhhhhhhhhhhhhh
 
 \begin{algorithm}[H]
 \SetKw{KwBy}{by}
@@ -287,8 +203,6 @@ The boxplots and the comparative analysis of the NDSIs shows different patterns 
 \caption{make pixel states}
 \end{algorithm}
 
-Although rarely use for deriving variable states, boxplot has been used in all kind of statistics for the last 40 years. Beyond their incredible simplicity, boxplots use robust statistics to summarise data in terms of five-numbers while being particularly handy when comparing the distributions of these data across groups.\textsuperscript{\protect\hyperlink{ref-Wickham_and_Stryjewski_2012}{51}} To estimate the probability for a given range, we first recoded all values outside of that range to 0 whereas the values falling within the range were recorded to 1. This way, all the real-valued time series was reclassified into presence - absence time series data. Thereafter, the final probability of a pixel belonging to a range can be easily estimated using the ratio between the presence and absence of that pixel in the range throughout the time series (Equation \eqref{eq:eq1}).
-
 \begin{equation} 
 P(p_i \in range_j) = \frac{n_{p_i \in range_j}}{N}
 \label{eq:eq1}
@@ -296,7 +210,11 @@ P(p_i \in range_j) = \frac{n_{p_i \in range_j}}{N}
 
 Where \(P(p_i \in range_j)\) is the probability of the pixel \(p_i\) belonging to the range \(range_j\), \(n_{p_i \in range_j}\) is the number of time the pixel \(p_i\) belonged to the range \(range_j\), and \(N\) is the sample space (total size of the time series).
 
-After estimating the probabilities for each boxplot range, these ranges were mapped into fuzzy linguistic quantifiers in forms of low, medium, high etc. (depending on the number of states identify by the boxplot algorithm) to provide vegetation states in a spatially explicit manner. For example, in situation where all the five boxplot ranges are present, lower outlier values were mapped to very low, the lower Whisker to low, the interquartile range to medium, the upper Whisker to high and the upper outliers to very high. These states, computed in separated raster layers, were then merged into one single layer to provide discrete states on which the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} can be easily operationalized.
+nnnnnnnnnn nnnnnnnnn nn nnnnnnnnnnnnnnn nnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnn nnnnnnnn n n nnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+nnnnnnnnnn nnnnnnnnn nn nnnnnnnnnnnnnnn nnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnn nnnnnnnn n n nnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+nnnnnnnnnn nnnnnnnnn nn nnnnnnnnnnnnnnn nnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnn nnnnnnnn n n nnnnnnnnnnnnnnnn nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 
 \begin{algorithm}[H]
 \SetKw{KwBy}{by}
@@ -310,13 +228,13 @@ After estimating the probabilities for each boxplot range, these ranges were map
 \textbf{do} algorithm 1: make pixel states\ \label{lst:line:s1}\;
 \For{$each\;pixel$}{
         \eIf{the pixel has one single maximum for all layers}{
-        assign to the pixel the position of the layer (corresponding to a Whisker range as in the stack generated at step~\ref{lst:line:s1} and mapping to a linguistic quantifier) holding that maximal (probability) value \;
+        assign to the pixel the position of the layer (corresponding to a Whisker range as in the stack generated at step~\ref{lst:line:s1} and mapping to a linguistic quantifier) holding that maximum (probability) value \;
     }{
         assign NA to the pixel\ \label{lst:line:s2};
     }
     \For{$each\;pixel\;holding\;NA\;in\;the\;layer\;(generated\;after\;step~\ref{lst:line:s2})$}{
         \eIf{the pixel has one single maximum for all neighbours in the 8 ways connectedness}{
-        fill it with that maximal value \;
+        fill it with that maximum value \;
         }{
         leave the pixel value as NA\ \label{lst:line:s13};
         }
@@ -329,321 +247,195 @@ After estimating the probabilities for each boxplot range, these ranges were map
 \caption{compile pixel states}
 \end{algorithm}
 
-The decision to assign a state value to a given pixel was made transparently using fully probabilistic heuristics in 3 sequential steps. The first step consisted in assigning a particular state to a given pixels if that state scored the highest probability and only if that highest probability is exclusive. Thus, all cases where 2 or more highest probability co-exist are considered as unknown and ignore until the second step. Such cases having equal probability states were commonly encountered at the edges where two consecutive states spatially meet. In the second step, these confusing pixels having 2 or more maximal probability of state occurrence are filled in using majority rule. Herein, since spatial feature are geographically auto-correlated in general, we applied a 3 by 3 moving window (eight-way connectedness) centred on each of these uncertain state value pixels and estimate their state value based on the values of the 8 neighbourhood pixels. Similarly, to the first step, a particular value among the values of the 8 neighbours is chosen when and only when it is the only value that occurs the most. Whenever 2 or more states happen to be the most probable at the same time, the pixel is left out and handled at the third step. In the third step, the rest of these confusing pixels, where the first and second steps heuristics failed, were modelled using decision tree recursive partitioning classification algorithm. We first extracted the maximal values which correspond to the highest probability across all these remaining confusing pixels to fit a classification regression tree (CART) model and used that model to conditionally infer their state values. Therefore, after this third step all pixel state value were estimated, and the resulting raster can be used as spatial data node in the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} model. The boxplot statistics were computed using our own defined function (see \texttt{get\_boxplot\_1d} in the technical material) based on \href{https://www.rdocumentation.org/packages/grDevices/versions/3.5.3/topics/boxplot.stats}{\texttt{boxplot.stats}} function from the \texttt{grDevices} package.\textsuperscript{\protect\hyperlink{ref-RCoreTeam_2018}{35}} We used the \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/reclassify}{\texttt{reclassify}} and the \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/calc}{\texttt{calc}} functions both from the \texttt{raster} package\textsuperscript{\protect\hyperlink{ref-Hijmans_2019}{46}} to recode the pixel values and to estimate the probability respectively. The second step confusing pixels were handled using \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/modal}{\texttt{modal}} function from within the \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/focal}{\texttt{focal}} function also from the \texttt{raster} package.\textsuperscript{\protect\hyperlink{ref-Hijmans_2019}{46}} The CART model was fitted using the \href{https://www.rdocumentation.org/packages/party/versions/1.3-3/topics/Conditional\%20Inference\%20Trees}{\texttt{ctree}} function from the \texttt{party} package\textsuperscript{\protect\hyperlink{ref-Hothorn_et_al_2006}{52}} whereas the third step confusing pixels' inference was achieved by supplying an anonymous function wrapping the \href{https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/predict}{\texttt{predict}} function from the \texttt{stats} package\textsuperscript{\protect\hyperlink{ref-RCoreTeam_2018}{35}} as argument to \href{https://www.rdocumentation.org/packages/raster/versions/2.8-19/topics/calc}{\texttt{calc}} function.\textsuperscript{\protect\hyperlink{ref-Hijmans_2019}{46}}
+\hypertarget{section_2_5_2}{%
+\subsubsection{General procedure applied to single-layer data}\label{section_2_5_2}}
 
-\hypertarget{I512}{%
-\paragraph{Single layer data}\label{I512}}
-
-In the case of single layer data where time series does not make sense (e.g.~slope and flow accumulation) or where nodes were derived from times series as single layer (e.g.~exposure to wetness, vegetation sensitivity to water), a slightly different procedure compared to that adopted for time series data was adopted for \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} nodes making. We rather used the boxplot's five-numbers approach in a much straightforward way by exploiting the spatial variability across cell values since the temporal component of this variability no longer exists. We first extracted all pixel values and computed the five-numbers from which ranges corresponding to discrete states were computed. These ranges were then directly recoded into unique values mapping to fuzzy linguistic quantifiers. The process is somewhat a simple raster reclassification task except that the reclassification matrix was derived directly from the natural breaks of the data.
-
-\hypertarget{I52}{%
-\subsubsection{Specific procedure}\label{I52}}
-
-Specific processing procedures were applied to derive each spatial data node considered in the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}. These are described in detail in the supplementary material. We explained the meaning of each node, provided the rational of its usage and described how it is causally related to other nodes in the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs}. Some nodes (e.g.~Soil water content) were indirectly estimated as composite variable involving several NDSIs. Other (Exposure to wetness) were simply computed using single metric time series. In some other cases, the computation involved complex algorithm applied either to time series data (Temporal variation in vegetation) or to single layer (Flow accumulation) depending on the nature of the data.
+\hypertarget{section_2_5_3}{%
+\subsubsection{Specific procedure used for spatial data generation}\label{section_2_5_3}}
 
 \hypertarget{II}{%
-\section{Results and discussion}\label{II}}
+\section{Results}\label{II}}
 
-\begin{figure}[!htbp]
+\hypertarget{section_3_1}{%
+\subsection{Spatio-temporal analysis of water and vegetation in Kisumu County, Kenya}\label{section_3_1}}
 
-{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig3-1} 
+\begin{figure}[!h]
 
-}
-
-\caption{Temporal variability in water and vegetation in Kisumu county, Kenya.}\label{fig:fig3}
-\end{figure}
-
-\begin{figure}[!htbp]
-
-{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig4-1} 
+{\centering \includegraphics[width=1\linewidth,]{figures/seasonal_ranges_plot} 
 
 }
 
-\caption{Discrete states of vegetation and water in Kisumu county, Kenya.}\label{fig:fig4}
+\caption{Temporal variability in water and vegetation in Kisumu county, Kenya.}\label{fig:fig4}
 \end{figure}
 
-\begin{table}[t]
+\begin{figure}[!h]
 
-\caption{\label{tab:table2}Spatial coverage of different states of vegetation and flood in Kisumu County, Kenya.}
+{\centering \includegraphics[width=1\linewidth,]{figures/veg_water_states_plot} 
+
+}
+
+\caption{Discrete states of vegetation and water in Kisumu county, Kenya.}\label{fig:fig5}
+\end{figure}
+
+\hypertarget{section_3_2}{%
+\subsection{FBFS-relevant metrics}\label{section_3_2}}
+
+\hypertarget{section_3_2_1}{%
+\subsubsection{Prior distribution of FBFS-relevant metrics}\label{section_3_2_1}}
+
+\begin{figure}[!h]
+
+{\centering \includegraphics[width=1\linewidth,]{figures/prior_plot} 
+
+}
+
+\caption{Prior maps of differents spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya and Tigray region, Ethiopia.}\label{fig:fig6}
+\end{figure}
+
+\hypertarget{section_3_2_2}{%
+\subsubsection{Posterior distribution of FBFS-relevant metrics}\label{section_3_2_2}}
+
+\begin{figure}[!h]
+
+{\centering \includegraphics[width=1\linewidth,]{figures/posterior_plot} 
+
+}
+
+\caption{Posterior maps of differents spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya and Tigray region, Ethiopia.}\label{fig:fig7}
+\end{figure}
+
+\hypertarget{section_3_2_3}{%
+\subsubsection{Uncertainty of FBFS-relevant metrics}\label{section_3_2_3}}
+
+\begin{figure}[!h]
+
+{\centering \includegraphics[width=1\linewidth,]{figures/uncertainty_plot} 
+
+}
+
+\caption{Uncertainty maps of differents spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya and Tigray region, Ethiopia.}\label{fig:fig8}
+\end{figure}
+
+\hypertarget{section_3_3}{%
+\subsection{FBFS potential in Kisumu County, Kenya and Tigray region, Ethiopia}\label{section_3_3}}
+
+\begin{figure}[!h]
+
+{\centering \includegraphics[width=1\linewidth,]{figures/FBFS_plot} 
+
+}
+
+\caption{Potential areas for FBFS and associated uncertainity in Kisumu County, Kenya and Tigray region, Ethiopia.}\label{fig:fig9}
+\end{figure}
+
+\begin{table}
+
+\caption{\label{tab:tab5}Spatial coverage of FBFS in Kisumu County, Kenya and Tigray region, Ethiopia.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}{>{\bfseries}lllllll}
-\toprule
-\textbf{ } & \textbf{Very low} & \textbf{Low} & \textbf{Moderately Low} & \textbf{Moderately High} & \textbf{High} & \textbf{Very high}\\
-\midrule
-Vegetation & 544.22
-(20.42\%) & 114.51
-(4.3\%) & 997.99
-(37.45\%) & 766.64
-(28.77\%) & 241.57
-(9.07\%) & \\
-Flood &  & 950.52
-(35.67\%) & 463.98
-(17.41\%) & 618.29
-(23.2\%) & 37.25
-(1.4\%) & 594.87
-(22.32\%)\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\hypertarget{II4}{%
-\subsection{Prior spatial distribution of the spatial data node states}\label{II4}}
-
-The results of the processed spatial data nodes used to feed the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} model are presented in Figure \ref{fig:fig11}. As it can be seen, the topographic characteristics of the area are captured in both slope and flow accumulation nodes. In Kisumu county, run-off flows from East to West with most of the flow converging to Lake Victoria which is the flattest land located in vast low laying lands. In the East of the Lake basin are the steepest lands of Kisumu causing the essential of surface water to flow Westwards. Most poor-quality data are located around the water bodies where the node power of tools scored the lowest values to an extent that most water bodies are clearly visible. The chance of encountering water on the ground (water present node), either in forms of floods water or water body, is high in most area of Kisumu. This seems to be frequent towards the beginning of the growing season since there is no big difference between the map of the node water present and that of the node flood at the beginning of the rainy season. In general, vegetation in Kisumu experiences high intra-annual variation with, unexpectedly, the highest variability associated with Lake Victoria. While vegetation is high in the littoral zone, there seems to be a permanent mixture of vegetation and water in the deep water suggesting possible Eutrophication of Lake Victoria. As expected, the spatial pattern of soil water content mimic that of the exposure to wetness (also water present and flood at the beginning of the rainy season) with the Lake Victoria scoring the highest values. In general, there a drastic moisture within the flat area beyond the lake water; which moisture increases towards the eastern and the northern parts of the county. The highest sensitivity to flood is encountered in the Lake shore. Some forested areas are wrongly detected as high flood sensitivity spots in the north and west eastern of the county towards the neighboring Nandi and Kericho counties. Vegetation sensitivity to water variation, which seems to be negatively correlated with forest and open water, decrease from the literal Lake Victoria outwards.
-
-\begin{figure}[!htbp]
-
-{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig5-1} 
-
-}
-
-\caption{Prior, posterior, and uncertainity maps of differents spatial data used to feed the BNs for mapping FBFS in Kisumu county, Kenya.}\label{fig:fig5}
-\end{figure}
-
-The importance of vegetation infestation in the Kenyan part of Lake Victoria has been reported in previous studies.\textsuperscript{\protect\hyperlink{ref-Cavalli_et_al_2009}{53}} The high vegetation along with its low sensitivity to water variation in littoral zone can be explained by the permanence of water. Gikuma-Njuru et al.~\textsuperscript{\protect\hyperlink{ref-Gikuma-Njuru_et_al_2005}{54}} reported higher Chlorophyll concentrations in the littoral compared to the pelagic zones due to nutrients additions from tributaries.\textsuperscript{\protect\hyperlink{ref-World_Bank_1996}{55}} The highest vegetation variability associated with the lake water may be explained by a sequence of proliferation and decline of aquatic plants (e.g.~algae) at certain periods of the year. Another explanation could be the periods of active mixing resulting in water-vegetation mixtures.\textsuperscript{\protect\hyperlink{ref-Cavalli_et_al_2009}{53},\protect\hyperlink{ref-Gikuma-Njuru_et_al_2005}{54}} The confusion with regards to the spectral response of open water and forest is a testimonies of uncertainty sources. Care must be taken when dealing with remote sensing data to avoid such errors, particularly in studies dealing with water and vegetation.\textsuperscript{\protect\hyperlink{ref-Cavalli_et_al_2009}{53}} In general, water indices are sensitive to vegetation liquid water.\textsuperscript{\protect\hyperlink{ref-Boschetti_et_al_2014}{10}}
-
-\hypertarget{II5}{%
-\subsection{Posterior spatial distribution of the spatial data node states}\label{II5}}
-
-The output maps from the \href{https://en.wikipedia.org/wiki/Bayesian_network}{BNs} model are shown in Figure \ref{fig:fig12} and their respective uncertainties in Figure \ref{fig:fig13}. The suitable topography for FBFS, resulting from the interaction between the slope and flow accumulation nodes, is generally high in area having high flow accumulation which are not necessarily water body. The soil suitability (suitable soils node) is even more misleading showing forests and open waters as having highest suitable in soil for FBFS. Intuitively, permanently waterlogged areas may not be suitable for agriculture. Characteristic vegetation, in contrast, is rather accurate excluding most open waters and forests from typical vegetation for FBFS. Interestingly, the pattern of the characteristic vegetation is depicted with most vegetation exposed to waterlogging close to open water. Clearly, there is a change in the characteristic vegetation at a certain distance from Lake Victoria with the closed area to the Lake showing vegetation exposed to waterlogging and most of the areas near rivers Mogus, Awach, Sondu Miriu, Nyando and Kibos exhibiting hydrated vegetation.
-
-Important changes were introduced from the prior to the posterior maps of water present node. One important change is related to the appearance of a sort-of islands or at least a tendency to drying in certain parts of the Lake shores leading to the conclusion that water may be not be present all the yearlong in that area. Another important change is the increase in the areas where water can be expected on the ground. Probably due to vegetation liquid water, most forests have shown important water presence. The variable temporal variation in vegetation index ranked higher on forests and open waters with most central areas resulting in the lowest. This high vegetation variability over the Lake support the idea of the sequential increase / decrease of aquatic vegetation at certain period of the year (see section \ref{II4}), particularly looking at the map of the node vegetation variation caused by flood. The highest chance of flood is recorded near the lake shore and river Nyando, but most floodplains scored high values. As expected, vegetation variation attributed to flood (vegetation variation caused by flood node) seems to be positively correlated with flow accumulation and suitable topography for FBFS. In general, most of the posterior maps are not conclusive enough to be considered as standalone decision support with regards the potential area for FBFS. The target map (pixel is FBFS) seems to also be strongly correlated with flow accumulation and suitable topography and support the idea of vegetation presence inside the Lake which certain parts appears among the very likely areas for FBFS. As expected, most riverbanks are detected as having high potential for FBFS; which potential declines with distance.
-
-The spatial explicit uncertainty (Figure \ref{fig:fig13}), expressed as shannon entropy, revealed that the lowest level of uncertainty seems to be achieved with the suitable topography. This may be explained by the simplicity of the causality specified in this node but also the relative accuracy of the data (radar versus optical sensor) used to feed the parents nodes (slope and flow accumulation). Regarding this node, the highest uncertainty spot seems to be located around high flow accumulation areas where water is potentially present, but the topography is not necessarily flat. As stated earlier, the node suitable soils might be misleading, and this can be seen in the uncertainty map where most areas having either relatively low vegetation or water ranked amongst the highest uncertainty spots. Most open water seems to have the lowest uncertainty with regards to characteristic vegetation node contrary to water presence. The uncertainty map related to temporal variation in vegetation index has captured the drying spot inside the Lake as discussed earlier. High uncertainty regarding flood seems be ubiquitous and this seems to be propagated into the node vegetation variation caused by flood. Coming to the target node, there is high uncertainty on most pixels associated with open water. As it can be seen, the water in the Lake is associated with the highest level of uncertainty supporting the ideas that these areas are not suitable. In a nutshell, the posterior maps are to be used with consideration to the associated uncertainty maps.
-
-\hypertarget{case-study-application-to-tigray-region-of-ethiopia}{%
-\subsection{Case study: Application to Tigray region of Ethiopia}\label{case-study-application-to-tigray-region-of-ethiopia}}
-
-\begin{figure}[!htbp]
-
-{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig6-1} 
-
-}
-
-\caption{Prior, posterior, and uncertainity maps of differents spatial data used to feed the BNs for mapping FBFS in Tigray region, Ethiopia}\label{fig:fig6}
-\end{figure}
-
-\hypertarget{potential-of-fbfs-in-kisumu-and-tigray}{%
-\subsection{Potential of FBFS in Kisumu and Tigray}\label{potential-of-fbfs-in-kisumu-and-tigray}}
-
-\begin{figure}[!htbp]
-
-{\centering \includegraphics{Mapping_FBFS_files/figure-latex/fig7-1} 
-
-}
-
-\caption{Potential areas for FBFS and associated uncertainity in Kisumu County, Kenya and Tigray region, Ethiopia.}\label{fig:fig7}
-\end{figure}
-
-\begin{table}[t]
-
-\caption{\label{tab:table3}Spatial coverage of FBFS in Kisumu County, Kenya and Tigray region, Ethiopia.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}{>{\bfseries}llllll}
+\begin{tabular}[t]{>{\bfseries}llllll}
 \toprule
 \textbf{ } & \textbf{Highly unlikely} & \textbf{Unlikely} & \textbf{Possible} & \textbf{Likely} & \textbf{Highly likely}\\
 \midrule
-Kisumu 1 & 548.69
-(20.59\%) & 1085.89
-(40.75\%) & 27.03
-(1.01\%) & 217.09
-(8.15\%) & 786.21
-(29.5\%)\\
-Tigray 1 & 26.81
-(0.05\%) & 23568.4
-(44.85\%) & 1028.91
-(1.96\%) & 9009.07
-(17.14\%) & 18885.03
-(35.94\%)\\
-Kisumu 2 & 580.62
-(21.79\%) & 769.4
-(28.87\%) & 789.19
-(29.62\%) & 277.32
-(10.41\%) & 248.38
-(9.32\%)\\
-Tigray 2 & 12943.07
-(24.63\%) & 13759.91
-(26.18\%) & 13381.08
-(25.46\%) & 3421.86
-(6.51\%) & 9012.3
-(17.15\%)\\
+Kisumu & 379.7
+(14.2\%) & 1033.1
+(38.8\%) & 30.2
+(1.1\%) & 285.4
+(10.7\%) & 936.5
+(35.1\%)\\
+Tigray & 20.8
+(0.0\%) & 22727.9
+(43.2\%) & 831.3
+(1.6\%) & 6710.1
+(12.8\%) & 22228.1
+(42.3\%)\\
 \bottomrule
 \end{tabular}}
 \end{table}
 
-\clearpage
+\hypertarget{section_3_4}{%
+\subsection{Accuracy assessment}\label{section_3_4}}
+
+\begin{table}
+
+\caption{\label{tab:tab3}Prediction accuracy of a spatially explicit bayesian network used for mapping FBFS in Kisumu County, and Tigray region, Ethiopia.}
+\centering
+\resizebox{\linewidth}{!}{
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{>{\bfseries}lllllll}
+\toprule
+\textbf{Study area} & \textbf{Validation sample} & \textbf{Highly unlikely} & \textbf{Unlikely} & \textbf{Possible} & \textbf{Likely} & \textbf{Highly likely}\\
+\midrule
+ & Bare lands & 66.7\% & 33.3\% & 0.0\% & 0.0\% & 0.0\%\\
+\cmidrule{2-7}
+ & FBFS Fields & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 100.0\%\\
+\cmidrule{2-7}
+ & Forests & 0.0\% & 100.0\% & 0.0\% & 0.0\% & 0.0\%\\
+\cmidrule{2-7}
+ & Irrigated agricultural fields & 0.0\% & 20.5\% & 2.3\% & 2.3\% & 75.0\%\\
+\cmidrule{2-7}
+ & Rainfed agricultural fields & 0.0\% & 80.0\% & 0.0\% & 0.0\% & 20.0\%\\
+\cmidrule{2-7}
+ & Riperian forests & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 100.0\%\\
+\cmidrule{2-7}
+ & Settlements & 0.0\% & 63.6\% & 0.0\% & 27.3\% & 9.1\%\\
+\cmidrule{2-7}
+ & Vegetated plateaux & 0.0\% & 88.9\% & 0.0\% & 0.0\% & 11.1\%\\
+\cmidrule{2-7}
+\multirow{-9}{*}{\raggedright\arraybackslash Kisumu} & Water bodies & 65.0\% & 7.1\% & 0.0\% & 27.9\% & 0.1\%\\
+\cmidrule{1-7}
+ & Bare lands & 0.0\% & 62.3\% & 0.6\% & 2.6\% & 34.4\%\\
+\cmidrule{2-7}
+ & FBFS fields & 0.0\% & 24.5\% & 0.0\% & 1.9\% & 73.6\%\\
+\cmidrule{2-7}
+ & Forests & 0.0\% & 77.8\% & 0.0\% & 11.1\% & 11.1\%\\
+\cmidrule{2-7}
+ & Irrigated agricultural fields & 0.0\% & 65.4\% & 0.0\% & 0.0\% & 34.6\%\\
+\cmidrule{2-7}
+ & Rainfed agricultural fields & 0.0\% & 100.0\% & 0.0\% & 0.0\% & 0.0\%\\
+\cmidrule{2-7}
+ & Riperian forests & 0.0\% & 30.6\% & 2.8\% & 5.6\% & 61.1\%\\
+\cmidrule{2-7}
+ & Settlements & 0.0\% & 60.0\% & 0.0\% & 0.0\% & 40.0\%\\
+\cmidrule{2-7}
+ & Vegetated plateaux & 0.0\% & 16.6\% & 0.0\% & 50.1\% & 33.3\%\\
+\cmidrule{2-7}
+\multirow{-9}{*}{\raggedright\arraybackslash Tigray} & Water bodies & 78.2\% & 4.9\% & 0.0\% & 16.9\% & 0.0\%\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\hypertarget{section_3_5}{%
+\subsection{Uncertainty-based predictions}\label{section_3_5}}
+
+\begin{figure}[!h]
+
+{\centering \includegraphics[width=1\linewidth,]{figures/Uncertainity_based_predictions_plot} 
+
+}
+
+\caption{Potential areas for FBFS based different level of uncertainities in Kisumu County, Kenya and Tigray region, Ethiopia.}\label{fig:fig10}
+\end{figure}
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+\hypertarget{refs}{}
+
+\hypertarget{acknowledgements}{%
+\section*{Acknowledgements}\label{acknowledgements}}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+This study was jointly funded by the \href{https://www.daad.de/en/}{Deutscher Akademischer Austauschdienst} (German Academic Exchange Service; DAAD) and the \href{http://www.worldagroforestry.org/}{World Agroforestry Centre} (International Centre for Research in Agroforestry; ICRAF). We thank the farmers and experts who contributed in various ways during the development of the model. We thank the department of Dryland Agriculture of Mekelle University for guidance on the sampling frame in the Tigray region and for facilitating logistics during field work. Thanks to the participants of the leadership course in flood-based farming and water harvesting in Kenya and the participants of the International Training on Integrated Watershed Management and FBFS in Ethiopia, who drafted the models.
 
 \hypertarget{references}{%
 \section*{References}\label{references}}
 \addcontentsline{toc}{section}{References}
 
-\hypertarget{refs}{}
-\leavevmode\hypertarget{ref-Puertas_et_al_2011}{}%
-1. Puertas, D. G.-L., Steenbergen, F. van, Haile, A. M., Kool, M. \& Embaye, T.-a. G. \emph{Flood based farming systems in Africa}. 52 (2011).
-
-\leavevmode\hypertarget{ref-VanSteenbergen_et_al_2010}{}%
-2. Steenbergen, F. van, Lawrence, P., Mehari, A., Salman, M. \& Faurès, J.-M. \emph{Guidelines on spate irrigation}. 249 (FAO, 2010).
-
-\leavevmode\hypertarget{ref-Varisco_1983}{}%
-3. Varisco, D. M. Sayl and ghayl: The ecology of water allocation in Yemen. \emph{Human Ecology} \textbf{11}, 365--383 (1983).
-
-\leavevmode\hypertarget{ref-Xing_et_al_2014}{}%
-4. Xing, L. \emph{et al.} China wetland extraction and classification using MODIS data. in \emph{2014 third international workshop on earth observation and remote sensing applications (eorsa)} 349--352 (IEEE, 2014).
-
-\leavevmode\hypertarget{ref-FBLN_2018}{}%
-5. FBLN. Flood-based Livelihood Network (FBLN) Foundation. (2018).
-
-\leavevmode\hypertarget{ref-Haile_2010}{}%
-6. Haile, A. M. \emph{A Tradition in Transition, Water Management Reforms and Indigenous Spate Irrigation Systems in Eritrea}. 212 (CRC Press, 2010).
-
-\leavevmode\hypertarget{ref-Ghebreamlak_et_al_2018}{}%
-7. Ghebreamlak, A. Z., Tanakamaru, H., Tada, A., Adam, B. M. \& Elamin, K. A. E. Satellite-based mapping of cultivated area in Gash Delta Spate Irrigation System, Sudan. \emph{Remote Sensing} \textbf{10}, 186 (2018).
-
-\leavevmode\hypertarget{ref-Khalid_et_al_2016}{}%
-8. Khalid, A. E. \emph{et al.} Performance Evaluation of Spate Irrigation Using Remote Sensing and DEM. in \emph{The 7th international conference on water resources and environment research (icwrer2016)} (ICWRER2016, 2016).
-
-\leavevmode\hypertarget{ref-Theilen-Willige_et_al_2015}{}%
-9. Theilen-Willige, B. \emph{et al.} Flash Floods in the Guelmim Area/Southwest Morocco--Use of Remote Sensing and GIS-Tools for the Detection of Flooding-Prone Areas. \textbf{5}, 203--221 (2015).
-
-\leavevmode\hypertarget{ref-Boschetti_et_al_2014}{}%
-10. Boschetti, M., Nutini, F., Manfron, G., Brivio, P. A. \& Nelson, A. Comparative analysis of normalised difference spectral indices derived from MODIS for detecting surface water in flooded rice cropping systems. \emph{PLoS ONE} \textbf{9}, (2014).
-
-\leavevmode\hypertarget{ref-Wegmann_et_al_2016}{}%
-11. Wegmann, M., Leutner, B. \& Dech, S. \emph{Remote Sensing and GIS for Ecologists: Using Open Source Software (Data in the Wild)}. 324 (Pelagic Publishing, 2016).
-
-\leavevmode\hypertarget{ref-Konecny_2014}{}%
-12. Konecny, G. \emph{Geoinformation: remote sensing, photogrammetry and geographic information systems}. 472 (CRC Press/Taylor \& Francis Group, 2014).
-
-\leavevmode\hypertarget{ref-Bashari_et_al_2008}{}%
-13. Bashari, H., Smith, C. \& Bosch, O. J. H. Developing decision support tools for rangeland management by combining state and transition models and Bayesian belief networks. \emph{Agricultural Systems} \textbf{99}, 23--34 (2008).
-
-\leavevmode\hypertarget{ref-Hubbard_2014}{}%
-14. Hubbard, D. W. \emph{How to Measure Anything: Finding the Value of Intangibles in Business}. 432 (John Wiley \& Sons, Inc., 2014).
-
-\leavevmode\hypertarget{ref-Kuhnert_et_al_2010}{}%
-15. Kuhnert, P. M., Martin, T. G. \& Griffiths, S. P. A guide to eliciting and using expert knowledge in Bayesian ecological models. \emph{Ecology Letters} \textbf{13}, 900--914 (2010).
-
-\leavevmode\hypertarget{ref-Kuhnert_et_al_2005}{}%
-16. Kuhnert, P. M., Martin, T. G., Mengersen, K. \& Possingham, H. P. Assessing the impacts of grazing levels on bird density in woodland habitat: A Bayesian approach using expert opinion. \emph{Environmetrics} \textbf{16}, 717--747 (2005).
-
-\leavevmode\hypertarget{ref-Whitney_et_al_2018}{}%
-17. Whitney, C., Shepherd, K. \& Luedeling, E. \emph{Decision analysis methods guide; Agricultural policy for nutrition}. 27 (2018). doi:\href{https://doi.org/10.5716/WP18001.PDF}{10.5716/WP18001.PDF}
-
-\leavevmode\hypertarget{ref-Kuhnert_2011}{}%
-18. Kuhnert, P. M. Four case studies in using expert opinion to inform priors. \emph{Environmetrics} \textbf{22}, 662--674 (2011).
-
-\leavevmode\hypertarget{ref-Luedeling_et_al_2015}{}%
-19. Luedeling, E. \emph{et al.} Fresh groundwater for Wajir - ex-ante assessment of uncertain benefits for multiple stakeholders in a water supply project in Northern Kenya. \emph{Frontiers in Environmental Science} \textbf{3}, (2015).
-
-\leavevmode\hypertarget{ref-Whitney_et_al_2018a}{}%
-20. Whitney, C. \emph{et al.} Probabilistic Decision Tools for Determining Impacts of Agricultural Development Policy on Household Nutrition. \emph{Earth's Future} \textbf{6}, 359--372 (2018).
-
-\leavevmode\hypertarget{ref-Yet_et_al_2016}{}%
-21. Yet, B. \emph{et al.} A Bayesian Network Framework for Project Cost, Benefit and Risk Analysis with an Agricultural Development Case Study. \emph{Expert Systems with Applications} \textbf{60}, 141--155 (2016).
-
-\leavevmode\hypertarget{ref-Pourret_et_al_2008}{}%
-22. Pourret, O., Naïm, P. \& Marcot, B. \emph{Bayesian Networks: A Practical Guide to Applications}. 446 (John Wiley \& Sons Ltd, 2008).
-
-\leavevmode\hypertarget{ref-VanSteenbergen_et_al_2011}{}%
-23. Steenbergen, F. van, MacAnderson, I. \& Mehari, A. \emph{Spate irrigation in the Horn of Africa: Status and potential.} 44 (2011).
-
-\leavevmode\hypertarget{ref-Arge_et_al_2003}{}%
-24. Arge, L. \emph{et al.} Efficient flow computation on massive grid terrain datasets. \emph{GeoInformatica} \textbf{7}, 283--313 (2003).
-
-\leavevmode\hypertarget{ref-Gao_1996}{}%
-25. Gao, B. C. NDWI - A normalized difference water index for remote sensing of vegetation liquid water from space. \emph{Remote Sensing of Environment} \textbf{58}, 257--266 (1996).
-
-\leavevmode\hypertarget{ref-Hunt_and_Rock_1989}{}%
-26. Hunt, E. R. \& Rock, B. N. Detection of changes in leaf water content using Near- and Middle-Infrared reflectances. \emph{Remote Sensing of Environment} \textbf{30}, 43--54 (1989).
-
-\leavevmode\hypertarget{ref-Jenson_and_Domingue_1988}{}%
-27. Jenson, S. K. \& Domingue, J. O. Extracting topographic structure from digital elevation data for geographic information system analysis. \emph{Photogrammetric Engineering and Remote Sensing} \textbf{54}, 1593--1600 (1988).
-
-\leavevmode\hypertarget{ref-Ji_et_al_2009}{}%
-28. Ji, L., Zhang, L. \& Wylie, B. Analysis of Dynamic Thresholds for the Normalized Difference Water Index. \textbf{75}, 1307--1317 (2009).
-
-\leavevmode\hypertarget{ref-McFeeters_1996}{}%
-29. McFeeters, S. K. The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features. \emph{International Journal of Remote Sensing} \textbf{17}, 1425--1432 (1996).
-
-\leavevmode\hypertarget{ref-Rouse_et_al_1973}{}%
-30. Rouse, W., Haas, R. H. \& Deering, D. W. Monitoring vegetation systems in the Great Plains with ERTS, NASA SP-351. in \emph{Third earth resources technology satellite-1 symposium} 309--317 (NASA, 1973).
-
-\leavevmode\hypertarget{ref-Roy_et_al_2014}{}%
-31. Roy, D. \emph{et al.} Landsat-8: Science and product vision for terrestrial global change research. \emph{Remote Sensing of Environment} \textbf{145}, 154--172 (2014).
-
-\leavevmode\hypertarget{ref-Tarboton_2003}{}%
-32. Tarboton, D. Terrain analysis using digital elevation models in hydrology. in \emph{23rd esri international users conference} (2003).
-
-\leavevmode\hypertarget{ref-Tucker_1979}{}%
-33. Tucker, C. J. Red and Photographic Infrared Linear Combinations for Monitoring Vegetation. \emph{Remote Sensing of Environment} \textbf{08}, 127--150 (1979).
-
-\leavevmode\hypertarget{ref-Yang_et_al_2006}{}%
-34. Yang, X., Chapman, G. A., Young, G. A. \& Gray, J. M. Using Compound Topographic Index to delineate soil landscape facets from Digital Elevation Models for comprehensive coastal assessment. in \emph{MODSIM 2005 international congress on modelling and simulation. Modelling and simulation society of australia and new zealand} (2006).
-
-\leavevmode\hypertarget{ref-RCoreTeam_2018}{}%
-35. R Core Team. \emph{R: A language and environment for statistical computing.} (R Foundation for Statistical Computing, 2018).
-
-\leavevmode\hypertarget{ref-KisumuCountyGovernment_2013}{}%
-36. Kisumu County Government. \emph{Kisumu County First Integrated Development Plan 2013 - 2017.} (2013).
-
-\leavevmode\hypertarget{ref-Farr_et_al_2000}{}%
-37. Farr, T. G. \& Kobrick, M. Shuttle radar topography mission produces a wealth of data. \emph{Eos} \textbf{81}, 583--585 (2000).
-
-\leavevmode\hypertarget{ref-Farr_et_al_2007}{}%
-38. Farr, T. G. \emph{et al.} The shuttle radar topography mission. \emph{Reviews of Geophysics} \textbf{45}, (2007).
-
-\leavevmode\hypertarget{ref-Nikolakopoulos_et_al_2006}{}%
-39. Nikolakopoulos, K. G., Kamaratakis, E. K. \& Chrysoulakis, N. SRTM vs ASTER elevation products. Comparison for two regions in Crete, Greece. \emph{International Journal of Remote Sensing} \textbf{27}, 4819--4838 (2006).
-
-\leavevmode\hypertarget{ref-Jarvis_et_al_2008}{}%
-40. Jarvis, A., Reuter, H. I. I., Nelson, A. \& Guevara, E. Hole-filled seamless SRTM data V4. (2008).
-
-\leavevmode\hypertarget{ref-Falorni_et_al_2005}{}%
-41. Falorni, G., Teles, V., Vivoni, E. R., Bras, R. L. \& Amaratunga, K. S. Analysis and characterization of the vertical accuracy of digital elevation models from the Shuttle Radar Topography Mission. \emph{Journal of Geophysical Research: Earth Surface} \textbf{110}, (2005).
-
-\leavevmode\hypertarget{ref-King_et_al_1995}{}%
-42. King, M. D., Herring, D. D. \& Diner, D. J. The earth observing system (EOS): A space-based program for assessing mankind's impact on the global environment. \emph{Opt. Photon. News} \textbf{6}, 34--39 (1995).
-
-\leavevmode\hypertarget{ref-Vermote_2015}{}%
-43. Vermote, E. MOD09A1 MODIS/Terra Surface Reflectance 8-Day L3 Global 500m SIN Grid V006. (2015).
-
-\leavevmode\hypertarget{ref-Pearl_2000}{}%
-44. Pearl, J. \emph{Causality: Models, Reasoning and Inference}. 1--386 (Cambridge University Press, 2000). doi:\href{https://doi.org/citeulike-article-id:3888442}{citeulike-article-id:3888442}
-
-\leavevmode\hypertarget{ref-GADM_2018}{}%
-45. GADM. Database of Global Administrative Areas. (2018).
-
-\leavevmode\hypertarget{ref-Hijmans_2019}{}%
-46. Hijmans, R. J. raster: Geographic Data Analysis and Modeling. (2019).
-
-\leavevmode\hypertarget{ref-Mattiuzzi_and_Detsch_2018}{}%
-47. Mattiuzzi, M. \& Detsch, F. MODIS: Acquisition and Processing of MODIS Products. (2018).
-
-\leavevmode\hypertarget{ref-Busetto_and_ranghetti_2016}{}%
-48. Busetto, L. \& Ranghetti, L. MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series. \emph{Computers \& Geosciences} \textbf{97}, 40--48 (2016).
-
-\leavevmode\hypertarget{ref-GDAL_OGRcontributors_2018}{}%
-49. contributors, G. GDAL/OGR Geospatial Data Abstraction software Library. (2018).
-
-\leavevmode\hypertarget{ref-Likert_1932}{}%
-50. Likert, R. A technique for the measurement of attitudes. \emph{Archives of Psychology} \textbf{22}, 5--55 (1932).
-
-\leavevmode\hypertarget{ref-Wickham_and_Stryjewski_2012}{}%
-51. Wickham, H. \& Stryjewski, L. \emph{40 Years of Boxplots}. 1--17 (2012).
-
-\leavevmode\hypertarget{ref-Hothorn_et_al_2006}{}%
-52. Hothorn, T., Hornik, K. \& Zeileis, A. Unbiased recursive partitioning: A conditional inference framework. \emph{Journal of Computational and Graphical Statistics} \textbf{15}, 651--674 (2006).
-
-\leavevmode\hypertarget{ref-Cavalli_et_al_2009}{}%
-53. Cavalli, R. M., Laneve, G., Fusilli, L., Pignatti, S. \& Santini, F. Remote sensing water observation for supporting Lake Victoria weed management. \emph{Journal of Environmental Management} \textbf{90}, 2199--2211 (2009).
-
-\leavevmode\hypertarget{ref-Gikuma-Njuru_et_al_2005}{}%
-54. Gikuma-Njuru, P. \emph{et al.} Eutrophication of the Lake Victoria Ecosystem. in \emph{Lake victoria regional water quality synthesis report} (eds. Mwanuzi, F. L., Abuodha, J. O. Z., Muyodi, F. J. \& Hecky, R. E.) 81 (LVEMP, 2005).
-
-\leavevmode\hypertarget{ref-World_Bank_1996}{}%
-55. World Bank. \emph{Kenya, Tanzania, Uganda: Lake Victoria Environmental Management Project}. 158 (World Bank, 1996).
-
 
 \end{document}
+
+

@@ -1,5 +1,5 @@
 ---
-title: "Mapping Flood-based Farming Systems with Bayesian Networks."
+title: "Mapping Flood-based Farming Systems with Bayesian networks."
 author:
 - name: Issoufou, Liman Harou
   email: 
